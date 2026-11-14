@@ -110,6 +110,10 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
             out.append((key, str(note[key])))
     for i, para in enumerate(note.get("body") or []):
         out.append((f"body[{i}]", str(para)))
+    photo = note.get("photo") or {}
+    for key in ("caption", "alt"):
+        if photo.get(key):
+            out.append((f"photo.{key}", str(photo[key])))
     return out
 
 

@@ -8,10 +8,19 @@
   "occasion": "Thought of you",
   "greeting": "Hey Arjun,",
   "body": [
-    "Made chai at the office today and it was nowhere near as good as our Friday chai runs during the 2019 launch. I still think those runs got us through that crunch.",
+    "Found this from launch week and it made me smile. I still think those Friday chai runs got us through that crunch.",
     "What are you building these days? Would love to hear, no need for a long reply."
   ],
   "closing": "",
   "signature": "Hardik",
-  "palette": {"bg": "#E9F0EA", "ink": "#2E3A33", "accent": "#3F7D5C", "paper": "#FFFEFB"}
+  "palette": {
+    "bg": "#E9F0EA",
+    "ink": "#2E3A33",
+    "accent": "#3F7D5C",
+    "paper": "#FFFEFB"
+  },
+  "photo": {
+    "caption": "Friday chai, launch week 2019",
+    "alt": "Two glasses of chai on a wooden table"
+  }
 }
