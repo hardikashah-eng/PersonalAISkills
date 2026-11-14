@@ -1,8 +1,8 @@
 {
   "name": "personalaiskills",
   "displayName": "PersonalAISkills",
-  "description": "Skills for human connection: write one-of-a-kind thank-you notes (ThankYou) and warm, no-guilt check-ins with people you've drifted from (Reconnect), grounded in real shared moments, fitted to the relationship, culture and language, with an optional photo from a good time together, and never sent without you.",
-  "version": "0.2.0",
+  "description": "Skills for human connection: write one-of-a-kind thank-you notes to a person, team, organization or family (ThankYou) and warm, no-guilt check-ins with people you've drifted from (Reconnect), grounded in real shared moments, fitted to the relationship, culture and language, with a photo from a good time together or a pencil sketch of the moment, and never sent without you.",
+  "version": "0.4.0",
   "author": {
     "name": "Hardik Shah",
     "url": "https://github.com/hardikashah-eng"

@@ -6,7 +6,8 @@ recipient-specific topics to avoid. It is a backstop for human judgement, not a
 replacement: a clean result does not prove a note is safe.
 
 Usage:
-    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect] [--json]
+    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect|team|family]
+                                      [--roster "Ana,Ben,Chen"] [--json]
 
 Exit code 0 = no blocking issues, 1 = blocking issues found, 2 = bad input.
 """
@@ -87,9 +88,57 @@ RECONNECT_REVIEW = {
     ],
 }
 
+# --- Profile: team / org ------------------------------------------------------
+
+TEAM_BLOCK = {
+    "confidential business detail": [
+        "confidential", "internal only", "do not share", "don't share", "revenue",
+        "headcount", "profit", "margin", "arr", "burn rate", "valuation",
+    ],
+}
+
+TEAM_REVIEW = {
+    "reads like a performance review": [
+        "exceeded expectations", "meets expectations", "met expectations",
+        "performance review", "performance rating", "rating", "promotion", "promoted",
+        "top performer", "high performer", "low performer", "pip",
+    ],
+    "ranking people": [
+        "mvp", "most valuable", "the best on the team", "best of the team", "star of the team",
+    ],
+    "non-inclusive or cliché wording": [
+        "guys", "rockstar", "rockstars", "rock star", "rock stars", "ninja", "ninjas",
+        "10x", "manpower",
+    ],
+}
+
+# --- Profile: family ----------------------------------------------------------
+
+FAMILY_BLOCK = {
+    "comparison or ranking": [
+        "favorite child", "favourite child", "favorite sibling", "favourite sibling",
+        "favorite grandchild", "favourite grandchild", "unlike your", "better than your",
+        "why can't you",
+    ],
+    "pressure": [
+        "when are you getting", "when will you", "settle down", "give us grandchildren",
+        "grandkids yet", "it's time you",
+    ],
+}
+
+FAMILY_REVIEW = {
+    "guilt or debt language": [
+        "after all you sacrificed", "after all you've sacrificed", "after everything you sacrificed",
+        "can never repay", "can't ever repay", "i owe you everything", "i don't call enough",
+        "i should call more", "i know i never",
+    ],
+}
+
 PROFILES = {
     "default": ({}, {}),
     "reconnect": (RECONNECT_BLOCK, RECONNECT_REVIEW),
+    "team": (TEAM_BLOCK, TEAM_REVIEW),
+    "family": (FAMILY_BLOCK, FAMILY_REVIEW),
 }
 
 CLICHES = [
@@ -118,16 +167,68 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
 
 
 def term_hits(text: str, terms: list[str]) -> list[str]:
+    """Stem match: word boundary at the start only (e.g. "diagnos" -> diagnosis)."""
     lowered = text.lower()
     hits = []
     for term in terms:
-        # word-boundary at the start; allow stems (e.g. "diagnos" -> diagnosis)
         if re.search(r"(?<![\w])" + re.escape(term.lower()), lowered):
             hits.append(term)
     return hits
 
 
-def scan(note: dict, avoid: list[str], profile: str = "default") -> list[dict]:
+def word_hits(text: str, terms: list[str]) -> list[str]:
+    """Whole-word or whole-phrase match (so "hell" doesn't match "hello")."""
+    lowered = text.lower().replace("’", "'")
+    hits = []
+    for term in terms:
+        if re.search(r"(?<![\w])" + re.escape(term.lower()) + r"(?![\w])", lowered):
+            hits.append(term)
+    return hits
+
+
+REAL_PHOTO_CLAIMS = [
+    "found this photo", "found this picture", "found this from", "found this today",
+    "look what turned up", "remember this", "photo of us", "picture of us", "this photo of",
+    "this is us", "here's us", "us at the", "photo from", "picture from", "snapped this",
+    "took this",
+]
+
+
+def honesty_issues(note: dict) -> list[dict]:
+    """A drawn sketch or stock photo must not be presented as a real photo of the moment."""
+    photo = note.get("photo") or {}
+    if photo.get("source") not in ("sketch", "stock"):
+        return []
+    out = []
+    for field, text in collect_text(note):
+        if field.startswith("photo.alt"):
+            continue
+        for t in word_hits(text, REAL_PHOTO_CLAIMS):
+            out.append({"level": "block",
+                        "category": f"honesty: wording presents a {photo['source']} as a real photo of the moment",
+                        "field": field, "match": t})
+    if photo.get("source") == "stock" and not (photo.get("credit") or photo.get("license")):
+        out.append({"level": "review", "category": "stock photo: record its licence (and credit if required)",
+                    "field": "photo", "match": "no credit/license"})
+    return out
+
+
+def roster_issues(note: dict, roster: list[str]) -> list[dict]:
+    """Name everyone or no one: if any roster member is named, all must be."""
+    names = [n for n in roster if n]
+    if not names:
+        return []
+    text = " ".join(t for _, t in collect_text(note))
+    named = [n for n in names if word_hits(text, [n])]
+    if not named:
+        return []
+    missing = [n for n in names if n not in named]
+    return [{"level": "block", "category": "group: named some people but not everyone",
+             "field": "roster", "match": m} for m in missing]
+
+
+def scan(note: dict, avoid: list[str], profile: str = "default",
+         roster: list[str] | None = None) -> list[dict]:
     issues: list[dict] = []
     extra_block, extra_review = PROFILES[profile]
 
@@ -148,15 +249,15 @@ def scan(note: dict, avoid: list[str], profile: str = "default") -> list[dict]:
             add("block", "sensitive topic", field, t)
         for t in term_hits(text, [a for a in avoid if a]):
             add("block", "recipient trigger (--avoid)", field, t)
-        for t in term_hits(text, HARSH_TERMS):
+        for t in word_hits(text, HARSH_TERMS):
             add("review", "tone: harsh/judgemental", field, t)
-        for t in term_hits(text, CLICHES):
+        for t in word_hits(text, CLICHES):
             add("review", "tone: cliché", field, t)
         for category, terms in extra_block.items():
-            for t in term_hits(text.replace("’", "'"), terms):
+            for t in word_hits(text, terms):
                 add("block", f"{profile}: {category}", field, t)
         for category, terms in extra_review.items():
-            for t in term_hits(text.replace("’", "'"), terms):
+            for t in word_hits(text, terms):
                 add("review", f"{profile}: {category}", field, t)
         if text.count("!") > 1:
             add("review", "tone: too many exclamation marks", field, "!" * text.count("!"))
@@ -169,6 +270,8 @@ def scan(note: dict, avoid: list[str], profile: str = "default") -> list[dict]:
     if words > 220:
         add("review", "length: body over 220 words", "body", str(words))
 
+    issues += roster_issues(note, roster if roster is not None else note.get("roster") or [])
+    issues += honesty_issues(note)
     return issues
 
 
@@ -178,7 +281,10 @@ def main() -> int:
     ap.add_argument("--avoid", default="", help="comma-separated topics to avoid for this recipient")
     ap.add_argument("--json", action="store_true", help="print machine-readable output")
     ap.add_argument("--profile", choices=sorted(PROFILES), default="default",
-                    help="extra checks for a specific skill (e.g. reconnect)")
+                    help="extra checks: reconnect, team (team/org notes), family")
+    ap.add_argument("--roster", default=None,
+                    help="comma-separated names in the group; if any are named, all must be "
+                         "(defaults to the note's 'roster' list)")
     args = ap.parse_args()
 
     try:
@@ -188,7 +294,8 @@ def main() -> int:
         return 2
 
     avoid = [a.strip() for a in args.avoid.split(",")]
-    issues = scan(note, avoid, args.profile)
+    roster = [r.strip() for r in args.roster.split(",")] if args.roster is not None else None
+    issues = scan(note, avoid, args.profile, roster)
     blocking = [i for i in issues if i["level"] == "block"]
 
     if args.json:

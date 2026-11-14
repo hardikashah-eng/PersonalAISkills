@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <!-- Family header: the family home on a winter night, kitchen window lit ("esa luz encendida"), five snowflakes -->
+  <rect width="320" height="200" fill="#2F3550"/>
+  <g fill="#E8ECF5" opacity=".75">
+    <circle cx="40" cy="30" r="2"/><circle cx="96" cy="60" r="1.6"/><circle cx="270" cy="36" r="2.2"/>
+    <circle cx="232" cy="78" r="1.5"/><circle cx="150" cy="24" r="1.8"/>
+  </g>
+  <!-- snowy ground -->
+  <path d="M0 160 Q80 148 160 156 T320 152 V200 H0 Z" fill="#E8ECF5"/>
+  <!-- pine -->
+  <path d="M250 152 L268 110 L286 152 Z M256 126 L268 96 L280 126 Z" fill="#3E5C4A"/>
+  <rect x="265" y="152" width="6" height="8" fill="#5A3E2B"/>
+  <!-- house -->
+  <path d="M90 158 V110 L140 74 L190 110 V158 Z" fill="#7A4B3A"/>
+  <path d="M84 112 L140 70 L196 112" stroke="#E8ECF5" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="166" y="80" width="10" height="20" fill="#5E3A2E"/>
+  <path d="M171 78 q-6 -10 2 -18 q8 -8 0 -18" stroke="#E8ECF5" stroke-width="2" fill="none" opacity=".6" stroke-linecap="round"/>
+  <!-- kitchen window, lit -->
+  <rect x="104" y="118" width="30" height="24" rx="2" fill="#F2C14E"/>
+  <path d="M119 118 V142 M104 130 H134" stroke="#7A4B3A" stroke-width="2"/>
+  <ellipse cx="119" cy="150" rx="26" ry="6" fill="#F2C14E" opacity=".25"/>
+  <!-- door -->
+  <rect x="152" y="126" width="20" height="32" rx="2" fill="#5E3A2E"/>
+  <circle cx="167" cy="143" r="1.6" fill="#F2C14E"/>
+</svg>
