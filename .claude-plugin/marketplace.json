@@ -1,0 +1,15 @@
+{
+  "name": "personalaiskills",
+  "owner": {
+    "name": "Hardik Shah",
+    "url": "https://github.com/hardikashah-eng"
+  },
+  "description": "Skills for human connection: ThankYou and Reconnect.",
+  "plugins": [
+    {
+      "name": "personalaiskills",
+      "source": "./",
+      "description": "Write one-of-a-kind thank-you notes and warm, no-guilt check-ins with people you've drifted from."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- PersonalAISkills icon: an open envelope with a heart rising out of it -->
+  <rect width="1024" height="1024" fill="#FBEBD9"/>
+  <circle cx="512" cy="470" r="300" fill="#F3CFAE" opacity=".5"/>
+
+  <!-- envelope back + open flap -->
+  <path d="M232 520 L512 364 L792 520 V780 Q792 812 760 812 H264 Q232 812 232 780 Z" fill="#B5562F"/>
+
+  <!-- heart rising out, in front of the flap -->
+  <path d="M512 500
+           C 512 500, 362 404, 362 300
+           C 362 244, 406 202, 458 202
+           C 484 202, 503 215, 512 236
+           C 521 215, 540 202, 566 202
+           C 618 202, 662 244, 662 300
+           C 662 404, 512 500, 512 500 Z" fill="#C8693C" stroke="#FBEBD9" stroke-width="14"/>
+
+  <!-- small sparkles -->
+  <g fill="#C8693C">
+    <circle cx="300" cy="300" r="12"/><circle cx="738" cy="248" r="14"/><circle cx="760" cy="360" r="9"/>
+  </g>
+
+  <!-- letter peeking -->
+  <rect x="300" y="468" width="424" height="230" rx="18" fill="#FFFDF9"/>
+  <path d="M352 528 H672 M352 576 H620 M352 624 H572" stroke="#E7CDB6" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- envelope front pocket -->
+  <path d="M232 556 L512 712 L792 556 V780 Q792 812 760 812 H264 Q232 812 232 780 Z" fill="#D9824F"/>
+</svg>
