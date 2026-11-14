@@ -6,7 +6,7 @@ recipient-specific topics to avoid. It is a backstop for human judgement, not a
 replacement: a clean result does not prove a note is safe.
 
 Usage:
-    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect|team|family]
+    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect|team|family|grateful]
                                       [--roster "Ana,Ben,Chen"] [--json]
 
 Exit code 0 = no blocking issues, 1 = blocking issues found, 2 = bad input.
@@ -34,24 +34,24 @@ CURRENCY = r"(?:[$€£¥₹₩]\s?\d|\d[\d,.]*\s?(?:k|K|lakh|lakhs|crore|USD|IN
 
 FINANCIAL_TERMS = [
     "salary", "salaries", "paycheck", "loan", "loaned", "lend", "lending", "lent me", "debt", "debts",
-    "mortgage", "rent money", "bank", "credit card", "bonus", "raise", "compensation",
-    "stock options", "equity", "invest", "investment", "bankrupt", "broke", "money",
-    "paid for", "cash", "wire", "venmo", "paypal", "upi",
+    "mortgage", "rent money", "bank account", "bank loan", "credit card", "bonus", "pay raise", "a raise",
+    "compensation", "stock options", "investment", "investments", "bankrupt", "was broke", "were broke",
+    "flat broke", "money", "paid for", "cash", "wire transfer", "venmo", "paypal", "upi",
 ]
 
 HEALTH_TERMS = [
     "hospital", "surgery", "surgeon", "cancer", "chemo", "chemotherapy", "tumor",
-    "diagnos", "therapy", "therapist", "counsel", "psychiatr", "medication", "meds",
+    "diagnos", "therapy", "therapist", "counseling", "counselling", "counselor", "counsellor", "psychiatr", "medication", "meds",
     "pills", "prescription", "pregnan", "miscarriage", "ivf", "fertility",
     "depression", "depressed", "anxiety", "panic attack", "rehab", "addiction",
     "sober", "illness", "disease", "injury", "injured", "icu", "er visit", "clinic",
-    "doctor", "diabetes", "heart attack", "stroke", "covid", "disabled", "disability",
+    "doctor", "diabetes", "heart attack", "had a stroke", "suffered a stroke", "covid", "disabled", "disability",
     "mental health", "suicid", "self-harm", "eating disorder",
 ]
 
 SENSITIVE_OTHER = [
     "lawsuit", "court case", "arrest", "visa status", "green card", "immigration",
-    "divorce", "laid off", "fired", "layoff",
+    "divorce", "laid off", "got fired", "was fired", "were fired", "layoff",
 ]
 
 # --- Review (tone) patterns --------------------------------------------------
@@ -134,11 +134,32 @@ FAMILY_REVIEW = {
     ],
 }
 
+# --- Profile: grateful (gratitude lists) --------------------------------------
+
+GRATEFUL_BLOCK = {
+    "comparison with others' misfortune": [
+        "at least i'm not", "at least i am not", "at least we're not", "at least we are not",
+        "unlike some people", "unlike others", "less fortunate", "luckier than", "better off than",
+        "poor people", "those poor",
+    ],
+}
+
+GRATEFUL_REVIEW = {
+    "bragging or humble-bragging": [
+        "humbled to announce", "so humbled", "blessed beyond measure", "#blessed", "living my best life",
+        "crushed it", "killing it", "promotion", "promoted",
+    ],
+    "guilt": [
+        "i don't deserve", "i never thank", "i should have been", "i know i haven't",
+    ],
+}
+
 PROFILES = {
     "default": ({}, {}),
     "reconnect": (RECONNECT_BLOCK, RECONNECT_REVIEW),
     "team": (TEAM_BLOCK, TEAM_REVIEW),
     "family": (FAMILY_BLOCK, FAMILY_REVIEW),
+    "grateful": (GRATEFUL_BLOCK, GRATEFUL_REVIEW),
 }
 
 CLICHES = [
@@ -163,6 +184,12 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
     for key in ("caption", "alt"):
         if photo.get(key):
             out.append((f"photo.{key}", str(photo[key])))
+    if note.get("title"):
+        out.append(("title", str(note["title"])))
+    for i, it in enumerate(note.get("items") or []):
+        for key in ("subject", "why", "difference", "forward"):
+            if it.get(key):
+                out.append((f"items[{i}].{key}", str(it[key])))
     # Channel versions used by share.py
     for key in ("subject", "channel_post"):
         if note.get(key):
@@ -247,7 +274,7 @@ def scan(note: dict, avoid: list[str], profile: str = "default",
                 add("block", f"PII: {label}", field, m.group(0))
         for m in re.finditer(CURRENCY, text):
             add("block", "financial: amount", field, m.group(0))
-        for t in term_hits(text, FINANCIAL_TERMS):
+        for t in word_hits(text, FINANCIAL_TERMS):
             add("block", "financial term", field, t)
         for t in term_hits(text, HEALTH_TERMS):
             add("block", "health term", field, t)
@@ -287,7 +314,7 @@ def main() -> int:
     ap.add_argument("--avoid", default="", help="comma-separated topics to avoid for this recipient")
     ap.add_argument("--json", action="store_true", help="print machine-readable output")
     ap.add_argument("--profile", choices=sorted(PROFILES), default="default",
-                    help="extra checks: reconnect, team (team/org notes), family")
+                    help="extra checks: reconnect, team (team/org notes), family, grateful (gratitude lists)")
     ap.add_argument("--roster", default=None,
                     help="comma-separated names in the group; if any are named, all must be "
                          "(defaults to the note's 'roster' list)")

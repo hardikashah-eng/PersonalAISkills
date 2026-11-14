@@ -1,0 +1,45 @@
+{
+  "kind": "gratitude",
+  "visibility": "family",
+  "sender_first_name": "Hardik",
+  "language": "en",
+  "direction": "ltr",
+  "occasion": "Thanksgiving 2026",
+  "quote": {
+    "text": "Gratitude is not only the greatest of virtues, but the parent of all the others.",
+    "attribution": "Cicero",
+    "translation": null
+  },
+  "title": "This Thanksgiving, I'm grateful for…",
+  "body": [
+    "It was a year of small mercies, and I don't want them to slip by unnoticed."
+  ],
+  "items": [
+    {
+      "subject": "My sister",
+      "why": "for the Sunday calls that never once felt like a chore.",
+      "difference": "I came out of a heavy year steadier than I went in.",
+      "forward": "I've started calling Dad every Sunday too."
+    },
+    {
+      "subject": "The people I get to work with",
+      "why": "for building something hard together and still laughing at the end of it.",
+      "difference": "They reminded me that good work is mostly good people.",
+      "forward": "I'm keeping an hour every week to help a new engineer find their feet."
+    },
+    {
+      "subject": "Ordinary evenings at home",
+      "why": "for dinners that run late and homework at the kitchen table.",
+      "difference": "They're the part of the day I'd keep if I could keep only one.",
+      "forward": "This winter we'll cook for our neighbour once a week."
+    }
+  ],
+  "closing": "May I notice these things more often, and pass a little of each one on.",
+  "signature": "Hardik, Thanksgiving 2026",
+  "photo": {
+    "source": "sketch",
+    "caption": "Tea by the window, late November",
+    "alt": "Pencil sketch of a steaming cup on a windowsill, with an autumn tree and falling leaves outside"
+  },
+  "palette": {"bg": "#F6E7D6", "ink": "#3B2F2A", "accent": "#B5562F", "paper": "#FFFDF9"}
+}
