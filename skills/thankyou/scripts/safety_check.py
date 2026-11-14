@@ -6,7 +6,7 @@ recipient-specific topics to avoid. It is a backstop for human judgement, not a
 replacement: a clean result does not prove a note is safe.
 
 Usage:
-    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--json]
+    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect] [--json]
 
 Exit code 0 = no blocking issues, 1 = blocking issues found, 2 = bad input.
 """
@@ -63,6 +63,35 @@ HARSH_TERMS = [
     "damn", "hell", "crap",
 ]
 
+# --- Profile: reconnect -------------------------------------------------------
+
+RECONNECT_BLOCK = {
+    "guilt / time-counting": [
+        "it's been forever", "it has been forever", "been ages", "been so long",
+        "long time no", "years already", "sorry i disappeared", "sorry i've been mia",
+        "sorry for being mia", "i'm terrible at", "i'm the worst at", "i am terrible at",
+        "you probably don't remember", "you may not remember", "dropped the ball",
+    ],
+    "surveillance-sounding": [
+        "saw on your profile", "noticed on your profile", "noticed you moved",
+        "saw you moved", "noticed you were at", "saw you were at", "saw you were in",
+        "checked in at", "your location", "stalking",
+    ],
+}
+
+RECONNECT_REVIEW = {
+    "possible hidden ask": [
+        "quick favor", "quick favour", "refer me", "referral", "could you introduce",
+        "can you introduce", "looking for a job", "job search", "are you hiring",
+        "pick your brain",
+    ],
+}
+
+PROFILES = {
+    "default": ({}, {}),
+    "reconnect": (RECONNECT_BLOCK, RECONNECT_REVIEW),
+}
+
 CLICHES = [
     "words cannot express", "words can't express", "from the bottom of my heart",
     "you're the best ever", "best ever", "means the world",
@@ -94,8 +123,9 @@ def term_hits(text: str, terms: list[str]) -> list[str]:
     return hits
 
 
-def scan(note: dict, avoid: list[str]) -> list[dict]:
+def scan(note: dict, avoid: list[str], profile: str = "default") -> list[dict]:
     issues: list[dict] = []
+    extra_block, extra_review = PROFILES[profile]
 
     def add(level, category, field, match):
         issues.append({"level": level, "category": category, "field": field, "match": match})
@@ -118,6 +148,12 @@ def scan(note: dict, avoid: list[str]) -> list[dict]:
             add("review", "tone: harsh/judgemental", field, t)
         for t in term_hits(text, CLICHES):
             add("review", "tone: cliché", field, t)
+        for category, terms in extra_block.items():
+            for t in term_hits(text.replace("’", "'"), terms):
+                add("block", f"{profile}: {category}", field, t)
+        for category, terms in extra_review.items():
+            for t in term_hits(text.replace("’", "'"), terms):
+                add("review", f"{profile}: {category}", field, t)
         if text.count("!") > 1:
             add("review", "tone: too many exclamation marks", field, "!" * text.count("!"))
 
@@ -137,6 +173,8 @@ def main() -> int:
     ap.add_argument("note", type=Path)
     ap.add_argument("--avoid", default="", help="comma-separated topics to avoid for this recipient")
     ap.add_argument("--json", action="store_true", help="print machine-readable output")
+    ap.add_argument("--profile", choices=sorted(PROFILES), default="default",
+                    help="extra checks for a specific skill (e.g. reconnect)")
     args = ap.parse_args()
 
     try:
@@ -146,7 +184,7 @@ def main() -> int:
         return 2
 
     avoid = [a.strip() for a in args.avoid.split(",")]
-    issues = scan(note, avoid)
+    issues = scan(note, avoid, args.profile)
     blocking = [i for i in issues if i["level"] == "block"]
 
     if args.json:

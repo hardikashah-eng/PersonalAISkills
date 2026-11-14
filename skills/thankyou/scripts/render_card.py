@@ -54,11 +54,7 @@ TEMPLATE = """<!DOCTYPE html>
   {art}
   <div class="content">
     {occasion}
-    <blockquote>
-      <p>{quote}</p>
-      {translation}
-      {attribution}
-    </blockquote>
+    {quote_block}
     <p class="greeting">{greeting}</p>
     <div class="body">{body}</div>
     <p class="closing">{closing}</p>
@@ -91,9 +87,13 @@ def render(note: dict, art_svg: str | None) -> str:
         name=e(note.get("recipient_first_name", "")),
         art=f'<div class="art" role="img" aria-label="Illustration made for {e(note.get("recipient_first_name"))}">{clean_svg(art_svg)}</div>' if art_svg else "",
         occasion=f'<p class="occasion">{e(note["occasion"])}</p>' if note.get("occasion") else "",
-        quote=f"“{e(quote.get('text'))}”" if quote.get("text") else "",
-        translation=f'<p class="translation">{e(quote["translation"])}</p>' if quote.get("translation") else "",
-        attribution=f"<cite>— {e(quote['attribution'])}</cite>" if quote.get("attribution") else "",
+        quote_block=(
+            "<blockquote>"
+            f"<p>“{e(quote.get('text'))}”</p>"
+            + (f'<p class="translation">{e(quote["translation"])}</p>' if quote.get("translation") else "")
+            + (f"<cite>— {e(quote['attribution'])}</cite>" if quote.get("attribution") else "")
+            + "</blockquote>"
+        ) if quote.get("text") else "",
         greeting=e(note.get("greeting")),
         body=body,
         closing=e(note.get("closing", "With gratitude,")),
