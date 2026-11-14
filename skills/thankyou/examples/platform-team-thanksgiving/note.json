@@ -38,5 +38,7 @@
     "ink": "#3B2F2A",
     "accent": "#B5562F",
     "paper": "#FFFDF9"
-  }
+  },
+  "channel": "slack",
+  "channel_post": "Happy Thanksgiving, team. In the spring we set a goal that sounded a little unreasonable: every simulation run on the new farm by year's end, without stopping anyone's work. We got there in October, and test runs that took a week now finish the same afternoon. That came from late nights nobody asked for, careful reviews, and the habit you kept no matter what: no one debugs alone. Three other teams now build on what you made, and I'm taking that habit everywhere I go. Grateful for every one of you who touched this, on-site and remote. 🧡"
 }

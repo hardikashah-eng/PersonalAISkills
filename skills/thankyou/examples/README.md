@@ -35,3 +35,22 @@ python3 scripts/safety_check.py examples/family-navidad/note.json --profile fami
   the moment.
 - A freely licensed stock photo can also be turned into a sketch:
   `python3 scripts/sketch_photo.py stock.jpg --out sketch.jpg`.
+
+## Delivery
+
+Each note can go out on the channel that fits (`references/delivery.md`).
+Nothing is sent without an explicit yes to the exact message.
+
+| Example | Channel | How |
+|---|---|---|
+| Maya | email | `share.py --channel email`: subject "Thank you, Maya", full note; with Outlook or Gmail connected, a draft with `card.png` and the photo attached, sent only after "send" |
+| Platform team | Slack | `share.py --channel slack` uses `channel_post`; posted to the channel the user names, only after a yes that names the channel |
+| Family | WhatsApp | `card_to_png.py` for the image, then `share.py --channel whatsapp` for a `wa.me` link with the text filled in; the user picks the family chat and sends |
+| Sharma Sir | printed card | print `card.html` on card stock (A5 or 5×7) |
+
+```bash
+python3 scripts/render_card.py examples/family-navidad/note.json --art examples/family-navidad/art.svg \
+  --photo examples/family-navidad/sketch.svg --out /tmp/navidad.html
+python3 scripts/card_to_png.py /tmp/navidad.html --out /tmp/navidad.png
+python3 scripts/share.py examples/family-navidad/note.json --channel whatsapp
+```
