@@ -11,6 +11,7 @@ up better for each other, not to stand in for them.
 |---|---|---|
 | [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion, to a person, a team (`--team`), an organization (`--org`), or family (`--family`). It opens with a fitting, correctly attributed quote, recalls the specific moment or shared achievement that made a real difference, uses your native language where it fits, can show how you are paying it forward, and adds a small artwork drawn only for them plus a photo from a good time together, or a pencil sketch of the moment when there is no photo. The card is written in handwriting, and Claude helps deliver it by email, WhatsApp, text, Slack and more. | "Write a Thanksgiving thank-you note to my mentor Maya" or "/thankyou --team Platform Thanksgiving" |
 | [Reconnect](skills/reconnect/SKILL.md) | Finds people you've drifted from, and quietly leaves alone the ones you drifted from on purpose. Then it drafts a short, no-guilt check-in built on a real shared memory (often a photo from that time), a festival they celebrate, or a "thought of you" moment. | "Who have I lost touch with?" or "Help me reconnect with Arjun" |
+| [Grateful](skills/grateful/SKILL.md) | A seasonal gratitude list (Thanksgiving, Diwali, year-end) of the people, moments and facts you're grateful for. Each entry gives a safe reason, the real difference it made, and how you're paying it forward. It opens with a quote and a pencil sketch of the occasion or feeling, in handwriting, in your language, private by default or ready to share. | "What am I grateful for this Thanksgiving?" or "/grateful Diwali --family" |
 
 ## Install
 
@@ -138,8 +139,9 @@ skills/<name>/
   examples/                  # finished samples
 ```
 
-Reconnect reuses ThankYou's safety check (`--profile reconnect`), card
-renderer, and its language, art, relationship and culture guides.
+Reconnect and Grateful reuse ThankYou's scripts (safety check with their own
+profiles, card renderer, share links, card image) and its guides (language,
+quotes, sketches, photos, safety, delivery, relationships and culture).
 
 ## Try the scripts locally
 

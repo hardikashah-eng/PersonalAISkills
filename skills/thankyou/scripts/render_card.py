@@ -79,6 +79,14 @@ HAND_CSS = """
   blockquote .translation {{ font-size:20px; opacity:.72; margin-top:6px; }}
   blockquote cite {{ font: 500 20px/1.2 "PAI Hand", cursive; margin-top:8px; }}
   .greeting {{ font-size:30px; margin:0 0 10px; }}
+  .title {{ font-size:34px; line-height:1.15; margin:0 0 12px; transform:rotate(-0.8deg); }}
+  ol.items li {{ padding-left:38px; margin:0 0 18px; }}
+  ol.items li::before {{ font-size:30px; top:-4px; }}
+  ol.items li:nth-child(odd) {{ transform:rotate(-0.3deg); }}
+  ol.items li:nth-child(even) {{ transform:rotate(0.25deg); margin-left:4px; }}
+  ol.items .subject {{ font-size:28px; font-weight:700; }}
+  ol.items .why {{ font-size:24px; line-height:1.32; }}
+  ol.items .forward {{ font-size:23px; line-height:1.3; }}
   .body p {{ font-size:25px; line-height:1.36; margin:0 0 14px; }}
   .body p:nth-child(4n+1) {{ transform:rotate(-0.35deg); margin-left:1px; }}
   .body p:nth-child(4n+2) {{ transform:rotate(0.25deg); margin-left:5px; }}
@@ -138,6 +146,15 @@ TEMPLATE = """<!DOCTYPE html>
   blockquote cite {{ display:block; margin-top:8px; font: 13px/1.3 system-ui, sans-serif; font-style:normal;
                     color:var(--accent); }}
   .greeting {{ font-size:18px; margin:0 0 12px; }}
+  .title {{ font-size:24px; margin:0 0 14px; color:var(--accent); }}
+  ol.items {{ list-style:none; counter-reset:item; margin:6px 0 10px; padding:0; }}
+  ol.items li {{ counter-increment:item; position:relative; padding-left:34px; margin:0 0 16px; }}
+  ol.items li::before {{ content:counter(item) "."; position:absolute; left:0; top:0; font-size:20px;
+                         color:var(--accent); }}
+  ol.items .subject {{ font-size:18px; font-weight:600; margin:0 0 2px; }}
+  ol.items .why {{ font-size:16px; line-height:1.55; margin:0; }}
+  ol.items .forward {{ font-size:15px; line-height:1.5; margin:4px 0 0; color:var(--accent); }}
+  ol.items .forward::before {{ content:"↪ "; }}
   .body p {{ font-size:16px; line-height:1.65; margin:0 0 12px; }}
   .photo {{ margin:22px 0 10px; display:flex; justify-content:center; }}
   .photo .frame {{ background:#fff; padding:10px 10px 0; max-width:82%;
@@ -159,8 +176,10 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="content">
     {occasion}
     {quote_block}
-    <p class="greeting">{greeting}</p>
+    {title_block}
+    {greeting_block}
     <div class="body">{body}</div>
+    {items_block}
     {photo_block}
     {closing_block}
     <p class="signature">{signature}</p>
@@ -361,7 +380,18 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
             caption += f'<p class="credit">{e(photo_meta["credit"])}</p>'
         photo_block = f'<figure class="photo"><div class="frame"><img src="{src}" alt="{alt}">{caption}</div></figure>'
 
-    closing = note.get("closing", "With gratitude,")
+    closing = note.get("closing", "" if note.get("kind") == "gratitude" else "With gratitude,")
+
+    items_block = ""
+    if note.get("items"):
+        lis = []
+        for it in note["items"]:
+            why = " ".join(x for x in (it.get("why"), it.get("difference")) if x)
+            parts = [f'<p class="subject">{e(it.get("subject"))}</p>' if it.get("subject") else "",
+                     f'<p class="why">{e(why)}</p>' if why else "",
+                     f'<p class="forward">{e(it["forward"])}</p>' if it.get("forward") else ""]
+            lis.append("<li>" + "".join(parts) + "</li>")
+        items_block = '<ol class="items">' + "".join(lis) + "</ol>"
 
     style_css = ""
     if style == "handwritten":
@@ -375,7 +405,8 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
     return TEMPLATE.format(
         lang=e(note.get("language", "en")),
         direction="rtl" if note.get("direction") == "rtl" else "ltr",
-        title=f"For {name}" if name else "A note for you",
+        title=(e(note.get("title")) if note.get("kind") == "gratitude" and note.get("title")
+               else f"For {name}" if name else "A note for you"),
         art=f'<div class="art" role="img" aria-label="Illustration made for {name}">{clean_svg(art_svg)}</div>' if art_svg else "",
         occasion=f'<p class="occasion">{e(note["occasion"])}</p>' if note.get("occasion") else "",
         quote_block=(
@@ -385,7 +416,9 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
             + (f"<cite>— {e(quote['attribution'])}</cite>" if quote.get("attribution") else "")
             + "</blockquote>"
         ) if quote.get("text") else "",
-        greeting=e(note.get("greeting")),
+        title_block=f'<p class="title">{e(note["title"])}</p>' if note.get("title") else "",
+        greeting_block=f'<p class="greeting">{e(note["greeting"])}</p>' if note.get("greeting") else "",
+        items_block=items_block,
         body=body,
         photo_block=photo_block,
         closing_block=f'<p class="closing">{e(closing)}</p>' if closing else "",
@@ -405,10 +438,18 @@ def plain_text(note: dict) -> str:
         if q.get("attribution"):
             lines.append(f"— {q['attribution']}")
         lines.append("")
-    lines.append(note.get("greeting", ""))
-    lines.append("")
+    if note.get("title"):
+        lines += [note["title"], ""]
+    if note.get("greeting"):
+        lines += [note["greeting"], ""]
     for p in note.get("body") or []:
         lines += [p, ""]
+    for i, it in enumerate(note.get("items") or [], 1):
+        why = " ".join(x for x in (it.get("why"), it.get("difference")) if x)
+        lines.append(f"{i}. {it.get('subject', '')}" + (f" — {why}" if why else ""))
+        if it.get("forward"):
+            lines.append(f"   ↪ {it['forward']}")
+        lines.append("")
     if note.get("closing"):
         lines.append(note["closing"])
     lines.append(note.get("signature") or note.get("sender_first_name", ""))

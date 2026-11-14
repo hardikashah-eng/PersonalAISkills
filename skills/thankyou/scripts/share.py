@@ -81,8 +81,22 @@ def format_text(note: dict, channel: str) -> str:
 
     if not posting_to_group and note.get("greeting"):
         lines += [note["greeting"], ""]
+    if note.get("title") and not posting_to_group:
+        lines += [note["title"], ""]
     for para in body_for(note, channel):
         lines += [para, ""]
+    if not posting_to_group:
+        for i, it in enumerate(note.get("items") or [], 1):
+            why = " ".join(x for x in (it.get("why"), it.get("difference")) if x)
+            subject = it.get("subject", "")
+            if channel == "whatsapp":
+                subject = f"*{subject}*"
+            elif channel in WORK_CHAT:
+                subject = f"*{subject}*"
+            lines.append(f"{i}. {subject}" + (f" — {why}" if why else ""))
+            if it.get("forward"):
+                lines.append(f"   ↪ {it['forward']}")
+            lines.append("")
     if posting_to_group:
         lines.append(f"— {sig}" if sig else "")
     else:
@@ -96,6 +110,8 @@ def format_text(note: dict, channel: str) -> str:
 def default_subject(note: dict) -> str:
     if note.get("subject"):
         return note["subject"]
+    if note.get("kind") == "gratitude":
+        return note.get("title") or "What I'm grateful for"
     name = note.get("recipient_name") or note.get("recipient_first_name") or ""
     occasion = (note.get("occasion") or "").split("·")[-1].strip()
     if occasion and name:
