@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""Safety scan for a ThankYou note.
+
+Flags PII, financial and health details, harsh or judgemental wording, and any
+recipient-specific topics to avoid. It is a backstop for human judgement, not a
+replacement: a clean result does not prove a note is safe.
+
+Usage:
+    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--json]
+
+Exit code 0 = no blocking issues, 1 = blocking issues found, 2 = bad input.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+
+# --- Blocking patterns -------------------------------------------------------
+
+PII_PATTERNS = {
+    "email address": r"[\w.+-]+@[\w-]+\.[\w.-]+",
+    "phone number": r"(?:\+?\d[\s().-]?){7,}\d",
+    "URL": r"\b(?:https?://|www\.)\S+",
+    "long number (ID/account?)": r"\b\d{6,}\b",
+    "street address": r"\b\d{1,5}\s+\w+(?:\s\w+)?\s(?:street|st|avenue|ave|road|rd|lane|ln|drive|dr|blvd|boulevard|court|ct|way)\b",
+    "social handle": r"(?<![\w.])@[A-Za-z0-9_]{2,}",
+}
+
+CURRENCY = r"(?:[$€£¥₹₩]\s?\d|\d[\d,.]*\s?(?:k|K|lakh|lakhs|crore|USD|INR|EUR|GBP|dollars?|rupees?|euros?|pounds?|yuan|yen)\b)"
+
+FINANCIAL_TERMS = [
+    "salary", "salaries", "paycheck", "loan", "loaned", "lend", "lending", "lent me", "debt", "debts",
+    "mortgage", "rent money", "bank", "credit card", "bonus", "raise", "compensation",
+    "stock options", "equity", "invest", "investment", "bankrupt", "broke", "money",
+    "paid for", "cash", "wire", "venmo", "paypal", "upi",
+]
+
+HEALTH_TERMS = [
+    "hospital", "surgery", "surgeon", "cancer", "chemo", "chemotherapy", "tumor",
+    "diagnos", "therapy", "therapist", "counsel", "psychiatr", "medication", "meds",
+    "pills", "prescription", "pregnan", "miscarriage", "ivf", "fertility",
+    "depression", "depressed", "anxiety", "panic attack", "rehab", "addiction",
+    "sober", "illness", "disease", "injury", "injured", "icu", "er visit", "clinic",
+    "doctor", "diabetes", "heart attack", "stroke", "covid", "disabled", "disability",
+    "mental health", "suicid", "self-harm", "eating disorder",
+]
+
+SENSITIVE_OTHER = [
+    "lawsuit", "court case", "arrest", "visa status", "green card", "immigration",
+    "divorce", "laid off", "fired", "layoff",
+]
+
+# --- Review (tone) patterns --------------------------------------------------
+
+HARSH_TERMS = [
+    "stupid", "idiot", "dumb", "lazy", "useless", "pathetic", "annoying", "hate",
+    "shut up", "crazy", "insane", "loser", "weird", "ugly", "fat", "old man", "old lady",
+    "for once", "even you", "despite your", "unlike you", "for a change",
+    "you never", "you always", "should have", "finally did", "about time",
+    "damn", "hell", "crap",
+]
+
+CLICHES = [
+    "words cannot express", "words can't express", "from the bottom of my heart",
+    "you're the best ever", "best ever", "means the world",
+]
+
+
+def collect_text(note: dict) -> list[tuple[str, str]]:
+    """Return (field, text) pairs for every human-visible field."""
+    out: list[tuple[str, str]] = []
+    quote = note.get("quote") or {}
+    for key in ("text", "attribution", "translation"):
+        if quote.get(key):
+            out.append((f"quote.{key}", str(quote[key])))
+    for key in ("greeting", "closing", "signature", "occasion"):
+        if note.get(key):
+            out.append((key, str(note[key])))
+    for i, para in enumerate(note.get("body") or []):
+        out.append((f"body[{i}]", str(para)))
+    return out
+
+
+def term_hits(text: str, terms: list[str]) -> list[str]:
+    lowered = text.lower()
+    hits = []
+    for term in terms:
+        # word-boundary at the start; allow stems (e.g. "diagnos" -> diagnosis)
+        if re.search(r"(?<![\w])" + re.escape(term.lower()), lowered):
+            hits.append(term)
+    return hits
+
+
+def scan(note: dict, avoid: list[str]) -> list[dict]:
+    issues: list[dict] = []
+
+    def add(level, category, field, match):
+        issues.append({"level": level, "category": category, "field": field, "match": match})
+
+    for field, text in collect_text(note):
+        for label, pattern in PII_PATTERNS.items():
+            for m in re.finditer(pattern, text, flags=re.IGNORECASE):
+                add("block", f"PII: {label}", field, m.group(0))
+        for m in re.finditer(CURRENCY, text):
+            add("block", "financial: amount", field, m.group(0))
+        for t in term_hits(text, FINANCIAL_TERMS):
+            add("block", "financial term", field, t)
+        for t in term_hits(text, HEALTH_TERMS):
+            add("block", "health term", field, t)
+        for t in term_hits(text, SENSITIVE_OTHER):
+            add("block", "sensitive topic", field, t)
+        for t in term_hits(text, [a for a in avoid if a]):
+            add("block", "recipient trigger (--avoid)", field, t)
+        for t in term_hits(text, HARSH_TERMS):
+            add("review", "tone: harsh/judgemental", field, t)
+        for t in term_hits(text, CLICHES):
+            add("review", "tone: cliché", field, t)
+        if text.count("!") > 1:
+            add("review", "tone: too many exclamation marks", field, "!" * text.count("!"))
+
+    total_bang = sum(t.count("!") for _, t in collect_text(note))
+    if total_bang > 1:
+        add("review", "tone: more than one '!' in the note", "*", str(total_bang))
+
+    words = sum(len(t.split()) for f, t in collect_text(note) if f.startswith("body"))
+    if words > 220:
+        add("review", "length: body over 220 words", "body", str(words))
+
+    return issues
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("note", type=Path)
+    ap.add_argument("--avoid", default="", help="comma-separated topics to avoid for this recipient")
+    ap.add_argument("--json", action="store_true", help="print machine-readable output")
+    args = ap.parse_args()
+
+    try:
+        note = json.loads(args.note.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"error: cannot read {args.note}: {exc}", file=sys.stderr)
+        return 2
+
+    avoid = [a.strip() for a in args.avoid.split(",")]
+    issues = scan(note, avoid)
+    blocking = [i for i in issues if i["level"] == "block"]
+
+    if args.json:
+        print(json.dumps({"ok": not blocking, "issues": issues}, ensure_ascii=False, indent=2))
+    else:
+        if not issues:
+            print("✓ clean — no PII, financial, health, trigger, or tone flags")
+        for i in issues:
+            mark = "✗" if i["level"] == "block" else "•"
+            print(f"{mark} [{i['category']}] {i['field']}: {i['match']!r}")
+        if blocking:
+            print(f"\n{len(blocking)} blocking issue(s): abstract or remove them, then re-run.")
+        elif issues:
+            print("\nNo blocking issues; review the tone notes above.")
+    return 1 if blocking else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
