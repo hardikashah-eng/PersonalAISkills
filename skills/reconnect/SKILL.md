@@ -1,6 +1,6 @@
 ---
 name: reconnect
-description: Find people the user has drifted away from (old teammates, friends, mentors, family) and draft a short, warm, no-guilt check-in built on a real shared memory (optionally with a photo from that time, from the user's own library), fitted to the relationship, culture, and language. Use when the user wants to reconnect, catch up, or keep in touch with someone, or asks who they've lost touch with.
+description: Find people the user has drifted away from (old teammates, friends, mentors, family) and draft a short, warm, no-guilt check-in built on a real shared memory (optionally with a photo from that time, from the user's own library), fitted to the relationship, culture, and language. It helps deliver it on the channel they share (WhatsApp, SMS, email, Slack, LinkedIn and others), sending only after the user explicitly approves. Use when the user wants to reconnect, catch up, or keep in touch with someone, or asks who they've lost touch with.
 ---
 
 # Reconnect
@@ -25,8 +25,11 @@ to send and easy to answer — anchored in a real shared memory, never in guilt.
    monitoring ("I saw on your profile you moved…").
 4. **No sensitive data.** No PII, financial, or health details in the message.
    Same rules as ThankYou (`../thankyou/references/safety.md`).
-5. **Read-only. Never send.** Draft only. Creating a draft in the user's email
-   or chat is fine when asked; sending needs their explicit go-ahead.
+5. **Read-only while searching; send only on an explicit yes.** Deliver
+   through the channel the user chooses, and send only after they say yes to
+   that exact message, recipient, and channel. Otherwise, draft or give
+   ready-to-send text (`../thankyou/references/delivery.md`). Never send
+   unattended or on a schedule.
 6. **Private channels are opt-in.** WhatsApp, SMS/iMessage are read only after
    the user explicitly allows it, for this task, 1:1 threads only.
 7. **Some drift is a choice — respect it.** Never suggest someone the user
@@ -181,14 +184,29 @@ python3 ../thankyou/scripts/render_card.py message.json --art art.svg \
   --photo memory.jpg --photo-out memory-clean.jpg --out reconnect-<firstname>.html
 ```
 
-Give the user the clean photo to send (and the card, if they want one; it's
-handwritten by default, or `--style print`). Offer
-to create drafts in the right connector, with the clean photo attached. Never
-send. Keep any card with a personal photo as a file or draft, not a public link.
+Then deliver it on the channel they share, following
+`../thankyou/references/delivery.md`. That's usually where they used to talk:
+WhatsApp, SMS/iMessage, Slack, Teams, Lark, LinkedIn, email, Telegram, Signal,
+WeChat, LINE, or KakaoTalk.
+
+```bash
+python3 ../thankyou/scripts/share.py message.json --channel whatsapp   # text + share link
+python3 ../thankyou/scripts/card_to_png.py reconnect-<firstname>.html --out card.png
+```
+
+- **On chat apps**, the photo (or card image) goes first, then the short text.
+  On SMS, keep the text under about 60 words (`short_body`).
+- **If a connected app can send** (email, Slack, Teams, Lark, …), draft the
+  message, show the **"Ready to send?" preview**, and send only after an
+  explicit yes.
+- **Otherwise**, give the text, the clean photo or `card.png`, and the share
+  link that opens the app with the message filled in.
+- Keep any card with a personal photo as a file, draft, or message to them,
+  not a public link. Contact details are used only for the send.
 
 Optional follow-through, only if the user wants it: offer a monthly scheduled
-task ("each month, suggest two people to reconnect with and draft the notes")
-— it drafts only, never sends.
+task ("each month, suggest two people to reconnect with and draft the notes").
+It drafts only; it never sends unattended.
 
 ## message.json format
 
@@ -218,4 +236,5 @@ Same schema as ThankYou (quote optional):
 - `references/hooks.md` — hook types, examples, what feels creepy or guilt-inducing
 - `examples/` — sample suggestion list and messages
 - Shared with ThankYou: `../thankyou/references/{safety,language,art,photos,sketch,relationships-and-culture}.md`,
-  `../thankyou/scripts/{safety_check,render_card,sketch_photo}.py`
+  `../thankyou/scripts/{safety_check,render_card,sketch_photo,share,card_to_png}.py`,
+  `../thankyou/references/delivery.md`

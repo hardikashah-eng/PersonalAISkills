@@ -1,7 +1,7 @@
 ---
 name: thankyou
-description: Write a heartfelt, one-of-a-kind thank-you note to a person, a team (--team), an organization (--org), or family (--family) for Thanksgiving, holidays, Diwali, farewells or any occasion. It opens with a fitting quote, recalls the specific moment or shared achievement that made a real difference (found via the user's email, chat, LinkedIn, or opt-in WhatsApp/SMS), fits the relationship and culture, uses the native language when appropriate, can show how the sender is paying it forward, and includes a small original artwork and, when available, a photo from a good time together. Use when the user asks to thank someone, their team, an organization, or their family.
-argument-hint: "[--team <name> | --org <name> | --family [name]] [recipient] [occasion]"
+description: Write a heartfelt, one-of-a-kind thank-you note to a person, a team (--team), an organization (--org), or family (--family) for Thanksgiving, holidays, Diwali, farewells or any occasion. It opens with a fitting quote, recalls the specific moment or shared achievement that made a real difference (found via the user's email, chat, LinkedIn, or opt-in WhatsApp/SMS), fits the relationship and culture, uses the native language when appropriate, can show how the sender is paying it forward, and includes a small original artwork and, when available, a photo from a good time together. It helps deliver the note by email, WhatsApp, SMS, Slack, Teams, Lark, LinkedIn or other messengers, sending only after the user explicitly approves the exact message. Use when the user asks to thank someone, their team, an organization, or their family.
+argument-hint: "[--team <name> | --org <name> | --family [name]] [recipient] [occasion] [via whatsapp|email|sms|slack|...]"
 ---
 
 # ThankYou
@@ -43,10 +43,12 @@ safety checks. Every other step and rule below still applies.
    - "when you lent me $2,000 for rent" → "when you stepped in without a second thought during a hard month"
    - "you drove me to chemo every week" → "you showed up, week after week, when it mattered most"
    See `references/safety.md`.
-3. **Read-only on connectors. Never send.** Search and read only what is needed
-   to find the moment. Never send, post, reply, or react on the user's behalf.
-   Creating a *draft* is allowed only when the user asks; sending needs their
-   explicit go-ahead on the final text.
+3. **Read-only while searching; send only on an explicit yes.** Search and read
+   only what is needed to find the moment. Never reply, react, or post anything
+   while searching. Deliver only through the channel the user chooses, and
+   **send or post only after the user says yes to that exact message, recipient,
+   and channel** (`references/delivery.md`). Otherwise, create a draft or give
+   ready-to-send text. Never send unattended or on a schedule.
 4. **The user confirms the moment.** Anything mined from connectors is shown to
    the user as a one-line summary before it goes into a note — they decide
    whether it is accurate and appropriate to mention.
@@ -325,20 +327,42 @@ python3 scripts/sketch_photo.py stock.jpg --out sketch.jpg
 python3 scripts/render_card.py note.json --art art.svg --photo sketch.jpg --out thankyou-<firstname>.html
 ```
 
-Give the user:
-- the rendered card (send the HTML file). If it contains a personal photo,
-  keep it as a file or draft; publish it as a shareable link only if the user
-  explicitly asks,
-- the plain-text version ready to paste into a card, email, or chat,
-- one line on the moment you used and why, and an offer to adjust tone, length,
-  or language.
+Then **deliver** it the way the user wants (`references/delivery.md`):
 
-If they want it emailed, create a **draft** in their email connector and tell
-them it's waiting in Drafts, with the cleaned photo attached if there is one.
-For WhatsApp/SMS, give the text ready to paste and suggest sending the cleaned
-photo first (the card can also be sent as an image). For a team or org, also
-give the channel-ready version with the photo to attach; the user posts it.
-Do not send or post.
+1. **Choose the channel**: what the user says, or where they actually talk
+   with this person, or by relationship. Options: email (Gmail/Outlook),
+   WhatsApp, SMS/iMessage, Slack, Microsoft Teams, Lark/Feishu, LinkedIn,
+   Telegram, Signal, WeChat, LINE, KakaoTalk, or a printed card. Ask once if
+   it's unclear.
+2. **Format it for that channel**: email gets a subject and the full note;
+   chat apps get the photo or card image first, then the text; SMS gets a
+   short version; a team gets the channel-ready post.
+   ```bash
+   python3 scripts/share.py note.json --channel whatsapp     # text + share link
+   python3 scripts/card_to_png.py card.html --out card.png   # card as an image
+   ```
+   If the text is long for the channel, write a shorter version that keeps the
+   specific moment (put it in `short_body`), and re-run the safety check.
+3. **Deliver**:
+   - **A connected app can send** (Gmail, Outlook, Slack, Teams, Lark, …):
+     create the draft with the card or photo attached, show the **"Ready to
+     send?" preview** (recipient, channel, full text, attachments), and send
+     or post only after an explicit yes. "Looks good" is not a yes to send.
+   - **No connector for the channel** (most messengers): give the
+     channel-ready text, `card.png`, the clean photo, and the share link that
+     opens the app with the message filled in (WhatsApp, SMS, email,
+     Telegram, LINE). For Signal, WeChat, KakaoTalk, Messenger, and LinkedIn
+     without a connector: copy the text and attach the image.
+   - **Printed card**: the HTML prints on card stock; suggest A5 or 5×7.
+4. **Confirm in one line** what happened ("Sent to Maya by email", "Draft is in
+   Outlook", "WhatsApp link ready: tap it, pick Arjun, attach card.png").
+
+Also give the user one line on the moment you used and why, and offer to adjust
+tone, length, or language.
+
+Keep any card with a personal photo as a file, draft, or message to the
+recipient; publish it as a shareable link only if the user explicitly asks.
+Contact details are used only for the send and never saved.
 
 ## note.json format
 
@@ -366,6 +390,9 @@ Do not send or post.
 `source` is `own` (the user's photo), `sketch` (drawn), or `stock` (with
 `credit`, `license`, and `url`).
 `style` is `handwritten` (default) or `print`.
+`channel` (optional) is the delivery channel; `subject` is the email subject;
+`short_body` is a shorter version for SMS or LinkedIn; `channel_post` is the
+team or org post for Slack, Teams, or Lark. All of these are safety-checked.
 `audience` is `individual` (default), `team`, `org`, or `family`. For a group,
 put the group's name in `recipient_name` (e.g. "the Platform team") and leave
 `recipient_first_name` out; the optional `roster` list is what
@@ -385,6 +412,9 @@ put the group's name in `recipient_name` (e.g. "the Platform team") and leave
 - `references/paying-it-forward.md` — when and how to show the gift travelling on
 - `references/sketch.md` — no photo: a drawn pencil sketch, or a freely licensed stock photo as a sketch; honesty rules
 - `scripts/sketch_photo.py` — turns a stock photo into a graphite pencil sketch (needs Pillow; strips metadata)
+- `references/delivery.md` — choosing the channel, the "Ready to send?" rule, formatting per channel, share links
+- `scripts/share.py` — channel-ready text, email subject, and share links (WhatsApp, SMS, email, Telegram, LINE); never sends
+- `scripts/card_to_png.py` — saves the card as an image for messaging apps (local headless browser)
 - `assets/fonts/` — handwriting fonts embedded in cards: Caveat (Latin, Cyrillic) and Kalam (Devanagari), SIL Open Font License 1.1
 - `scripts/safety_check.py` — automated PII / financial / health / harshness scan
 - `scripts/render_card.py` — renders note.json + art.svg (+ optional photo, metadata stripped) into a printable HTML card

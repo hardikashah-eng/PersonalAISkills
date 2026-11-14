@@ -9,7 +9,7 @@ up better for each other, not to stand in for them.
 
 | Skill | What it does | Try saying |
 |---|---|---|
-| [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion, to a person, a team (`--team`), an organization (`--org`), or family (`--family`). It opens with a fitting, correctly attributed quote, recalls the specific moment or shared achievement that made a real difference, uses your native language where it fits, can show how you are paying it forward, and adds a small artwork drawn only for them plus a photo from a good time together, or a pencil sketch of the moment when there is no photo. The card is written in handwriting. | "Write a Thanksgiving thank-you note to my mentor Maya" or "/thankyou --team Platform Thanksgiving" |
+| [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion, to a person, a team (`--team`), an organization (`--org`), or family (`--family`). It opens with a fitting, correctly attributed quote, recalls the specific moment or shared achievement that made a real difference, uses your native language where it fits, can show how you are paying it forward, and adds a small artwork drawn only for them plus a photo from a good time together, or a pencil sketch of the moment when there is no photo. The card is written in handwriting, and Claude helps deliver it by email, WhatsApp, text, Slack and more. | "Write a Thanksgiving thank-you note to my mentor Maya" or "/thankyou --team Platform Thanksgiving" |
 | [Reconnect](skills/reconnect/SKILL.md) | Finds people you've drifted from, and quietly leaves alone the ones you drifted from on purpose. Then it drafts a short, no-guilt check-in built on a real shared memory (often a photo from that time), a festival they celebrate, or a "thought of you" moment. | "Who have I lost touch with?" or "Help me reconnect with Arjun" |
 
 ## Install
@@ -32,11 +32,12 @@ work without any connectors: Claude asks you a few short questions instead.
 - **Kind always.** Tone fits the relationship (spouse, parent, elder, sibling,
   friend, mentor, colleague…) and the recipient's culture, and the skills steer
   around topics that could hurt.
-- **The human sends.** The skills draft; you review, edit, and send.
+- **You decide what's sent.** The skills draft; you review and edit. Nothing
+  is sent or posted without your explicit yes to the exact message.
 
 ## Privacy and data handling
 
-This plugin contains only skills (instructions and three small helper scripts).
+This plugin contains only skills (instructions and five small helper scripts).
 It has no hooks, no MCP servers, no package installs, and makes no network
 requests of its own.
 
@@ -69,10 +70,21 @@ photos of people, public figures or anything from social media, and it credits
 the author when the licence asks. A sketch or stock image is never described
 as a real photo of your moment.
 
-**What it never does.** It never sends, posts, replies, or reacts on your behalf.
-It creates an email draft only when you ask for one. It does not store your
-messages, contacts or notes anywhere, including memory, and it sends no data
-to any third party.
+**Delivery and sending.** When the note is ready, Claude helps you deliver it
+on the channel you choose: email (Gmail, Outlook), Slack, Microsoft Teams,
+Lark/Feishu, LinkedIn, WhatsApp, SMS/iMessage, Telegram, Signal, WeChat, LINE,
+KakaoTalk, or a printed card. **Claude sends or posts only after you say yes to
+that exact message, recipient and channel**, shown to you in full first. "Looks
+good" about the wording isn't taken as a yes to send. Without a yes, it creates a
+draft, or gives you the text, the card as an image, and a link that opens the
+app with the message filled in, so you send it yourself. It never sends
+unattended or on a schedule, never adds other recipients, and never posts a
+personal note to a group you didn't pick. Phone numbers and email addresses are
+used only for that send and never saved.
+
+**What it never does.** While looking for the moment, it only reads: it never
+replies, reacts, or posts. It does not store your messages, contacts or notes
+anywhere, including memory, and it sends no data to any third party.
 
 **What stays out of every note.** Contact details, addresses, ID or account
 numbers, money amounts and other financial details, and health information.
@@ -81,7 +93,7 @@ when I needed it most"). Reconnect never suggests people from a conflict, exes,
 estranged family, or anyone who may have passed away.
 
 **What runs on your machine.** When a skill is used in an environment that can
-run code, Claude may run three Python 3 scripts (no network access):
+run code, Claude may run five Python 3 scripts (no network access):
 
 - `skills/thankyou/scripts/safety_check.py` reads a draft note (JSON) and
   flags contact details, money amounts, financial and health terms, topics to
@@ -97,6 +109,13 @@ run code, Claude may run three Python 3 scripts (no network access):
 - `skills/thankyou/scripts/sketch_photo.py` turns a freely licensed stock
   photo into a graphite pencil sketch and removes its metadata. It needs
   Pillow; without Pillow, Claude draws the sketch as an SVG instead.
+- `skills/thankyou/scripts/share.py` formats the note for a channel (email
+  subject, short SMS version, team post) and prints a share link for
+  WhatsApp, SMS, email, Telegram or LINE. It never sends anything; a phone
+  number or address given to it appears only in the printed link.
+- `skills/thankyou/scripts/card_to_png.py` saves the card as an image using a
+  local headless browser (Playwright or Chrome, if installed). The card is
+  self-contained, so nothing is fetched.
 
 Where scripts can't run, the skills do the same checks by hand.
 

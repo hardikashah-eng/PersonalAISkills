@@ -163,6 +163,12 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
     for key in ("caption", "alt"):
         if photo.get(key):
             out.append((f"photo.{key}", str(photo[key])))
+    # Channel versions used by share.py
+    for key in ("subject", "channel_post"):
+        if note.get(key):
+            out.append((key, str(note[key])))
+    for i, para in enumerate(note.get("short_body") or []):
+        out.append((f"short_body[{i}]", str(para)))
     return out
 
 
