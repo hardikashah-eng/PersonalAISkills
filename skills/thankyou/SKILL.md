@@ -211,6 +211,12 @@ No clichés stack ("words cannot express…", "you're the best ever"). No
 over-sharing about the sender's own struggles. Read it aloud — it should sound
 like the sender, not a greeting-card company.
 
+**Write it like a handwritten note**, because the card is rendered in
+handwriting by default. Use contractions ("I've", "you're", "it's"), short
+sentences, and the rhythm of someone writing by hand. Small asides are fine
+("and yes, I still have the marker"), but there are no bullet points and no
+formal phrasing ("I would like to express my gratitude…").
+
 ### 6. Make a small artwork for this person only
 
 Follow `references/art.md`. Draw a small original SVG (about 320×200) built from
@@ -299,10 +305,16 @@ our relationship? Would they be glad to see this photo?*
 
 ### 9. Deliver
 
-Render a card the user can view, print, or screenshot:
+Render a card the user can view, print, or screenshot. Cards are **handwritten
+by default**: the note is set in a handwriting font (Caveat, with Kalam for
+Devanagari, both bundled and embedded so the card works offline) in ink on card
+stock, with slightly uneven lines and a signature. Chinese, Japanese and Korean
+use a handwriting-like system font where one is installed; other scripts use the
+system font. Use `--style print` for the clean serif look.
 
 ```bash
 python3 scripts/render_card.py note.json --art art.svg --out thankyou-<firstname>.html
+python3 scripts/render_card.py note.json --art art.svg --style print --out thankyou-<firstname>.html
 # with a photo (metadata is stripped; --photo-out saves the clean copy to attach)
 python3 scripts/render_card.py note.json --art art.svg --photo moment.jpg \
   --photo-out moment-clean.jpg --out thankyou-<firstname>.html
@@ -353,6 +365,7 @@ Do not send or post.
 `photo` is optional; the image file itself is passed with `--photo`. Its
 `source` is `own` (the user's photo), `sketch` (drawn), or `stock` (with
 `credit`, `license`, and `url`).
+`style` is `handwritten` (default) or `print`.
 `audience` is `individual` (default), `team`, `org`, or `family`. For a group,
 put the group's name in `recipient_name` (e.g. "the Platform team") and leave
 `recipient_first_name` out; the optional `roster` list is what
@@ -372,6 +385,7 @@ put the group's name in `recipient_name` (e.g. "the Platform team") and leave
 - `references/paying-it-forward.md` — when and how to show the gift travelling on
 - `references/sketch.md` — no photo: a drawn pencil sketch, or a freely licensed stock photo as a sketch; honesty rules
 - `scripts/sketch_photo.py` — turns a stock photo into a graphite pencil sketch (needs Pillow; strips metadata)
+- `assets/fonts/` — handwriting fonts embedded in cards: Caveat (Latin, Cyrillic) and Kalam (Devanagari), SIL Open Font License 1.1
 - `scripts/safety_check.py` — automated PII / financial / health / harshness scan
 - `scripts/render_card.py` — renders note.json + art.svg (+ optional photo, metadata stripped) into a printable HTML card
 - `examples/` — a finished sample (note.json, art.svg, rendered card)

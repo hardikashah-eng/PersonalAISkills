@@ -9,7 +9,7 @@ up better for each other, not to stand in for them.
 
 | Skill | What it does | Try saying |
 |---|---|---|
-| [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion, to a person, a team (`--team`), an organization (`--org`), or family (`--family`). It opens with a fitting, correctly attributed quote, recalls the specific moment or shared achievement that made a real difference, uses your native language where it fits, can show how you are paying it forward, and adds a small artwork drawn only for them plus a photo from a good time together, or a pencil sketch of the moment when there is no photo. | "Write a Thanksgiving thank-you note to my mentor Maya" or "/thankyou --team Platform Thanksgiving" |
+| [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion, to a person, a team (`--team`), an organization (`--org`), or family (`--family`). It opens with a fitting, correctly attributed quote, recalls the specific moment or shared achievement that made a real difference, uses your native language where it fits, can show how you are paying it forward, and adds a small artwork drawn only for them plus a photo from a good time together, or a pencil sketch of the moment when there is no photo. The card is written in handwriting. | "Write a Thanksgiving thank-you note to my mentor Maya" or "/thankyou --team Platform Thanksgiving" |
 | [Reconnect](skills/reconnect/SKILL.md) | Finds people you've drifted from, and quietly leaves alone the ones you drifted from on purpose. Then it drafts a short, no-guilt check-in built on a real shared memory (often a photo from that time), a festival they celebrate, or a "thought of you" moment. | "Who have I lost touch with?" or "Help me reconnect with Arjun" |
 
 ## Install
@@ -99,6 +99,11 @@ run code, Claude may run three Python 3 scripts (no network access):
   Pillow; without Pillow, Claude draws the sketch as an SVG instead.
 
 Where scripts can't run, the skills do the same checks by hand.
+
+**Fonts.** Cards are written in a handwriting font by default. Caveat and Kalam
+are bundled in `skills/thankyou/assets/fonts/` under the SIL Open Font License
+1.1 (licence files included) and embedded in each card, so nothing is fetched
+when a card opens.
 
 All people in `examples/` are fictional, the example photos are illustrated
 stand-ins, and the sketches were drawn by the skill.

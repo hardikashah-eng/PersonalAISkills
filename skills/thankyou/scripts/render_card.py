@@ -3,6 +3,7 @@
 
 Usage:
     python3 render_card.py note.json --art art.svg --out thankyou-priya.html
+    python3 render_card.py note.json --art art.svg --style print --out thankyou-priya.html
     python3 render_card.py note.json --art art.svg --photo moment.jpg \
         --photo-out moment-clean.jpg --out card.html
 
@@ -14,6 +15,12 @@ is embedded, all metadata (EXIF, GPS location, XMP, IPTC, text chunks) is
 removed. If Pillow is installed the photo is also turned upright and shrunk to
 at most 1200 px; otherwise JPEG and PNG are cleaned with the standard library
 only. --photo-out writes the cleaned copy, for attaching to an email or chat.
+
+Cards are written in a handwriting font by default (Caveat, with Kalam for
+Devanagari; both SIL Open Font License, bundled in ../assets/fonts and embedded
+so the card works offline). Scripts without a bundled handwriting font, such as
+Chinese or Arabic, fall back to the system fonts. --style print gives the clean
+serif look instead.
 """
 from __future__ import annotations
 
@@ -30,6 +37,78 @@ from pathlib import Path
 DEFAULT_PALETTE = {"bg": "#FBF6EE", "ink": "#3B2F2A", "accent": "#C8693C", "paper": "#FFFDF9"}
 MAX_PHOTO_PX = 1200
 MAX_EMBED_BYTES = 3 * 1024 * 1024
+
+# --- Handwritten style ----------------------------------------------------------
+# Fonts are bundled under ../assets/fonts (SIL Open Font License 1.1, see the
+# OFL-*.txt files there). Only the subsets a card's text needs are embedded.
+FONT_DIR = Path(__file__).resolve().parent.parent / "assets" / "fonts"
+
+HAND_FONTS = [
+    # (file, weight, unicode-range, regex that triggers embedding, size-adjust)
+    ("caveat-latin-500-normal.woff2", 500,
+     "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,"
+     "U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD", r".", None),
+    ("caveat-latin-700-normal.woff2", 700,
+     "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,"
+     "U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD", r".", None),
+    ("caveat-latin-ext-500-normal.woff2", 500,
+     "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,"
+     "U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF",
+     r"[Ā-˿Ḁ-ỿ]", None),
+    ("caveat-cyrillic-500-normal.woff2", 500,
+     "U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116", r"[Ѐ-ӿ]", None),
+    ("kalam-devanagari-400-normal.woff2", 500,
+     "U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF",
+     r"[ऀ-ॿ]", "82%"),
+]
+
+SQUIGGLE = ("url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' "
+            "viewBox='0 0 40 8'%3E%3Cpath d='M0 4 Q5 0 10 4 T20 4 T30 4 T40 4' fill='none' "
+            "stroke='%23000' stroke-opacity='.22' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E\")")
+
+HAND_CSS = """
+  body {{ font-family: "PAI Hand", "Bradley Hand", "Segoe Print",
+                      "Kaiti SC", "STKaiti", "KaiTi", "BiauKai", "Klee", "Nanum Pen Script",
+                      "Noto Serif", cursive; }}
+  .card {{ background-image: radial-gradient(rgba(120,100,70,.035) 1px, transparent 1px);
+          background-size: 5px 5px; }}
+  .content {{ padding:30px 40px 36px; color:var(--ink); text-shadow:0 0 .35px currentColor; }}
+  blockquote {{ border-bottom:none; padding-bottom:20px; margin-bottom:20px;
+               background:{squiggle} repeat-x left bottom / 40px 8px; }}
+  blockquote p {{ font-style:normal; font-size:25px; line-height:1.25; }}
+  blockquote .translation {{ font-size:20px; opacity:.72; margin-top:6px; }}
+  blockquote cite {{ font: 500 20px/1.2 "PAI Hand", cursive; margin-top:8px; }}
+  .greeting {{ font-size:30px; margin:0 0 10px; }}
+  .body p {{ font-size:25px; line-height:1.36; margin:0 0 14px; }}
+  .body p:nth-child(4n+1) {{ transform:rotate(-0.35deg); margin-left:1px; }}
+  .body p:nth-child(4n+2) {{ transform:rotate(0.25deg); margin-left:5px; }}
+  .body p:nth-child(4n+3) {{ transform:rotate(-0.15deg); margin-left:2px; }}
+  .body p:nth-child(4n)   {{ transform:rotate(0.3deg); margin-left:6px; }}
+  .photo figcaption {{ font-style:normal; font-size:22px; padding:8px 6px 12px; }}
+  .closing {{ font-size:26px; margin:22px 0 0 18px; }}
+  .signature {{ font-style:normal; font-weight:700; font-size:40px; margin:0 0 0 34px;
+               transform:rotate(-3deg); transform-origin:left center; }}
+"""
+
+
+def hand_font_faces(text: str) -> str | None:
+    """@font-face rules for the subsets this text needs, or None if fonts are missing."""
+    rules = []
+    for fname, weight, urange, trigger, size_adjust in HAND_FONTS:
+        if not re.search(trigger, text):
+            continue
+        path = FONT_DIR / fname
+        if not path.exists():
+            return None
+        data = base64.b64encode(path.read_bytes()).decode("ascii")
+        adjust = f" size-adjust:{size_adjust};" if size_adjust else ""
+        rules.append(
+            f'  @font-face {{ font-family:"PAI Hand"; font-style:normal; font-weight:{weight}; '
+            f'font-display:swap;{adjust} src:url(data:font/woff2;base64,{data}) format("woff2"); '
+            f"unicode-range:{urange}; }}"
+        )
+    return "\n".join(rules)
+
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="{lang}" dir="{direction}">
@@ -71,6 +150,7 @@ TEMPLATE = """<!DOCTYPE html>
   .closing {{ margin:20px 0 2px; font-size:16px; }}
   .signature {{ font-size:22px; font-style:italic; color:var(--accent); margin:0; }}
   @media print {{ body {{ background:#fff; padding:0; }} .card {{ box-shadow:none; }} }}
+{style_css}
 </style>
 </head>
 <body>
@@ -262,7 +342,8 @@ def clean_photo(path: Path) -> tuple[bytes, str, list[str]]:
 
 # --- Rendering ----------------------------------------------------------------
 
-def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = None) -> str:
+def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = None,
+           style: str = "handwritten") -> str:
     e = lambda s: html.escape(str(s or ""))
     palette = {**DEFAULT_PALETTE, **(note.get("palette") or {})}
     quote = note.get("quote") or {}
@@ -281,6 +362,16 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
         photo_block = f'<figure class="photo"><div class="frame"><img src="{src}" alt="{alt}">{caption}</div></figure>'
 
     closing = note.get("closing", "With gratitude,")
+
+    style_css = ""
+    if style == "handwritten":
+        all_text = json.dumps(note, ensure_ascii=False)
+        faces = hand_font_faces(all_text)
+        if faces is None:
+            print("note: handwriting fonts not found; using the print style", file=sys.stderr)
+        else:
+            style_css = faces + HAND_CSS.format(squiggle=SQUIGGLE)
+
     return TEMPLATE.format(
         lang=e(note.get("language", "en")),
         direction="rtl" if note.get("direction") == "rtl" else "ltr",
@@ -299,6 +390,7 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
         photo_block=photo_block,
         closing_block=f'<p class="closing">{e(closing)}</p>' if closing else "",
         signature=e(note.get("signature") or note.get("sender_first_name")),
+        style_css=style_css,
         **{k: e(v) for k, v in palette.items()},
     )
 
@@ -331,6 +423,9 @@ def main() -> int:
                     "or a drawn pencil-sketch SVG when there is no photo")
     ap.add_argument("--photo-out", type=Path, help="also write the cleaned photo, for attaching to an email or chat")
     ap.add_argument("--out", type=Path, default=Path("thankyou.html"))
+    ap.add_argument("--style", choices=["handwritten", "print"], default=None,
+                    help="handwritten (default): embedded handwriting font, ink on card stock; "
+                         "print: the clean serif look. Overrides note.json 'style'.")
     ap.add_argument("--text-out", type=Path, help="also write a plain-text version")
     args = ap.parse_args()
 
@@ -351,7 +446,8 @@ def main() -> int:
             args.photo_out.write_bytes(data)
             print(f"clean photo → {args.photo_out}")
 
-    args.out.write_text(render(note, svg, photo), encoding="utf-8")
+    style = args.style or note.get("style") or "handwritten"
+    args.out.write_text(render(note, svg, photo, style), encoding="utf-8")
     print(f"card → {args.out}")
     if args.text_out:
         args.text_out.write_text(plain_text(note), encoding="utf-8")

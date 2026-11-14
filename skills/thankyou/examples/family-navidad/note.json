@@ -14,8 +14,8 @@
   "greeting": "Queridos Mamá y Papá,",
   "body": [
     "I keep thinking about the kitchen table. Every school night, Mamá, you sat beside me with my homework until it made sense, and Papá, on the nights you got home late, you left the light on and two cups of hot chocolate waiting.",
-    "That table is where I learned that being stuck is not the same as being lost. I still believe it, and it has carried me further than you know.",
-    "Now I am the one at the kitchen table with Sofía's homework, the way you sat with me. Every time she finally gets it, I think of you both.",
+    "That table is where I learned that being stuck isn't the same as being lost. I still believe it, and it has carried me further than you know.",
+    "Now I'm the one at the kitchen table with Sofía's homework, the way you sat with me. Every time she finally gets it, I think of you both.",
     "Gracias por todo, por la paciencia y por esa luz encendida."
   ],
   "closing": "Con todo mi cariño,",
@@ -25,5 +25,10 @@
     "caption": "The kitchen table, school nights",
     "alt": "Pencil sketch of a kitchen table under a hanging lamp, with two cups and an open notebook and pencil"
   },
-  "palette": {"bg": "#2F3550", "ink": "#33302C", "accent": "#A8402F", "paper": "#FFFCF6"}
+  "palette": {
+    "bg": "#2F3550",
+    "ink": "#33302C",
+    "accent": "#A8402F",
+    "paper": "#FFFCF6"
+  }
 }

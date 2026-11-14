@@ -7,9 +7,9 @@ In the spring we set ourselves a goal that sounded a little unreasonable: move e
 
 We got there in October. Test runs that used to take a week now finish the same afternoon. That happened because of late nights nobody asked for, careful reviews, and one habit you kept no matter what: no one debugs alone.
 
-Three other teams now run their tests on what you built, and I am carrying that same habit into every group I work with.
+Three other teams now run their tests on what you built, and I'm carrying that same habit into every group I work with.
 
-This Thanksgiving I am grateful for every one of you who touched this, on-site and remote.
+This Thanksgiving I'm grateful for every one of you who touched this, on-site and remote.
 
 With gratitude and pride,
 Hardik

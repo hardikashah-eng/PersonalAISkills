@@ -181,7 +181,8 @@ python3 ../thankyou/scripts/render_card.py message.json --art art.svg \
   --photo memory.jpg --photo-out memory-clean.jpg --out reconnect-<firstname>.html
 ```
 
-Give the user the clean photo to send (and the card, if they want one). Offer
+Give the user the clean photo to send (and the card, if they want one; it's
+handwritten by default, or `--style print`). Offer
 to create drafts in the right connector, with the clean photo attached. Never
 send. Keep any card with a personal photo as a file or draft, not a public link.
 
