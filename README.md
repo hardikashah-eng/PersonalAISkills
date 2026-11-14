@@ -14,7 +14,9 @@ Each skill follows the same principles:
 
 ## Skills
 
-Coming soon.
+| Skill | What it does |
+|---|---|
+| [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion: an opening quote, the specific moment the person made a difference (found in your connectors with your permission), your native language where it fits, and a small artwork made only for them. |
 
 ## Layout
 
@@ -25,3 +27,14 @@ skills/<name>/
   scripts/        # deterministic helpers (safety checks, renderers)
   examples/       # finished samples
 ```
+
+## Try ThankYou locally
+
+```bash
+cd skills/thankyou
+python3 scripts/safety_check.py examples/maya-thanksgiving/note.json
+python3 scripts/render_card.py examples/maya-thanksgiving/note.json \
+  --art examples/maya-thanksgiving/art.svg --out /tmp/maya.html
+```
+
+Requires Python 3.9+, no dependencies.

@@ -1,0 +1,23 @@
+{
+  "recipient_first_name": "Maya",
+  "sender_first_name": "Hardik",
+  "relationship": "former manager and mentor",
+  "language": "en",
+  "direction": "ltr",
+  "occasion": "Happy Thanksgiving",
+  "quote": {
+    "text": "If I have seen further it is by standing on the shoulders of Giants.",
+    "attribution": "Isaac Newton, letter to Robert Hooke (1675)",
+    "translation": null
+  },
+  "greeting": "Dear Maya,",
+  "body": [
+    "Five years ago, when I was ready to scrap the simulation pipeline redesign, you gave up two evenings to stand at a whiteboard with me and untangle it, one box and arrow at a time.",
+    "That design shipped, and it is still the foundation my team builds on today. More than the system, you taught me that being stuck is just the part before the sketch gets clear. I have passed that on to every engineer I have mentored since.",
+    "Not once did you make me feel small for not knowing. That patience is something I try to carry with me every day.",
+    "This Thanksgiving, you are near the top of my list. I hope the trails are kind to you this season."
+  ],
+  "closing": "With gratitude,",
+  "signature": "Hardik",
+  "palette": {"bg": "#FBEBD9", "ink": "#3B2F2A", "accent": "#B5562F", "paper": "#FFFDF9"}
+}
