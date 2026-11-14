@@ -79,10 +79,10 @@ def format_text(note: dict, channel: str) -> str:
         lines += quote_lines(note, "plain")
     # SMS, iMessage, LinkedIn: no quote, to keep it short.
 
-    if not posting_to_group and note.get("greeting"):
-        lines += [note["greeting"], ""]
     if note.get("title") and not posting_to_group:
         lines += [note["title"], ""]
+    if not posting_to_group and note.get("greeting"):
+        lines += [note["greeting"], ""]
     for para in body_for(note, channel):
         lines += [para, ""]
     if not posting_to_group:
