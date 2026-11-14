@@ -19,5 +19,14 @@
   ],
   "closing": "With gratitude,",
   "signature": "Hardik",
-  "palette": {"bg": "#FBEBD9", "ink": "#3B2F2A", "accent": "#B5562F", "paper": "#FFFDF9"}
+  "palette": {
+    "bg": "#FBEBD9",
+    "ink": "#3B2F2A",
+    "accent": "#B5562F",
+    "paper": "#FFFDF9"
+  },
+  "photo": {
+    "caption": "The whiteboard from that second evening, 2021",
+    "alt": "A whiteboard with boxes and arrows sketching a job queue, with \"it works\" written in red"
+  }
 }

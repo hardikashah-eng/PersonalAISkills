@@ -13,6 +13,13 @@ Something the two of them lived through together.
 Best when it's small, specific, and happy. Skip memories tied to a hard time
 unless the user wants that.
 
+**With a photo.** A photo from that shared time is the strongest form of this
+hook. Send the photo first, then one line:
+- "Found this from launch week and it made me smile."
+- "Look what turned up in my old photos. That trail still owes us a rematch."
+It must be the user's own photo from the shared past, never the recipient's
+recent posts or profile picture (`../../thankyou/references/photos.md`).
+
 ### 2. "Thought of you" trigger
 Something real in the user's current life that connects to the person.
 - "I just used your 'read the error slowly' line on a new engineer and realised I never told you how often I quote you."

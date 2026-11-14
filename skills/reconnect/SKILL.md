@@ -1,6 +1,6 @@
 ---
 name: reconnect
-description: Find people the user has drifted away from (old teammates, friends, mentors, family) and draft a short, warm, no-guilt check-in built on a real shared memory, fitted to the relationship, culture, and language. Use when the user wants to reconnect, catch up, or keep in touch with someone, or asks who they've lost touch with.
+description: Find people the user has drifted away from (old teammates, friends, mentors, family) and draft a short, warm, no-guilt check-in built on a real shared memory (optionally with a photo from that time, from the user's own library), fitted to the relationship, culture, and language. Use when the user wants to reconnect, catch up, or keep in touch with someone, or asks who they've lost touch with.
 ---
 
 # Reconnect
@@ -35,6 +35,12 @@ to send and easy to answer — anchored in a real shared memory, never in guilt.
    When in doubt, leave them off the list.
 8. **Kind, always.** Relationship-aware tone, recipient triggers avoided,
    cultural norms respected (`../thankyou/references/relationships-and-culture.md`).
+9. **Photos from the shared past only.** A photo must come from the user's own
+   library, drive, attachments, or the two people's shared threads, and show a
+   time they had together. Never use the recipient's recent posts, profile
+   pictures, or anything from the web, never identify anyone by face, and
+   never alter a person. Metadata is always stripped
+   (`../thankyou/references/photos.md`).
 
 ## Two modes
 
@@ -76,6 +82,8 @@ For each chosen person, know (or ask, briefly):
 Follow `references/hooks.md`. Pick **one** hook, in this order of preference:
 1. **Shared memory** — a specific moment from their history ("the night we got
    the demo working at 2am", "your terrible-but-legendary trivia team name").
+   A **photo from that time** is the strongest version of this hook: "Found this
+   from launch week and smiled." See step 3b.
 2. **"Thought of you" trigger** — something real in the user's life that
    reminded them of the person ("I just used the review checklist you taught me").
    Must be true — ask the user if you don't have one.
@@ -86,6 +94,32 @@ Follow `references/hooks.md`. Pick **one** hook, in this order of preference:
 5. **Genuine question** — something only they would know or would enjoy answering.
 
 Never invent a memory or a trigger. If nothing real exists, use 4 or 5.
+
+### 3b. Look for a photo from the good times (optional)
+
+A photo from the time they shared, sent with a short line, is one of the
+warmest ways to reopen a door, and it gives the other person something easy to
+reply to ("Ha, I remember that day!"). Follow `../thankyou/references/photos.md`:
+
+- **Search by context, never by face**, in the user's own sources: the date
+  range or album of the shared time (their connected photo library or drive),
+  photos the two of them exchanged back then in email or chat (WhatsApp/SMS
+  only with the same opt-in), person labels the user created, or a photo the
+  user attaches. Or ask: "Any photo from the launch days or that trip? You can
+  drop it here."
+- **The shared past only.** Never use the recipient's recent posts or profile
+  photos. A photo of the place or the thing (the two chai glasses, the
+  whiteboard, the trailhead) works well and is often safest.
+- **Right for them.** It should be from a happy time and flattering, with no
+  former partners, no one they've lost or are estranged from, no other people's
+  children, no addresses, plates, or screens, and nothing at odds with their
+  culture. For someone you drifted from, choose a photo that's light and
+  nostalgic, not one that marks a big life event they might feel differently
+  about now.
+- **The user picks.** Show 2–4 candidates and use only the one they choose.
+  Never retouch, alter, or generate a person.
+- On WhatsApp or SMS, the photo usually goes first, then the message. In email
+  or LinkedIn, attach it or put it on a small card.
 
 ### 4. Write the message
 
@@ -108,8 +142,13 @@ relationships (greeting or festival wish in the native language). Follow
 Offer **two variants** when it helps: one lighter, one warmer. Keep the user's
 voice — if they share past messages to the person, match that register.
 
-Optional: a tiny "postcard" image from the shared memory (art rules in
-`../thankyou/references/art.md`), useful for WhatsApp or a holiday note.
+When there's a photo, let the message lean on it: "Found this from launch week
+and it made me smile." Keep the photo's caption (if on a card) to one warm line
+with no personal details.
+
+Optional: a tiny "postcard" drawing from the shared memory (art rules in
+`../thankyou/references/art.md`), useful for WhatsApp or a holiday note, or
+when there's no photo.
 
 ### 5. Safety pass
 
@@ -125,7 +164,17 @@ answer? Nothing that feels like pressure, guilt, or being watched?*
 ### 6. Deliver
 
 For each person: the message (ready to paste), one line on why this hook, and
-the variant if any. Offer to create drafts in the right connector. Never send.
+the variant if any. With a photo, render the cleaned copy so no hidden
+location or camera data goes out:
+
+```bash
+python3 ../thankyou/scripts/render_card.py message.json --art art.svg \
+  --photo memory.jpg --photo-out memory-clean.jpg --out reconnect-<firstname>.html
+```
+
+Give the user the clean photo to send (and the card, if they want one). Offer
+to create drafts in the right connector, with the clean photo attached. Never
+send. Keep any card with a personal photo as a file or draft, not a public link.
 
 Optional follow-through, only if the user wants it: offer a monthly scheduled
 task ("each month, suggest two people to reconnect with and draft the notes")
@@ -145,14 +194,17 @@ Same schema as ThankYou (quote optional):
   "greeting": "Hey Arjun,",
   "body": ["…"],
   "closing": "",
-  "signature": "Hardik"
+  "signature": "Hardik",
+  "photo": {"caption": "Friday chai, launch week 2019", "alt": "Two glasses of chai on an office table"}
 }
 ```
+
+`photo` is optional; the image itself is passed to `render_card.py` with `--photo`.
 
 ## Files
 
 - `references/drift-detection.md` — finding drifted connections, exclusions, scoring
 - `references/hooks.md` — hook types, examples, what feels creepy or guilt-inducing
 - `examples/` — sample suggestion list and messages
-- Shared with ThankYou: `../thankyou/references/{safety,language,art,relationships-and-culture}.md`,
+- Shared with ThankYou: `../thankyou/references/{safety,language,art,photos,relationships-and-culture}.md`,
   `../thankyou/scripts/{safety_check,render_card}.py`

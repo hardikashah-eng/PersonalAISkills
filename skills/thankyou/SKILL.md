@@ -1,6 +1,6 @@
 ---
 name: thankyou
-description: Write a heartfelt, one-of-a-kind thank-you note (Thanksgiving, holidays, Diwali, farewells, any occasion) that opens with a fitting quote, recalls the specific moment the recipient made a real difference (found via the user's email, chat, LinkedIn, or opt-in WhatsApp/SMS), fits the relationship and culture, uses the native language when appropriate, and includes a small original artwork. Use when the user asks to thank someone or write thank-you notes.
+description: Write a heartfelt, one-of-a-kind thank-you note (Thanksgiving, holidays, Diwali, farewells, any occasion) that opens with a fitting quote, recalls the specific moment the recipient made a real difference (found via the user's email, chat, LinkedIn, or opt-in WhatsApp/SMS), fits the relationship and culture, uses the native language when appropriate, and includes a small original artwork and, when the user has one, a photo from a good time together. Use when the user asks to thank someone or write thank-you notes.
 ---
 
 # ThankYou
@@ -10,8 +10,8 @@ A thank-you note lands when it proves the sender *noticed*. Generic gratitude
 through my first on-call incident is why I stayed in this field" is kept for
 years. This skill finds that specific moment — using the sender's own
 communication history when they have connected it — and turns it into a warm,
-safe, personal note with a quote and a small piece of art made only for the
-recipient.
+safe, personal note with a quote, a small piece of art made only for the
+recipient, and, when the user has one, a photo from a good time they shared.
 
 ## Non-negotiables (apply to every step)
 
@@ -43,6 +43,11 @@ recipient.
    (spouse, parent, sibling, friend, mentor, colleague…), steer around anything
    that could be painful for them, and follow their cultural norms
    (`references/relationships-and-culture.md`).
+9. **Photos: the user's own, chosen by the user, never altered.** Use only
+   photos from the user's own library, drive, attachments, or the two people's
+   shared threads; never from the web, social media, or profile pictures.
+   Never identify anyone by face, and never edit or generate a person's face or
+   body. Metadata is always stripped. See `references/photos.md`.
 
 ## Workflow
 
@@ -159,7 +164,34 @@ no logos, brands, or copyrighted characters, no text containing PII. A tiny
 hidden-in-plain-sight detail (their favourite colour, a constellation, initials
 of the first name only) makes it one-of-one. Save it as `art.svg`.
 
-### 7. Safety pass — mandatory before showing the note
+### 7. Add a photo of a good time together (optional)
+
+A real photo from the moment you're thanking them for, or from a happy time
+together, makes the note unmistakably personal. Follow `references/photos.md`:
+
+- **Find candidates by context, never by face**, in the user's own sources:
+  photos from the date or event of the moment (their connected photo library
+  or drive, such as Google Photos, OneDrive, or iCloud via a connected folder),
+  photos the two of them already exchanged in email or chat (WhatsApp/SMS only
+  with the same opt-in), albums or person labels the user created, or a photo
+  the user attaches. Often the quickest path is to ask: "Do you have a photo
+  from that time together? You can attach it here."
+- **A photo of the shared thing counts.** The whiteboard from that night, the
+  trail you hiked, or the lab bench can be as personal as a photo of people.
+- **Check it's right for them.** It should be happy, flattering, and from a good
+  time, with nothing inappropriate, no former partners, no one they've lost
+  (unless the user wants a remembrance), no other people's children, no
+  addresses, plates, or screens in frame, and nothing at odds with their
+  culture. If in doubt, skip it.
+- **The user picks.** Show 2–4 candidates; use only the one they choose. Crop,
+  straighten, or brighten if needed, but never retouch, alter, or generate a
+  person.
+- **Caption it warmly.** One short line with no personal details, such as
+  "The night the demo finally worked, 2019". Add plain alt text.
+
+No good photo? That's fine. The drawing carries the card on its own.
+
+### 8. Safety pass — mandatory before showing the note
 
 Run the automated check, then review by hand:
 
@@ -168,31 +200,37 @@ python3 scripts/safety_check.py note.json
 ```
 
 The script flags emails, phone numbers, URLs, long numbers, currency amounts,
-health and financial terms, and harsh words. Fix every flag (abstract or remove)
-and re-run until clean. Then re-read against the non-negotiables above — the
-script is a backstop, not a substitute for judgement. Ask: *Would the recipient
-feel seen and happy? Would anything make them uncomfortable if someone read it
-over their shoulder? Does anything touch a trigger, or break a norm of their
-culture or our relationship?*
+health and financial terms, and harsh words, in the note and in the photo
+caption and alt text. Fix every flag (abstract or remove) and re-run until
+clean. Then re-read against the non-negotiables above — the script is a
+backstop, not a substitute for judgement. Ask: *Would the recipient feel seen
+and happy? Would anything make them uncomfortable if someone read it over their
+shoulder? Does anything touch a trigger, or break a norm of their culture or
+our relationship? Would they be glad to see this photo?*
 
-### 8. Deliver
+### 9. Deliver
 
 Render a card the user can view, print, or screenshot:
 
 ```bash
 python3 scripts/render_card.py note.json --art art.svg --out thankyou-<firstname>.html
+# with a photo (metadata is stripped; --photo-out saves the clean copy to attach)
+python3 scripts/render_card.py note.json --art art.svg --photo moment.jpg \
+  --photo-out moment-clean.jpg --out thankyou-<firstname>.html
 ```
 
 Give the user:
-- the rendered card (send the HTML file; publish it as an artifact if they want
-  to share a link),
+- the rendered card (send the HTML file). If it contains a personal photo,
+  keep it as a file or draft; publish it as a shareable link only if the user
+  explicitly asks,
 - the plain-text version ready to paste into a card, email, or chat,
 - one line on the moment you used and why, and an offer to adjust tone, length,
   or language.
 
 If they want it emailed, create a **draft** in their email connector and tell
-them it's waiting in Drafts. For WhatsApp/SMS, give the text ready to paste
-(the card can be sent as an image). Do not send.
+them it's waiting in Drafts, with the cleaned photo attached if there is one.
+For WhatsApp/SMS, give the text ready to paste and suggest sending the cleaned
+photo first (the card can also be sent as an image). Do not send.
 
 ## note.json format
 
@@ -208,12 +246,14 @@ them it's waiting in Drafts. For WhatsApp/SMS, give the text ready to paste
   "body": ["paragraph 1", "paragraph 2"],
   "closing": "With gratitude,",
   "signature": "Hardik",
+  "photo": {"caption": "The night the demo finally worked, 2019", "alt": "A whiteboard covered in boxes and arrows"},
   "palette": {"bg": "#FBF6EE", "ink": "#3B2F2A", "accent": "#C8693C"}
 }
 ```
 
 `translation` is used when the quote is in another language (shown under it).
 `direction` is `rtl` for Arabic, Hebrew, Urdu, Persian.
+`photo` is optional; the image file itself is passed with `--photo`.
 
 ## Files
 
@@ -223,6 +263,7 @@ them it's waiting in Drafts. For WhatsApp/SMS, give the text ready to paste
 - `references/art.md` — motif library and SVG rules for the one-of-one artwork
 - `references/safety.md` — what never goes in a note, and how to abstract it
 - `references/relationships-and-culture.md` — tone by relationship, recipient triggers, cultural norms
+- `references/photos.md` — finding, choosing, cleaning, and captioning a photo of a good time together
 - `scripts/safety_check.py` — automated PII / financial / health / harshness scan
-- `scripts/render_card.py` — renders note.json + art.svg into a printable HTML card
+- `scripts/render_card.py` — renders note.json + art.svg (+ optional photo, metadata stripped) into a printable HTML card
 - `examples/` — a finished sample (note.json, art.svg, rendered card)

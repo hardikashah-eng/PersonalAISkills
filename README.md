@@ -9,8 +9,8 @@ up better for each other, not to stand in for them.
 
 | Skill | What it does | Try saying |
 |---|---|---|
-| [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion. It opens with a fitting, correctly attributed quote, recalls the specific moment the person made a real difference, uses your native language where it fits, and adds a small artwork drawn only for them. | "Write a Thanksgiving thank-you note to my mentor Maya" |
-| [Reconnect](skills/reconnect/SKILL.md) | Finds people you've drifted from, and quietly leaves alone the ones you drifted from on purpose. Then it drafts a short, no-guilt check-in built on a real shared memory, a festival they celebrate, or a "thought of you" moment. | "Who have I lost touch with?" or "Help me reconnect with Arjun" |
+| [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion. It opens with a fitting, correctly attributed quote, recalls the specific moment the person made a real difference, uses your native language where it fits, and adds a small artwork drawn only for them, plus a photo from a good time together if you have one. | "Write a Thanksgiving thank-you note to my mentor Maya" |
+| [Reconnect](skills/reconnect/SKILL.md) | Finds people you've drifted from, and quietly leaves alone the ones you drifted from on purpose. Then it drafts a short, no-guilt check-in built on a real shared memory (often a photo from that time), a festival they celebrate, or a "thought of you" moment. | "Who have I lost touch with?" or "Help me reconnect with Arjun" |
 
 ## Install
 
@@ -48,6 +48,17 @@ read only after you explicitly allow it for that note, and only your 1:1 thread
 with that person. Claude shows you a one-line summary of the moment it found
 and uses it only after you confirm.
 
+**Photos.** A note can include a photo from a good time you shared. Photos
+come only from your own sources: a photo library or drive you've connected, a
+photo you attach, or photos the two of you already exchanged (WhatsApp and SMS
+with the same opt-in as above). Claude finds candidates by the date, album or
+thread of the moment, never by recognising faces, and never takes photos from
+the web, social media or profile pictures. You choose the photo. Claude never
+retouches, alters or generates a person. Before a photo goes into a card or
+draft, its hidden data (GPS location, camera details, timestamps) is removed.
+Cards with personal photos are kept as files or drafts, not shareable links,
+unless you ask.
+
 **What it never does.** It never sends, posts, replies, or reacts on your behalf.
 It creates an email draft only when you ask for one. It does not store your
 messages, contacts or notes anywhere, including memory, and it sends no data
@@ -60,19 +71,23 @@ when I needed it most"). Reconnect never suggests people from a conflict, exes,
 estranged family, or anyone who may have passed away.
 
 **What runs on your machine.** When a skill is used in an environment that can
-run code, Claude may run two Python 3 scripts (standard library only, no
-network access):
+run code, Claude may run two Python 3 scripts (no network access):
 
 - `skills/thankyou/scripts/safety_check.py` reads a draft note (JSON) and
   flags contact details, money amounts, financial and health terms, topics to
-  avoid, and harsh or guilt-inducing wording. It prints a report and writes nothing.
-- `skills/thankyou/scripts/render_card.py` turns a note and an optional SVG
-  drawing into a self-contained HTML card file at the path you choose. It
-  strips scripts and external links from the SVG.
+  avoid, and harsh or guilt-inducing wording, including in a photo's caption
+  and alt text. It prints a report and writes nothing.
+- `skills/thankyou/scripts/render_card.py` turns a note, an optional SVG
+  drawing and an optional photo into a self-contained HTML card file at the
+  path you choose. It strips scripts and external links from the SVG and all
+  metadata from the photo, and can save the cleaned photo for you to attach.
+  It uses the standard library only; if Pillow is already installed it also
+  turns photos upright and shrinks them to at most 1200 px.
 
 Where scripts can't run, the skills do the same checks by hand.
 
-All people in `examples/` are fictional.
+All people in `examples/` are fictional, and the example photos are
+illustrated stand-ins.
 
 ## Layout
 
