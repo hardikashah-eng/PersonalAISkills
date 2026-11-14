@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For the Platform team</title>
+<style>
+  :root { --bg:#F6E7D6; --ink:#3B2F2A; --accent:#B5562F; --paper:#FFFDF9; }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:var(--bg); color:var(--ink); padding:32px 16px;
+         font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Noto Serif",
+                      "Noto Serif Devanagari", "Noto Serif Tamil", "Noto Serif CJK SC",
+                      "Noto Naskh Arabic", serif; }
+  .card { width:100%; max-width:520px; background:var(--paper); border-radius:18px;
+          box-shadow:0 1px 2px rgba(0,0,0,.06), 0 12px 40px rgba(60,40,20,.12);
+          overflow:hidden; }
+  .art { display:block; width:100%; height:auto; background:var(--bg); }
+  .art svg { display:block; width:100%; height:auto; }
+  .content { padding:28px 36px 34px; }
+  .occasion { font: 600 11px/1.2 system-ui, sans-serif; letter-spacing:.14em; text-transform:uppercase;
+              color:var(--accent); margin:0 0 14px; }
+  blockquote { margin:0 0 22px; padding:0 0 18px; border-bottom:1px solid rgba(0,0,0,.08); }
+  blockquote p { margin:0; font-style:italic; font-size:18px; line-height:1.45; }
+  blockquote .translation { font-size:14px; opacity:.75; margin-top:6px; }
+  blockquote cite { display:block; margin-top:8px; font: 13px/1.3 system-ui, sans-serif; font-style:normal;
+                    color:var(--accent); }
+  .greeting { font-size:18px; margin:0 0 12px; }
+  .body p { font-size:16px; line-height:1.65; margin:0 0 12px; }
+  .photo { margin:22px 0 10px; display:flex; justify-content:center; }
+  .photo .frame { background:#fff; padding:10px 10px 0; max-width:82%;
+                  box-shadow:0 1px 2px rgba(0,0,0,.08), 0 8px 22px rgba(60,40,20,.16);
+                  transform:rotate(-1.6deg); }
+  .photo img { display:block; width:100%; height:auto; }
+  .photo figcaption { font-style:italic; font-size:15px; text-align:center; padding:9px 6px 13px;
+                      color:var(--ink); }
+  .photo .credit { font: 11px/1.3 system-ui, sans-serif; text-align:center; opacity:.6; margin:-8px 0 0; padding:0 6px 10px; }
+  .closing { margin:20px 0 2px; font-size:16px; }
+  .signature { font-size:22px; font-style:italic; color:var(--accent); margin:0; }
+  @media print { body { background:#fff; padding:0; } .card { box-shadow:none; } }
+</style>
+</head>
+<body>
+<article class="card">
+  <div class="art" role="img" aria-label="Illustration made for the Platform team"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <!-- Team header: a constellation of six stars shaped like a summit (one star per teammate), autumn leaves for Thanksgiving -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3B3456"/>
+      <stop offset="1" stop-color="#8C5A4A"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#sky)"/>
+  <path d="M0 170 Q80 150 160 165 T320 160 V200 H0 Z" fill="#5A3A33"/>
+  <path d="M0 182 Q90 168 170 180 T320 176 V200 H0 Z" fill="#43292A"/>
+
+  <!-- constellation: six stars, one per teammate, joined like a rope to a summit -->
+  <g stroke="#F6E7D6" stroke-width="1.2" stroke-dasharray="3 4" opacity=".75" fill="none">
+    <path d="M70 130 L105 108 L138 90 L168 66 L196 82 L232 104"/>
+  </g>
+  <g fill="#FCE9C8">
+    <circle cx="70" cy="130" r="3.4"/><circle cx="105" cy="108" r="3.4"/><circle cx="138" cy="90" r="3.4"/>
+    <circle cx="168" cy="66" r="4.6"/><circle cx="196" cy="82" r="3.4"/><circle cx="232" cy="104" r="3.4"/>
+  </g>
+  <!-- small flag at the brightest star -->
+  <path d="M168 62 L168 40" stroke="#FCE9C8" stroke-width="1.6"/>
+  <path d="M169 41 L186 46 L169 52 Z" fill="#E9964F"/>
+
+  <!-- faint background stars -->
+  <g fill="#FCE9C8" opacity=".45">
+    <circle cx="30" cy="40" r="1.2"/><circle cx="262" cy="30" r="1.4"/><circle cx="292" cy="70" r="1"/><circle cx="110" cy="30" r="1"/><circle cx="220" cy="20" r="1.1"/>
+  </g>
+
+  <!-- autumn leaves (three) -->
+  <g transform="translate(276 128) rotate(30)"><ellipse rx="7" ry="3.4" fill="#C8693C"/><path d="M-7 0 L-11 0" stroke="#7A3E22" stroke-width="1"/></g>
+  <g transform="translate(40 160) rotate(-25)"><ellipse rx="6" ry="3" fill="#D9963A"/><path d="M-6 0 L-10 0" stroke="#7A3E22" stroke-width="1"/></g>
+  <g transform="translate(250 166) rotate(65)"><ellipse rx="5.5" ry="2.8" fill="#B5462E"/><path d="M-5.5 0 L-9 0" stroke="#7A3E22" stroke-width="1"/></g>
+</svg></div>
+  <div class="content">
+    <p class="occasion">Happy Thanksgiving</p>
+    <blockquote><p>“Alone we can do so little; together we can do so much.”</p><cite>— Helen Keller</cite></blockquote>
+    <p class="greeting">To the Platform team,</p>
+    <div class="body"><p>In the spring we set ourselves a goal that sounded a little unreasonable: move every simulation run onto the new farm before the end of the year, without stopping anyone&#x27;s work along the way.</p><p>We got there in October. Test runs that used to take a week now finish the same afternoon. That happened because of late nights nobody asked for, careful reviews, and one habit you kept no matter what: no one debugs alone.</p><p>Three other teams now run their tests on what you built, and I am carrying that same habit into every group I work with.</p><p>This Thanksgiving I am grateful for every one of you who touched this, on-site and remote.</p></div>
+    <figure class="photo"><div class="frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDAwIj4KICA8IS0tIFBlbmNpbCBza2V0Y2ggKGRyYXduLCBub3QgYSBwaG90byk6IHNpeCBmaWd1cmVzIHJvcGVkIHRvZ2V0aGVyIG5lYXIgYSBzdW1taXQgZmxhZyA9IHRoZSBnb2FsIHJlYWNoZWQgdG9nZXRoZXIgLS0+CiAgPGRlZnM+CiAgICA8ZmlsdGVyIGlkPSJwZW5jaWwiIHg9Ii01JSIgeT0iLTUlIiB3aWR0aD0iMTEwJSIgaGVpZ2h0PSIxMTAlIj4KICAgICAgPGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuMDM1IiBudW1PY3RhdmVzPSIyIiBzZWVkPSI3IiByZXN1bHQ9Im4iLz4KICAgICAgPGZlRGlzcGxhY2VtZW50TWFwIGluPSJTb3VyY2VHcmFwaGljIiBpbjI9Im4iIHNjYWxlPSIyLjYiIHhDaGFubmVsU2VsZWN0b3I9IlIiIHlDaGFubmVsU2VsZWN0b3I9IkciLz4KICAgIDwvZmlsdGVyPgogICAgPGZpbHRlciBpZD0icGFwZXIiPgogICAgICA8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC45IiBudW1PY3RhdmVzPSIyIiBzZWVkPSIzIi8+CiAgICAgIDxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwLjQ1ICAwIDAgMCAwIDAuNDIgIDAgMCAwIDAgMC4zOCAgMCAwIDAgMC4wNyAwIi8+CiAgICA8L2ZpbHRlcj4KICAgIDxwYXR0ZXJuIGlkPSJoYXRjaCIgd2lkdGg9IjYiIGhlaWdodD0iNiIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDQwKSI+CiAgICAgIDxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSI2IiBzdHJva2U9IiM2YjZiNmIiIHN0cm9rZS13aWR0aD0iMC45IiBvcGFjaXR5PSIuNTUiLz4KICAgIDwvcGF0dGVybj4KICAgIDxwYXR0ZXJuIGlkPSJoYXRjaDIiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgtMzUpIj4KICAgICAgPGxpbmUgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjkiIHN0cm9rZT0iIzhhOGE4YSIgc3Ryb2tlLXdpZHRoPSIwLjciIG9wYWNpdHk9Ii40Ii8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjdGNEVFIi8+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbHRlcj0idXJsKCNwYXBlcikiLz4KCiAgPGcgZmlsdGVyPSJ1cmwoI3BlbmNpbCkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzNBM0EzQSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICAgIDwhLS0gc3VuLCBsaWdodGx5IHNoYWRlZCAtLT4KICAgIDxjaXJjbGUgY3g9IjUwNSIgY3k9Ijc4IiByPSIzNCIgZmlsbD0idXJsKCNoYXRjaDIpIiBzdHJva2U9IiM4YThhOGEiIHN0cm9rZS13aWR0aD0iMS4yIiBvcGFjaXR5PSIuOCIvPgogICAgPCEtLSBjbG91ZHMgLS0+CiAgICA8cGF0aCBkPSJNNjAgOTAgcTE4IC0xOCAzOCAtNCBxMTQgLTE2IDMyIC0yIHExNiAtNCAxOCAxMCIgc3Ryb2tlPSIjOGE4YThhIiBzdHJva2Utd2lkdGg9IjEuMyIvPgogICAgPHBhdGggZD0iTTMwMCA1NSBxMTQgLTEyIDMwIC0yIHExMiAtMTIgMjYgMCIgc3Ryb2tlPSIjOGE4YThhIiBzdHJva2Utd2lkdGg9IjEuMiIvPgogICAgPCEtLSBiaXJkcyAtLT4KICAgIDxwYXRoIGQ9Ik0yMTAgNzAgcTYgLTYgMTIgMCBxNiAtNiAxMiAwIiBzdHJva2Utd2lkdGg9IjEuMiIvPgogICAgPHBhdGggZD0iTTI0NSA5MCBxNSAtNSAxMCAwIHE1IC01IDEwIDAiIHN0cm9rZS13aWR0aD0iMS4xIi8+CgogICAgPCEtLSBmYXIgcmlkZ2UgLS0+CiAgICA8cGF0aCBkPSJNMCAzMDAgTDcwIDI1MCBMMTMwIDI3MCBMMjAwIDIxNSBMMjYwIDI0MCIgc3Ryb2tlPSIjOGE4YThhIiBzdHJva2Utd2lkdGg9IjEuMyIvPgogICAgPHBhdGggZD0iTTQ3MCAxOTAgTDUzMCAxNjAgTDYwMCAyMDAiIHN0cm9rZT0iIzhhOGE4YSIgc3Ryb2tlLXdpZHRoPSIxLjMiLz4KCiAgICA8IS0tIG1haW4gbW91bnRhaW46IHNoYWRvdyBzaWRlIGhhdGNoZWQgLS0+CiAgICA8cGF0aCBkPSJNNDMwIDkwIEw0ODAgMTQwIEw1NDAgMjAwIEw2MDAgMjQwIEw2MDAgNDAwIEw0NTUgNDAwIFoiIGZpbGw9InVybCgjaGF0Y2gpIiBzdHJva2U9Im5vbmUiLz4KICAgIDxwYXRoIGQ9Ik0wIDM4MCBMOTAgMzMwIEwxNzAgMzAwIEwyNDAgMjUwIEwzMDAgMjAwIEwzNTAgMTYwIEw0MDAgMTIwIEw0MzAgOTAgTDQ4MCAxNDAgTDU0MCAyMDAgTDYwMCAyNDAiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgPHBhdGggZD0iTTEgMzgyIEw5MSAzMzEgTDE3MSAzMDIgTDI0MSAyNTEgTDMwMSAyMDIgTDM1MSAxNjEgTDQwMSAxMjEgTDQzMSA5MiIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIuNiIvPgogICAgPCEtLSBzbm93IGNhcCBhbmQgcm9jayBsaW5lcyAtLT4KICAgIDxwYXRoIGQ9Ik00MDUgMTE2IEw0MTggMTI4IEw0MzAgMTEyIEw0NDQgMTI2IEw0NTggMTE4IiBzdHJva2Utd2lkdGg9IjEuMiIvPgogICAgPHBhdGggZD0iTTMwMCAyMDAgTDMyMCAyNDAgTTM1MCAxNjAgTDM2MiAyMDUgTTQ4MCAxNDAgTDQ3MCAyMDAgTTU0MCAyMDAgTDUyMCAyNjAiIHN0cm9rZT0iIzZiNmI2YiIgc3Ryb2tlLXdpZHRoPSIxLjEiLz4KCiAgICA8IS0tIGZsYWcgYXQgdGhlIHN1bW1pdCAob25lIGNvbG91cmVkLXBlbmNpbCBhY2NlbnQpIC0tPgogICAgPHBhdGggZD0iTTQzMSA5MCBMNDMxIDM4IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgIDxwYXRoIGQ9Ik00MzIgNDAgTDQ2OCA1MCBMNDMyIDYyIiBmaWxsPSIjQzg2OTNDIiBmaWxsLW9wYWNpdHk9Ii41NSIgc3Ryb2tlPSIjOWE0YTI2IiBzdHJva2Utd2lkdGg9IjEuNCIvPgoKICAgIDwhLS0gcm9wZSBsaW5raW5nIHRoZSBjbGltYmVycyAtLT4KICAgIDxwYXRoIGQ9Ik0xNzEgMjg2IFExOTMgMjc4IDIxNiAyNTQgUTIzOSAyMzYgMjYzIDIxOCBRMjg1IDIwMCAzMDYgMTgyIFEzMjYgMTY4IDM0NiAxNTAgUTM2NiAxMzQgMzg2IDExOCIKICAgICAgICAgIHN0cm9rZT0iIzVhNWE1YSIgc3Ryb2tlLXdpZHRoPSIxLjMiLz4KCiAgICA8IS0tIHNpeCBjbGltYmVycywgc2VlbiBmcm9tIGJlaGluZCwgbGVhbmluZyBpbnRvIHRoZSBzbG9wZSAtLT4KICAgIDxnIHN0cm9rZS13aWR0aD0iMS44Ij4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTcwIDMwMCkgcm90YXRlKDEwKSI+PGNpcmNsZSBjeD0iMCIgY3k9Ii0zMCIgcj0iNSIvPjxwYXRoIGQ9Ik0wIC0yNSBMMiAtMTIgTC0zIDAgTTIgLTEyIEw3IDAgTTAgLTIxIEw4IC0xNiIvPjxyZWN0IHg9Ii02IiB5PSItMjQiIHdpZHRoPSI1IiBoZWlnaHQ9IjkiIHJ4PSIxLjUiLz48L2c+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIxNSAyNjgpIHJvdGF0ZSgxMCkiPjxjaXJjbGUgY3g9IjAiIGN5PSItMzAiIHI9IjUiLz48cGF0aCBkPSJNMCAtMjUgTDIgLTEyIEwtMyAwIE0yIC0xMiBMNyAwIE0wIC0yMSBMOCAtMTYiLz48cmVjdCB4PSItNiIgeT0iLTI0IiB3aWR0aD0iNSIgaGVpZ2h0PSI5IiByeD0iMS41Ii8+PC9nPgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNjIgMjMyKSByb3RhdGUoMTApIj48Y2lyY2xlIGN4PSIwIiBjeT0iLTMwIiByPSI1Ii8+PHBhdGggZD0iTTAgLTI1IEwyIC0xMiBMLTMgMCBNMiAtMTIgTDcgMCBNMCAtMjEgTDggLTE2Ii8+PHJlY3QgeD0iLTYiIHk9Ii0yNCIgd2lkdGg9IjUiIGhlaWdodD0iOSIgcng9IjEuNSIvPjwvZz4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzA1IDE5Nikgcm90YXRlKDEwKSI+PGNpcmNsZSBjeD0iMCIgY3k9Ii0zMCIgcj0iNSIvPjxwYXRoIGQ9Ik0wIC0yNSBMMiAtMTIgTC0zIDAgTTIgLTEyIEw3IDAgTTAgLTIxIEw4IC0xNiIvPjxyZWN0IHg9Ii02IiB5PSItMjQiIHdpZHRoPSI1IiBoZWlnaHQ9IjkiIHJ4PSIxLjUiLz48L2c+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM0NSAxNjQpIHJvdGF0ZSgxMCkiPjxjaXJjbGUgY3g9IjAiIGN5PSItMzAiIHI9IjUiLz48cGF0aCBkPSJNMCAtMjUgTDIgLTEyIEwtMyAwIE0yIC0xMiBMNyAwIE0wIC0yMSBMOCAtMTYiLz48cmVjdCB4PSItNiIgeT0iLTI0IiB3aWR0aD0iNSIgaGVpZ2h0PSI5IiByeD0iMS41Ii8+PC9nPgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzODUgMTMyKSByb3RhdGUoMTApIj48Y2lyY2xlIGN4PSIwIiBjeT0iLTMwIiByPSI1Ii8+PHBhdGggZD0iTTAgLTI1IEwyIC0xMiBMLTMgMCBNMiAtMTIgTDcgMCBNMCAtMjEgTDEwIC0yNiIvPjxyZWN0IHg9Ii02IiB5PSItMjQiIHdpZHRoPSI1IiBoZWlnaHQ9IjkiIHJ4PSIxLjUiLz48L2c+CiAgICA8L2c+CgogICAgPCEtLSBmb3JlZ3JvdW5kIGdyYXNzIHN0cm9rZXMgLS0+CiAgICA8cGF0aCBkPSJNMjAgMzkyIGw0IC0xMiBNMjggMzk0IGwyIC0xMCBNNDAgMzkzIGw1IC0xMyBNNzAgMzk0IGwzIC05IE0xMTAgMzkzIGw0IC0xMiIgc3Ryb2tlPSIjNmI2YjZiIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8L2c+Cjwvc3ZnPg==" alt="Pencil sketch of six small figures roped together, climbing toward a flag on a summit"><figcaption>Six on the rope, one flag at the top</figcaption></div></figure>
+    <p class="closing">With gratitude and pride,</p>
+    <p class="signature">Hardik</p>
+  </div>
+</article>
+</body>
+</html>

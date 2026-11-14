@@ -121,6 +121,15 @@ reply to ("Ha, I remember that day!"). Follow `../thankyou/references/photos.md`
 - On WhatsApp or SMS, the photo usually goes first, then the message. In email
   or LinkedIn, attach it or put it on a small card.
 
+**No photo of their own?** Offer a pencil sketch of the shared scene instead
+(`../thankyou/references/sketch.md`): an original drawn SVG (default), or a
+freely licensed stock photo of a place, never of people, turned into a sketch
+with `../thankyou/scripts/sketch_photo.py`. Then the opener changes. A sketch
+isn't a found photo, so never write "found this from launch week" or
+"remember this?". Write something like "Made a little sketch of our Friday chai
+runs, they've been on my mind." Set `"source": "sketch"` or `"stock"` so the
+safety check enforces it.
+
 ### 4. Write the message
 
 Short — this is a door-opener, not a letter.
@@ -195,16 +204,17 @@ Same schema as ThankYou (quote optional):
   "body": ["…"],
   "closing": "",
   "signature": "Hardik",
-  "photo": {"caption": "Friday chai, launch week 2019", "alt": "Two glasses of chai on an office table"}
+  "photo": {"source": "own", "caption": "Friday chai, launch week 2019", "alt": "Two glasses of chai on an office table"}
 }
 ```
 
-`photo` is optional; the image itself is passed to `render_card.py` with `--photo`.
+`photo` is optional; the image itself is passed to `render_card.py` with
+`--photo`. `source` is `own`, `sketch`, or `stock` (with `credit` and `license`).
 
 ## Files
 
 - `references/drift-detection.md` — finding drifted connections, exclusions, scoring
 - `references/hooks.md` — hook types, examples, what feels creepy or guilt-inducing
 - `examples/` — sample suggestion list and messages
-- Shared with ThankYou: `../thankyou/references/{safety,language,art,photos,relationships-and-culture}.md`,
-  `../thankyou/scripts/{safety_check,render_card}.py`
+- Shared with ThankYou: `../thankyou/references/{safety,language,art,photos,sketch,relationships-and-culture}.md`,
+  `../thankyou/scripts/{safety_check,render_card,sketch_photo}.py`

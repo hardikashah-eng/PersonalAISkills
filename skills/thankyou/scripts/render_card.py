@@ -6,8 +6,10 @@ Usage:
     python3 render_card.py note.json --art art.svg --photo moment.jpg \
         --photo-out moment-clean.jpg --out card.html
 
-The optional photo is shown in a small instant-photo frame with the caption
-and alt text from note.json ("photo": {"caption": ..., "alt": ...}). Before it
+The optional photo is shown in a small instant-photo frame with the caption,
+alt text and optional credit from note.json ("photo": {"caption": ..., "alt": ...,
+"credit": ...}). It can also be a drawn pencil-sketch SVG (see
+references/sketch.md), which is cleaned and embedded the same way. Before a photo
 is embedded, all metadata (EXIF, GPS location, XMP, IPTC, text chunks) is
 removed. If Pillow is installed the photo is also turned upright and shrunk to
 at most 1200 px; otherwise JPEG and PNG are cleaned with the standard library
@@ -65,6 +67,7 @@ TEMPLATE = """<!DOCTYPE html>
   .photo img {{ display:block; width:100%; height:auto; }}
   .photo figcaption {{ font-style:italic; font-size:15px; text-align:center; padding:9px 6px 13px;
                       color:var(--ink); }}
+  .photo .credit {{ font: 11px/1.3 system-ui, sans-serif; text-align:center; opacity:.6; margin:-8px 0 0; padding:0 6px 10px; }}
   .closing {{ margin:20px 0 2px; font-size:16px; }}
   .signature {{ font-size:22px; font-style:italic; color:var(--accent); margin:0; }}
   @media print {{ body {{ background:#fff; padding:0; }} .card {{ box-shadow:none; }} }}
@@ -204,6 +207,11 @@ def strip_png(data: bytes) -> tuple[bytes, list[str]]:
 
 def clean_photo(path: Path) -> tuple[bytes, str, list[str]]:
     """Return (clean_bytes, mime, notes). Metadata is always removed."""
+    if path.suffix.lower() == ".svg":
+        svg = clean_svg(path.read_text(encoding="utf-8"))
+        if "xmlns=" not in svg[:300]:
+            svg = svg.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"', 1)
+        return svg.encode("utf-8"), "image/svg+xml", ["embedded drawn sketch (scripts and external links removed)"]
     raw = path.read_bytes()
     try:
         from PIL import Image, ImageOps  # type: ignore
@@ -260,7 +268,7 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
     quote = note.get("quote") or {}
     photo_meta = note.get("photo") or {}
     body = "".join(f"<p>{e(p)}</p>" for p in note.get("body") or [])
-    name = e(note.get("recipient_first_name", ""))
+    name = e(note.get("recipient_name") or note.get("recipient_first_name", ""))
 
     photo_block = ""
     if photo:
@@ -268,6 +276,8 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
         src = f"data:{mime};base64,{base64.b64encode(data).decode('ascii')}"
         alt = e(photo_meta.get("alt") or "A photo from a good time together")
         caption = f"<figcaption>{e(photo_meta['caption'])}</figcaption>" if photo_meta.get("caption") else ""
+        if photo_meta.get("credit"):
+            caption += f'<p class="credit">{e(photo_meta["credit"])}</p>'
         photo_block = f'<figure class="photo"><div class="frame"><img src="{src}" alt="{alt}">{caption}</div></figure>'
 
     closing = note.get("closing", "With gratitude,")
@@ -317,7 +327,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("note", type=Path)
     ap.add_argument("--art", type=Path, help="SVG artwork file")
-    ap.add_argument("--photo", type=Path, help="JPEG or PNG photo from a shared moment (metadata is removed)")
+    ap.add_argument("--photo", type=Path, help="JPEG or PNG photo from a shared moment (metadata is removed), "
+                    "or a drawn pencil-sketch SVG when there is no photo")
     ap.add_argument("--photo-out", type=Path, help="also write the cleaned photo, for attaching to an email or chat")
     ap.add_argument("--out", type=Path, default=Path("thankyou.html"))
     ap.add_argument("--text-out", type=Path, help="also write a plain-text version")

@@ -3,7 +3,8 @@
 Shared by ThankYou and Reconnect. A real photo from a moment the two of them
 shared, such as the team at the launch, the hike, or the whiteboard from that
 night, says "I remember" more than any sentence can. It is optional: when no
-good photo exists, the note uses the drawing alone.
+good photo exists, use a pencil sketch of the moment instead (`sketch.md`).
+Record where the picture came from as `"source": "own"` in `note.json`.
 
 ## Non-negotiables
 

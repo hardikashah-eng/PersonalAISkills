@@ -1,6 +1,7 @@
 ---
 name: thankyou
-description: Write a heartfelt, one-of-a-kind thank-you note (Thanksgiving, holidays, Diwali, farewells, any occasion) that opens with a fitting quote, recalls the specific moment the recipient made a real difference (found via the user's email, chat, LinkedIn, or opt-in WhatsApp/SMS), fits the relationship and culture, uses the native language when appropriate, and includes a small original artwork and, when the user has one, a photo from a good time together. Use when the user asks to thank someone or write thank-you notes.
+description: Write a heartfelt, one-of-a-kind thank-you note to a person, a team (--team), an organization (--org), or family (--family) for Thanksgiving, holidays, Diwali, farewells or any occasion. It opens with a fitting quote, recalls the specific moment or shared achievement that made a real difference (found via the user's email, chat, LinkedIn, or opt-in WhatsApp/SMS), fits the relationship and culture, uses the native language when appropriate, can show how the sender is paying it forward, and includes a small original artwork and, when available, a photo from a good time together. Use when the user asks to thank someone, their team, an organization, or their family.
+argument-hint: "[--team <name> | --org <name> | --family [name]] [recipient] [occasion]"
 ---
 
 # ThankYou
@@ -12,6 +13,22 @@ years. This skill finds that specific moment — using the sender's own
 communication history when they have connected it — and turns it into a warm,
 safe, personal note with a quote, a small piece of art made only for the
 recipient, and, when the user has one, a photo from a good time they shared.
+
+## Who is being thanked: modes
+
+| Mode | Use for | Guide |
+|---|---|---|
+| *(default)* | one person: a mentor, friend, colleague, teacher, neighbour | this file |
+| `--team <name>` | a group the sender worked with or led: their team, a project crew, a class, a volunteer group | `references/team-and-org.md` |
+| `--org <name>` | an organization as a whole: a partner company, nonprofit, school, club, former employer | `references/team-and-org.md` |
+| `--family [name]` | one relative (`--family Mom`) or the whole family (`--family`) | `references/family.md` |
+
+The mode comes from the arguments when given (`/thankyou --team Platform
+Thanksgiving`), otherwise from plain language ("thank my team for the launch",
+"a note to my parents"). If it's genuinely unclear, ask once. The mode changes
+what to look for (a shared achievement and goal reached together for a team or
+org; one picture of a lifetime for family), the tone, the photo, and the
+safety checks. Every other step and rule below still applies.
 
 ## Non-negotiables (apply to every step)
 
@@ -48,6 +65,13 @@ recipient, and, when the user has one, a photo from a good time they shared.
    shared threads; never from the web, social media, or profile pictures.
    Never identify anyone by face, and never edit or generate a person's face or
    body. Metadata is always stripped. See `references/photos.md`.
+10. **Groups: everyone or no one.** In team, org, and whole-family notes,
+    credit the group first. If you name individuals, name every member, each
+    with something specific; otherwise name no one. Never rank or compare
+    people. No confidential business details in team or org notes.
+11. **Paying it forward only when true.** A line about how the sender passes
+    the gift on is included only if the user confirms it, and it never names
+    or exposes the people they helped (`references/paying-it-forward.md`).
 
 ## Workflow
 
@@ -71,10 +95,31 @@ Collect what is not already given:
 - **Tone dial** — warm-professional (colleague, manager) or warm-personal
   (friend, family). Infer from the relationship; ask only if unclear.
 
-If the user is thanking many people (e.g. "thank-yous for my whole team"),
-do the steps per person and keep each note distinct — no copy-paste templates.
+If the user wants **separate notes for each person** (e.g. "a thank-you for each
+person on my team"), do the steps per person and keep each note distinct — no
+copy-paste templates. If they want **one note to the group**, use `--team`,
+`--org`, or `--family` mode.
+
+**Team / org:** also learn who's in the group (get the roster if anyone will be
+named), the goal achieved together, the sender's role (leader, peer, partner,
+customer), and where the note goes (channel post, card, email).
+**Family:** also learn what the sender calls them (Mom, Amma, Nani, Abuela…)
+and the language of the home. See the mode guides.
 
 ### 2. Find the moment that made a tangible difference
+
+**Team / org mode:** look for the **shared achievement**, the goal reached
+together: launch and milestone threads in the team channel, release notes,
+retros, partner emails, the offsite on the calendar. Build the arc *goal → what
+it took → the moment it landed → what it made possible*, and offer 2–3
+candidates (`references/team-and-org.md`).
+**Family mode:** turn the lifetime of gratitude into **one picture**, a single
+moment that sums it up, usually from the user ("Is there one moment that sums
+it up?") (`references/family.md`).
+
+**Paying it forward (any mode, optional):** ask once whether the sender has
+passed the gift on, by teaching it, doing the same for someone else, or
+building on it. Use it only if it's real (`references/paying-it-forward.md`).
 
 **If personal connectors are available** (email: Gmail/Outlook; chat: Slack,
 Teams, Lark/Feishu; LinkedIn; calendar; and — only with explicit permission —
@@ -139,8 +184,21 @@ Structure (keep it short — specific beats long):
    heart of the note; be specific and honest, not grand.
 5. **What it says about them** — one sentence about the quality it showed
    (generosity, patience, belief in people). Sincere, not flattering.
-6. **Occasion tie-in** — one line connecting to Thanksgiving/holiday/etc., if any.
-7. **Warm close + signature** — "With gratitude," / "Thank you, truly," + sender's first name.
+6. **Paying it forward** (optional, only if true) — one or two sentences on how
+   the sender passes it on, framed as the giver's influence: "I've passed that
+   on to every engineer I've mentored since."
+7. **Occasion tie-in** — one line connecting to Thanksgiving/holiday/etc., if any.
+8. **Warm close + signature** — "With gratitude," / "Thank you, truly," + sender's first name.
+
+**Team / org notes** follow the same shape with the group as the subject:
+greeting to the group → the goal and the moment it landed → what it took
+(collectively, or for *every* named person) → what it made possible → paying
+it forward → occasion → close. Lead with "we", keep business details
+non-confidential, and avoid anything that reads like a performance review.
+Also give a channel-ready version (about 80–150 words, no card formatting).
+**Family notes** use the family's own forms of address and sign-offs ("Dear
+Amma," … "Your loving son,"), often the home language, and no guilt, debt,
+ranking, or pressure. A blessing in the family's tradition fits the close.
 
 Match the relationship: tender for a spouse, reverent for a parent or elder,
 lightly playful (never teasing) for a sibling or close friend, warm-professional
@@ -163,6 +221,9 @@ for mentorship, a coffee cup for the 7am calls) plus the occasion
 no logos, brands, or copyrighted characters, no text containing PII. A tiny
 hidden-in-plain-sight detail (their favourite colour, a constellation, initials
 of the first name only) makes it one-of-one. Save it as `art.svg`.
+For a team or org: a rowing boat with one oar per person, a constellation with
+one star per member, a relay baton, a bridge of many planks. For family: a
+family tree with one leaf per person, a home with lit windows, a long table.
 
 ### 7. Add a photo of a good time together (optional)
 
@@ -189,7 +250,30 @@ together, makes the note unmistakably personal. Follow `references/photos.md`:
 - **Caption it warmly.** One short line with no personal details, such as
   "The night the demo finally worked, 2019". Add plain alt text.
 
-No good photo? That's fine. The drawing carries the card on its own.
+**Team / org photo:** a group photo from the moment (the launch-day shot, the
+offsite, the event), preferably one already shared with that group. Everyone
+pictured should belong to the group, and if a few people are missing, use a
+photo of the shared thing instead (the finished build, the launch cake, the
+event banner). **Family photo:** a happy family moment; children only if
+they're the user's own family and the user picks it; respect relatives' wishes
+about photos.
+
+**No suitable photo? Use a pencil sketch of the moment** (`references/sketch.md`):
+- **Default: draw it.** Make an original pencil-style SVG of the *scene*, such
+  as the whiteboard, two cups and an open notebook, or a team roped together
+  near a summit flag. Use graphite greys on warm paper, wobbly doubled lines,
+  hatching, and at most one coloured-pencil accent. People appear only as
+  simple figures from behind or at a distance, never as a likeness.
+- **Or a freely licensed stock photo turned into a sketch**, when a place
+  needs to look real. Use only public domain, CC0, or free-to-use licences,
+  checked on the photo's page. Scenes and objects only; never people, public
+  figures, or anything from social media. Convert it with
+  `scripts/sketch_photo.py`, and credit the author if the licence asks.
+- **Be honest.** A sketch or stock image isn't a photo of their moment. Never
+  write "found this photo" or "remember this?", and never caption it as "us".
+  Set `"source": "sketch"` or `"stock"` so the safety check can enforce this.
+
+The user can also say no picture at all; the header drawing carries the card.
 
 ### 8. Safety pass — mandatory before showing the note
 
@@ -197,6 +281,11 @@ Run the automated check, then review by hand:
 
 ```bash
 python3 scripts/safety_check.py note.json
+# team / org: also checks for confidential details, review language, and
+# non-inclusive words; --roster flags anyone left out when some are named
+python3 scripts/safety_check.py note.json --profile team --roster "Ana,Ben,Chen,Dev"
+# family: also checks for comparison, pressure, and guilt phrases
+python3 scripts/safety_check.py note.json --profile family
 ```
 
 The script flags emails, phone numbers, URLs, long numbers, currency amounts,
@@ -217,6 +306,11 @@ python3 scripts/render_card.py note.json --art art.svg --out thankyou-<firstname
 # with a photo (metadata is stripped; --photo-out saves the clean copy to attach)
 python3 scripts/render_card.py note.json --art art.svg --photo moment.jpg \
   --photo-out moment-clean.jpg --out thankyou-<firstname>.html
+# with a drawn pencil sketch instead of a photo
+python3 scripts/render_card.py note.json --art art.svg --photo sketch.svg --out thankyou-<firstname>.html
+# with a freely licensed stock photo turned into a pencil sketch
+python3 scripts/sketch_photo.py stock.jpg --out sketch.jpg
+python3 scripts/render_card.py note.json --art art.svg --photo sketch.jpg --out thankyou-<firstname>.html
 ```
 
 Give the user:
@@ -230,12 +324,15 @@ Give the user:
 If they want it emailed, create a **draft** in their email connector and tell
 them it's waiting in Drafts, with the cleaned photo attached if there is one.
 For WhatsApp/SMS, give the text ready to paste and suggest sending the cleaned
-photo first (the card can also be sent as an image). Do not send.
+photo first (the card can also be sent as an image). For a team or org, also
+give the channel-ready version with the photo to attach; the user posts it.
+Do not send or post.
 
 ## note.json format
 
 ```json
 {
+  "audience": "individual",
   "recipient_first_name": "Priya",
   "sender_first_name": "Hardik",
   "language": "en",
@@ -246,14 +343,20 @@ photo first (the card can also be sent as an image). Do not send.
   "body": ["paragraph 1", "paragraph 2"],
   "closing": "With gratitude,",
   "signature": "Hardik",
-  "photo": {"caption": "The night the demo finally worked, 2019", "alt": "A whiteboard covered in boxes and arrows"},
+  "photo": {"source": "own", "caption": "The night the demo finally worked, 2019", "alt": "A whiteboard covered in boxes and arrows"},
   "palette": {"bg": "#FBF6EE", "ink": "#3B2F2A", "accent": "#C8693C"}
 }
 ```
 
 `translation` is used when the quote is in another language (shown under it).
 `direction` is `rtl` for Arabic, Hebrew, Urdu, Persian.
-`photo` is optional; the image file itself is passed with `--photo`.
+`photo` is optional; the image file itself is passed with `--photo`. Its
+`source` is `own` (the user's photo), `sketch` (drawn), or `stock` (with
+`credit`, `license`, and `url`).
+`audience` is `individual` (default), `team`, `org`, or `family`. For a group,
+put the group's name in `recipient_name` (e.g. "the Platform team") and leave
+`recipient_first_name` out; the optional `roster` list is what
+`safety_check.py --roster` checks against.
 
 ## Files
 
@@ -264,6 +367,11 @@ photo first (the card can also be sent as an image). Do not send.
 - `references/safety.md` — what never goes in a note, and how to abstract it
 - `references/relationships-and-culture.md` — tone by relationship, recipient triggers, cultural norms
 - `references/photos.md` — finding, choosing, cleaning, and captioning a photo of a good time together
+- `references/team-and-org.md` — `--team` / `--org`: shared achievements, naming everyone or no one, tone by sender's role, group photos
+- `references/family.md` — `--family`: forms of address, one picture of a lifetime, family rules, home language
+- `references/paying-it-forward.md` — when and how to show the gift travelling on
+- `references/sketch.md` — no photo: a drawn pencil sketch, or a freely licensed stock photo as a sketch; honesty rules
+- `scripts/sketch_photo.py` — turns a stock photo into a graphite pencil sketch (needs Pillow; strips metadata)
 - `scripts/safety_check.py` — automated PII / financial / health / harshness scan
 - `scripts/render_card.py` — renders note.json + art.svg (+ optional photo, metadata stripped) into a printable HTML card
 - `examples/` — a finished sample (note.json, art.svg, rendered card)
