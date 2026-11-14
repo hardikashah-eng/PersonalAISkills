@@ -17,6 +17,11 @@ Each skill follows the same principles:
 | Skill | What it does |
 |---|---|
 | [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion: an opening quote, the specific moment the person made a difference (found in your connectors with your permission), your native language where it fits, and a small artwork made only for them. |
+| [Reconnect](skills/reconnect/SKILL.md) | Finds people you've drifted from (and leaves alone the ones you drifted from on purpose), then drafts a short, no-guilt check-in built on a real shared memory, festival, or "thought of you" moment. |
+
+Reconnect currently reuses ThankYou's shared pieces (`safety_check.py --profile reconnect`,
+language, art, relationship and culture guides). These will move to a common
+`skills/_core/` folder as more skills are added.
 
 ## Layout
 

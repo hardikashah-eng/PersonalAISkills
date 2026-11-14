@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you, Arjun</title>
+<style>
+  :root { --bg:#E9F0EA; --ink:#2E3A33; --accent:#3F7D5C; --paper:#FFFEFB; }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:var(--bg); color:var(--ink); padding:32px 16px;
+         font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Noto Serif",
+                      "Noto Serif Devanagari", "Noto Serif Tamil", "Noto Serif CJK SC",
+                      "Noto Naskh Arabic", serif; }
+  .card { width:100%; max-width:520px; background:var(--paper); border-radius:18px;
+          box-shadow:0 1px 2px rgba(0,0,0,.06), 0 12px 40px rgba(60,40,20,.12);
+          overflow:hidden; }
+  .art { display:block; width:100%; height:auto; background:var(--bg); }
+  .art svg { display:block; width:100%; height:auto; }
+  .content { padding:28px 36px 34px; }
+  .occasion { font: 600 11px/1.2 system-ui, sans-serif; letter-spacing:.14em; text-transform:uppercase;
+              color:var(--accent); margin:0 0 14px; }
+  blockquote { margin:0 0 22px; padding:0 0 18px; border-bottom:1px solid rgba(0,0,0,.08); }
+  blockquote p { margin:0; font-style:italic; font-size:18px; line-height:1.45; }
+  blockquote .translation { font-size:14px; opacity:.75; margin-top:6px; }
+  blockquote cite { display:block; margin-top:8px; font: 13px/1.3 system-ui, sans-serif; font-style:normal;
+                    color:var(--accent); }
+  .greeting { font-size:18px; margin:0 0 12px; }
+  .body p { font-size:16px; line-height:1.65; margin:0 0 12px; }
+  .closing { margin:20px 0 2px; font-size:16px; }
+  .signature { font-size:22px; font-style:italic; color:var(--accent); margin:0; }
+  @media print { body { background:#fff; padding:0; } .card { box-shadow:none; } }
+</style>
+</head>
+<body>
+<article class="card">
+  <div class="art" role="img" aria-label="Illustration made for Arjun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <!-- Story: Friday chai runs (two cups, steam) during a launch (a small rocket arcing between the steam trails)
+       One-of-one: three stars for the three people who always came along -->
+  <rect width="320" height="200" fill="#E9F0EA"/>
+  <circle cx="160" cy="210" r="120" fill="#D6E5D9"/>
+
+  <!-- rocket arc -->
+  <path d="M70 120 C 110 30, 210 30, 252 70" fill="none" stroke="#3F7D5C" stroke-width="1.6"
+        stroke-dasharray="3 5" stroke-linecap="round" opacity=".7"/>
+  <g transform="translate(252 70) rotate(40)">
+    <path d="M0 -12 C5 -6 5 4 3 8 H-3 C-5 4 -5 -6 0 -12 Z" fill="#F2A541"/>
+    <circle cx="0" cy="-3" r="1.8" fill="#FFFEFB"/>
+    <path d="M-3 8 L-6 12 L-3 10 Z M3 8 L6 12 L3 10 Z" fill="#C8693C"/>
+  </g>
+
+  <!-- stars -->
+  <g fill="#3F7D5C" opacity=".6">
+    <circle cx="48" cy="34" r="2"/><circle cx="276" cy="28" r="2"/><circle cx="160" cy="22" r="1.6"/>
+  </g>
+
+  <!-- left cup (glass with chai) -->
+  <g transform="translate(108 112)">
+    <path d="M-14 -6 C-8 -18 -18 -26 -10 -38" stroke="#9DB8A4" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M0 -6 C6 -18 -4 -26 4 -38" stroke="#9DB8A4" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M-22 0 L22 0 L17 46 H-17 Z" fill="#FFFEFB" opacity=".85"/>
+    <path d="M-20.5 12 L20.5 12 L17 46 H-17 Z" fill="#C9874E"/>
+    <path d="M-22 0 L22 0" stroke="#2E3A33" stroke-width="1.4" opacity=".3"/>
+  </g>
+
+  <!-- right cup (glass with chai) -->
+  <g transform="translate(212 118)">
+    <path d="M-6 -6 C0 -18 -10 -26 -2 -38" stroke="#9DB8A4" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M8 -6 C14 -18 4 -26 12 -38" stroke="#9DB8A4" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M-20 0 L20 0 L15.5 42 H-15.5 Z" fill="#FFFEFB" opacity=".85"/>
+    <path d="M-18.6 10 L18.6 10 L15.5 42 H-15.5 Z" fill="#B97842"/>
+    <path d="M-20 0 L20 0" stroke="#2E3A33" stroke-width="1.4" opacity=".3"/>
+  </g>
+
+  <!-- table line -->
+  <path d="M40 162 H280" stroke="#2E3A33" stroke-width="1.5" opacity=".25" stroke-linecap="round"/>
+</svg></div>
+  <div class="content">
+    <p class="occasion">Thought of you</p>
+    
+    <p class="greeting">Hey Arjun,</p>
+    <div class="body"><p>Made chai at the office today and it was nowhere near as good as our Friday chai runs during the 2019 launch. I still think those runs got us through that crunch.</p><p>What are you building these days? Would love to hear, no need for a long reply.</p></div>
+    <p class="closing"></p>
+    <p class="signature">Hardik</p>
+  </div>
+</article>
+</body>
+</html>
