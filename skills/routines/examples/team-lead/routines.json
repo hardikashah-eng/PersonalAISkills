@@ -1,0 +1,26 @@
+{
+  "me": {"name": "Alex", "role": "engineering manager, Platform team"},
+  "timezone": "America/Los_Angeles",
+  "team": ["Bea", "Chen", "Dami", "Ola", "Kenji"],
+  "sources": {
+    "code": "GitHub org acme (the GitHub connector)",
+    "incidents": "PagerDuty service 'platform'",
+    "calendar": "Google Calendar",
+    "meetings": "Google Meet transcripts in Google Drive"
+  },
+  "channels": {
+    "kudos": "Slack DM, and #kudos for channel posts",
+    "feedback recaps": "email",
+    "public posts": "LinkedIn, pasted by me"
+  },
+  "growth_log": "Google Sheet 'Platform growth log' (the Google Sheets connector)",
+  "meeting": {"name": "Platform standup", "transcript_source": "Google Meet transcripts in Google Drive"},
+  "max_items": 5,
+  "routines": {
+    "daily-brief": {"time": "8:40", "days": "weekdays"},
+    "after-meeting": {"time": "10:10", "days": "weekdays"},
+    "weekly-kudos": {"time": "15:00", "days": "fri"},
+    "feedback-followups": {"time": "8:15", "days": "mon"},
+    "monthly-reconnect": {"time": "17:20", "days": "monthly", "enabled": false}
+  }
+}

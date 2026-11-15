@@ -113,6 +113,13 @@ python3 scripts/growth_log.py add --log <their log file> --person Dami --type gr
 - `growth_log.py summary --person Dami` prints both strengths and growth areas
   for a 1:1 or review.
 
+## Make it regular (optional)
+
+When an item has a follow-up date, offer once: "Want a Monday list of
+follow-ups due and 1:1 prep?" If yes, use the Routines skill
+(`../routines/SKILL.md`) to set up the Monday growth follow-ups. Feedback
+itself is never drafted or sent by a routine.
+
 ## Files
 
 - `references/feedback-model.md`: the model, examples (report, peer, upward), wording that helps

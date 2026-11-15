@@ -79,10 +79,13 @@ growth follow-ups for the coming week, and commitments still open.
 
 ## Scheduling
 
-Set these up as scheduled tasks with the user (`../../AUTOMATION.md` has
-ready-made prompts): daily at a quiet morning time, after a recurring
-standup, and Friday afternoon. A scheduled run prepares the list and sends the
-user a short "ready to review" message. It never sends drafts to anyone else.
+The Routines skill (`../routines/SKILL.md`) sets these up: it asks a few
+questions, shows the plan, generates standalone prompts with
+`make_routines.py`, and creates the scheduled tasks only after the user says
+yes. Offer it once, after a nudge list that helped.
+
+A scheduled run prepares the list and sends the user a short "ready to
+review" message; it never sends drafts to anyone else.
 
 ## Files
 

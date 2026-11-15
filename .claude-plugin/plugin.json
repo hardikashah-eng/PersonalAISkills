@@ -1,8 +1,8 @@
 {
   "name": "personalaiskills",
   "displayName": "PersonalAISkills",
-  "description": "Skills for human connection at work and at home, used daily: specific kudos built from real work (PRs, incidents, design docs) for Slack, Lark, Teams or LinkedIn; constructive feedback with a private growth log; double opt-in intros; first-week welcomes; sincere repairs after a tense meeting; and a daily and after-meeting nudge that finds these moments in transcripts and connected tools. Plus thank-you notes, reconnecting, gratitude lists, comfort in hard times, family story keepsakes and group tributes. Fitted to the relationship, culture and language, and sent only when you say yes.",
-  "version": "0.9.0",
+  "description": "Skills for human connection at work and at home, used daily: specific kudos built from real work (PRs, incidents, design docs) for Slack, Lark, Teams or LinkedIn; constructive feedback with a private growth log; double opt-in intros; first-week welcomes; sincere repairs after a tense meeting; a daily and after-meeting nudge that finds these moments in transcripts and connected tools; and optional scheduled routines that bring you a review list each day or week. Plus thank-you notes, reconnecting, gratitude lists, comfort in hard times, family story keepsakes and group tributes. Fitted to the relationship, culture and language, and sent only when you say yes.",
+  "version": "0.10.0",
   "author": {
     "name": "Hardik Shah",
     "url": "https://github.com/hardikashah-eng"
@@ -38,6 +38,8 @@
     "apology",
     "meeting-notes",
     "engineering-management",
-    "leadership"
+    "leadership",
+    "scheduled-tasks",
+    "routines"
   ]
 }

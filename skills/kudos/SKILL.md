@@ -112,6 +112,13 @@ python3 ../feedback/scripts/growth_log.py add --log <their log file> --person Be
   --impact "No retry pages since" --source kudos --shared
 ```
 
+## Make it regular (optional)
+
+After a kudos goes well, offer once, in one line: "Want me to look for work
+like this every Friday and draft kudos for you to approve?" If yes, use the
+Routines skill (`../routines/SKILL.md`) to set up the Friday sweep or the
+after-standup scan.
+
 ## Automate it
 
 See `../../AUTOMATION.md`. In short: a weekly scheduled task can list merged

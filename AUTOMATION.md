@@ -22,10 +22,20 @@ you one "ready to review" note. Nothing goes to anyone else until you say yes.
 
 ## Three ways to run it
 
-### 1. Scheduled tasks (recommended)
+### 1. Scheduled routines (recommended)
 
-Ask Claude to set these up; each runs on its own and sends you the list.
-Adjust names, times and sources.
+Say "set up my routines" (or accept the offer after a kudos or feedback
+session). The [Routines skill](skills/routines/SKILL.md) asks a few questions
+(which routines, times and time zone, your team, connected sources, where
+approved messages go, where your growth log lives), shows you the plan, and
+creates each one with your app's scheduling tool only after you say yes. Its
+`make_routines.py` writes complete prompts, with the approval and privacy
+rules built in, because each scheduled run starts fresh.
+
+You can also change, pause or remove them the same way: "move the Friday
+sweep to Thursday", "pause the daily brief while I'm on vacation".
+
+The prompts below are simplified versions, if you'd rather set one up by hand.
 
 **Daily people brief (weekdays, 8:40 a.m.)**
 > Run the nudge skill from PersonalAISkills in daily mode. Use my connected
