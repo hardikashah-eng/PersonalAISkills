@@ -1,0 +1,79 @@
+{
+  "title": "Nani's Stories",
+  "subtitle": "As told to Anaya, Diwali 2026",
+  "language": "en",
+  "palette": {
+    "bg": "#EFE6D8",
+    "ink": "#3A2E25",
+    "accent": "#9A5B34",
+    "paper": "#FFFCF6"
+  },
+  "cover_photo": {
+    "path": "courtyard.svg",
+    "caption": "The house with the mango tree",
+    "alt": "Pencil drawing of a small courtyard house beside a mango tree with a wooden swing",
+    "credit": "Drawn stand-in for this example; your family photo goes here"
+  },
+  "dedication": "For Anaya, Kabir and every grandchild still to come, so you know where you come from, and how much laughing went into getting here.",
+  "chapters": [
+    {
+      "title": "The mango tree",
+      "when": "Bhavnagar, the 1950s",
+      "story": [
+        "Every summer, all the cousins came to our house, and every afternoon we waited under the mango tree for the fruit to fall. Whoever caught the first one got to sit on the swing until dinner.",
+        "My brother Mahesh never caught one. Not once. So one year I climbed up at dawn and tied the biggest mango to the lowest branch with my hair ribbon, right above his head. When it dropped, he cheered so loudly the neighbours came out to see.",
+        "He found out about the ribbon forty years later, at your mother's wedding. He laughed until he cried."
+      ],
+      "pullquote": "Sometimes the best gift is the one nobody knows you gave.",
+      "voice": {
+        "path": "standin-voice.m4a",
+        "label": "Hear Nani tell it",
+        "transcript": "And he cheered so loudly, the whole street came out!",
+        "recorded": "Stand-in clip for this example. Yours is cut from a family video with extract_voice.py."
+      }
+    },
+    {
+      "title": "The train to Bombay",
+      "when": "1968",
+      "photos": [
+        {
+          "path": "train.svg",
+          "caption": "One trunk, one tiffin, and a lot of courage",
+          "alt": "Pencil drawing of a steam train at a platform with a trunk and a tiffin carrier",
+          "credit": "Drawn stand-in for this example"
+        }
+      ],
+      "story": [
+        "I was twenty when your Nana got the job at the mill. We had one trunk between us and a tiffin my mother packed with enough thepla for a week.",
+        "I cried from Bhavnagar to Ahmedabad. Then a family in our compartment shared their pickle, and by Bombay I had three new friends and an invitation to a wedding.",
+        "That is what I learned on that train: wherever you go, open your tiffin. People will sit down with you."
+      ],
+      "pullquote": "Wherever you go, open your tiffin."
+    },
+    {
+      "title": "Sunday dal",
+      "when": "Every Sunday since",
+      "photos": [
+        {
+          "path": "kitchen.svg",
+          "caption": "The pot that fed three generations",
+          "alt": "Pencil drawing of a pot of dal steaming on a kitchen counter, with a rolling pin and two cups",
+          "credit": "Drawn stand-in for this example"
+        }
+      ],
+      "story": [
+        "My mother never wrote anything down. She said a recipe lives in your hands, not on paper. So I stood beside her every Sunday until my hands knew it too.",
+        "Now your hands are learning it. Don't worry if it's too salty the first time. Mine was. Your Nana ate two bowls anyway and said it was the best he'd ever had. That's love, beta: two bowls of salty dal."
+      ]
+    }
+  ],
+  "closing": {
+    "title": "What I want you to remember",
+    "body": [
+      "Be kind first. Laugh often, especially at yourself. Share your food. Call your brother.",
+      "And when you tell these stories to your own grandchildren, you're allowed to make the mango a little bigger. I did."
+    ],
+    "signature": "With all my love, Nani"
+  },
+  "colophon": "Kept by Anaya, with Nani's blessing. Shared only with the family."
+}

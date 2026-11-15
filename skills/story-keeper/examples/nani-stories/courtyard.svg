@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420">
+  <!-- Drawn stand-in (pencil style): a courtyard house with a mango tree and a swing -->
+  <defs><filter id="p" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+  <rect width="600" height="420" fill="#F7F4EE"/>
+  <g filter="url(#p)" fill="none" stroke="#4a4a4a" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 330 H560" stroke-width="2"/>
+    <path d="M70 330 V170 L200 110 L330 170 V330" stroke-width="2.2"/>
+    <path d="M60 175 L200 102 L340 175" stroke-width="2.6"/>
+    <rect x="170" y="240" width="60" height="90" stroke-width="2"/>
+    <path d="M200 240 V330" stroke-width="1.2"/>
+    <rect x="95" y="200" width="45" height="45" stroke-width="1.8"/><path d="M117 200 V245 M95 222 H140" stroke-width="1"/>
+    <rect x="260" y="200" width="45" height="45" stroke-width="1.8"/><path d="M282 200 V245 M260 222 H305" stroke-width="1"/>
+    <path d="M90 300 l8 -6 M100 312 l10 -8 M290 300 l8 -6 M300 314 l10 -8" stroke-width="1" opacity=".6"/>
+    <path d="M440 330 C436 280 438 230 446 190" stroke-width="5"/>
+    <path d="M446 220 C470 200 500 196 520 186 M444 240 C420 222 400 214 380 212" stroke-width="3"/>
+    <path d="M360 210 C340 150 400 90 460 96 C530 92 580 150 552 206 C530 236 470 230 446 214 C420 232 376 236 360 210 Z" stroke-width="2"/>
+    <path d="M390 150 q10 -8 20 0 M430 124 q10 -8 20 0 M480 140 q10 -8 20 0 M510 176 q10 -8 20 0 M410 190 q10 -8 20 0 M460 176 q10 -8 20 0" stroke-width="1.2" opacity=".7"/>
+    <path d="M398 212 V286 M426 216 V286" stroke-width="1.2"/>
+    <path d="M390 286 H434" stroke-width="3"/>
+    <ellipse cx="478" cy="206" rx="5" ry="8" stroke-width="1.4"/><ellipse cx="500" cy="196" rx="5" ry="8" stroke-width="1.4"/>
+  </g>
+</svg>

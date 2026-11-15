@@ -129,6 +129,15 @@ Structure:
    shared pay-it-forward intention.
 6. **Signature and season** ("Hardik, Thanksgiving 2026"), for private and
    family versions.
+7. **P.S. fun fact** (when it fits): one short, true fact tied to the list's
+   theme or the occasion: teamwork for a team list, friendship, family, or the
+   holiday itself ("Thanksgiving became a national holiday in 1863, after
+   Sarah Josepha Hale spent 17 years writing letters asking for it."). Use
+   `../thankyou/references/fun-facts.md` or a newly verified fact with its
+   source; skip it when the season has been hard or nothing fits.
+
+Don't number the entries. On the card each gets a small hand-drawn mark
+(`bullet`: `sparkle`, `leaf`, `heart` or `star`), and in plain text ✦.
 
 **Tone:** warm, tender, a little emotional, and never dramatic. Write it like
 a handwritten page: contractions, short sentences, natural rhythm, plain
@@ -172,8 +181,9 @@ python3 ../thankyou/scripts/share.py grateful.json --channel whatsapp
 ```
 
 The card is handwritten by default (`--style print` for a typeset version):
-the sketch across the top, then the quote, the title, and numbered entries,
-each with its reason, the difference it made, and an ↪ pay-it-forward line. Give the user:
+the sketch across the top, then the quote, the title, and the entries, each
+marked with a small hand-drawn sparkle (not numbered) and showing its reason,
+the difference it made, and an ↪ pay-it-forward line, with the P.S. at the end. Give the user:
 - the card (keep it as a file; publish a link only if they ask),
 - the plain text (for a journal, a toast, or a caption),
 - for `--family` or `--public`, the channel version and share link. Send or
@@ -200,6 +210,7 @@ this list?" If so, hand over to the ThankYou skill.
   ],
   "closing": "closing reflection",
   "signature": "Hardik, Thanksgiving 2026",
+  "fun_fact": {"text": "Fun fact: …", "source": "…"},
   "photo": {"source": "sketch", "caption": "…", "alt": "…"},
   "palette": {"bg": "#F6E7D6", "ink": "#3B2F2A", "accent": "#B5562F", "paper": "#FFFDF9"}
 }
@@ -213,5 +224,5 @@ entry. Everything visible, including every entry, is safety-checked.
 - `examples/`: an English Thanksgiving list and a Hindi Diwali list, each with
   a drawn pencil sketch
 - Shared with ThankYou (`../thankyou/`):
-  - `references/`: safety, language, quotes, sketch, photos, paying-it-forward, delivery, connector-mining, relationships-and-culture
+  - `references/`: safety, language, quotes, sketch, photos, paying-it-forward, fun-facts, delivery, connector-mining, relationships-and-culture
   - `scripts/`: safety_check (`--profile grateful`), render_card (renders `items`), share (formats `items`), card_to_png, sketch_photo

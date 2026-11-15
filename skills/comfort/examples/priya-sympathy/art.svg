@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <!-- Comfort header: a single candle on a windowsill at dusk; soft greys with one warm light -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#F6D9A8" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="pencil"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="4"/><feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.2  0 0 0 0 0.2  0 0 0 .06 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+  </defs>
+  <rect width="320" height="200" fill="#DADDE2"/>
+  <!-- window frame -->
+  <rect x="70" y="18" width="180" height="140" fill="#B9C0CA" stroke="#5E636B" stroke-width="2.4" rx="3"/>
+  <line x1="160" y1="18" x2="160" y2="158" stroke="#5E636B" stroke-width="2"/>
+  <line x1="70" y1="88" x2="250" y2="88" stroke="#5E636B" stroke-width="2"/>
+  <!-- dusk hills through the glass -->
+  <path d="M71 132 Q120 112 160 126 T249 118 V157 H71 Z" fill="#9AA2AD"/>
+  <circle cx="214" cy="52" r="9" fill="#EEF0F2" opacity=".8"/>
+  <!-- sill -->
+  <rect x="56" y="156" width="208" height="12" fill="#8C8F95" rx="2"/>
+  <rect x="0" y="168" width="320" height="32" fill="#C9CDD3"/>
+  <!-- glow -->
+  <circle cx="160" cy="118" r="54" fill="url(#glow)"/>
+  <!-- candle -->
+  <rect x="150" y="118" width="20" height="38" fill="#FBF7EF" stroke="#6A6E75" stroke-width="1.6" rx="2"/>
+  <path d="M160 118 v-6" stroke="#4A4D52" stroke-width="1.4"/>
+  <path d="M160 92 C152 102 154 111 160 112 C166 111 168 102 160 92 Z" fill="#E7A24A" stroke="#B07A3A" stroke-width="1.2"/>
+  <path d="M160 100 C157 105 158 109 160 109 C162 109 163 105 160 100 Z" fill="#FFF3D6"/>
+  <!-- a small cup beside it -->
+  <path d="M190 140 h22 v12 a6 6 0 0 1 -6 6 h-10 a6 6 0 0 1 -6 -6 z" fill="#F2EEE6" stroke="#6A6E75" stroke-width="1.5"/>
+  <path d="M212 143 a5 5 0 0 1 0 10" fill="none" stroke="#6A6E75" stroke-width="1.5"/>
+  <path d="M197 134 q-3 -5 0 -10 M204 134 q-3 -5 0 -10" fill="none" stroke="#8C8F95" stroke-width="1.2" stroke-linecap="round"/>
+  <rect width="320" height="200" filter="url(#pencil)"/>
+</svg>

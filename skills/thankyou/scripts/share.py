@@ -79,21 +79,21 @@ def format_text(note: dict, channel: str) -> str:
         lines += quote_lines(note, "plain")
     # SMS, iMessage, LinkedIn: no quote, to keep it short.
 
-    if not posting_to_group and note.get("greeting"):
-        lines += [note["greeting"], ""]
     if note.get("title") and not posting_to_group:
         lines += [note["title"], ""]
+    if not posting_to_group and note.get("greeting"):
+        lines += [note["greeting"], ""]
     for para in body_for(note, channel):
         lines += [para, ""]
     if not posting_to_group:
-        for i, it in enumerate(note.get("items") or [], 1):
+        for it in note.get("items") or []:
             why = " ".join(x for x in (it.get("why"), it.get("difference")) if x)
             subject = it.get("subject", "")
             if channel == "whatsapp":
                 subject = f"*{subject}*"
             elif channel in WORK_CHAT:
                 subject = f"*{subject}*"
-            lines.append(f"{i}. {subject}" + (f" — {why}" if why else ""))
+            lines.append(f"✦ {subject}" + (f" — {why}" if why else ""))
             if it.get("forward"):
                 lines.append(f"   ↪ {it['forward']}")
             lines.append("")
@@ -104,6 +104,15 @@ def format_text(note: dict, channel: str) -> str:
             lines.append(closing)
         if sig:
             lines.append(sig)
+    lm = note.get("light_moment") or {}
+    if lm.get("title") and channel not in ("sms", "imessage"):
+        lines += ["", f"{lm.get('lead') or 'For a smile, whenever you want one:'} {lm['title']}"]
+        if lm.get("url"):
+            lines.append(lm["url"])
+    ff = note.get("fun_fact")
+    ff = (ff.get("text") if isinstance(ff, dict) else ff) or ""
+    if ff.strip() and channel not in ("sms", "imessage"):
+        lines += ["", f"P.S. {ff.strip()}"]
     return "\n".join(lines).strip() + "\n"
 
 

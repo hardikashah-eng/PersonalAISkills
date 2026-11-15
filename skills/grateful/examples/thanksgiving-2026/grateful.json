@@ -41,5 +41,14 @@
     "caption": "Tea by the window, late November",
     "alt": "Pencil sketch of a steaming cup on a windowsill, with an autumn tree and falling leaves outside"
   },
-  "palette": {"bg": "#F6E7D6", "ink": "#3B2F2A", "accent": "#B5562F", "paper": "#FFFDF9"}
+  "palette": {
+    "bg": "#F6E7D6",
+    "ink": "#3B2F2A",
+    "accent": "#B5562F",
+    "paper": "#FFFDF9"
+  },
+  "fun_fact": {
+    "text": "Fun fact: Thanksgiving became a national holiday in 1863, after Sarah Josepha Hale spent 17 years writing letters asking for it. Gratitude, it turns out, takes persistence.",
+    "source": "National Park Service, Lincoln and Thanksgiving; Library of Congress, Hale to Lincoln, 28 Sep 1863"
+  }
 }

@@ -85,6 +85,21 @@ photograph.
   If the licence requires credit, the renderer shows it under the caption.
 - If the sandbox or tools can't download images, fall back to option A.
 
+## C. The user's own photo, as a pencil sketch
+
+When the user has a real photo but wants the hand-drawn look (or the photo is
+a print photographed at an angle, with glare), sketch the photo itself:
+
+```bash
+python3 scripts/sketch_photo.py team-photo.jpg --out team-sketch.jpg
+```
+
+Straighten and crop it first, keeping everyone in the frame. The default
+`photo` method gives soft graphite shading in which people stay recognisable;
+`--method lines` suits flat images. Because it is still their real moment,
+set `"source": "own"`, and captions like "All of us, back in the day" are
+honest. Wide group shots get a wider frame on the card automatically.
+
 ## Honesty
 
 A sketch or a stock photo **is not a photo of their moment**, so the words

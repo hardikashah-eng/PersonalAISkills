@@ -1,0 +1,25 @@
+{
+  "recipient_first_name": "Rohan",
+  "sender_first_name": "Hardik",
+  "relationship": "close friend, former teammate",
+  "situation": "layoff",
+  "language": "en",
+  "direction": "ltr",
+  "greeting": "Rohan,",
+  "body": [
+    "Just heard about the changes at your company. That's a rough thing to get hit with, and it says nothing about you.",
+    "You're the person every team I've been on wished it had: the one who stays calm at 2 a.m. and makes everyone around them better.",
+    "Whenever you're ready, I'd love to send a note to a couple of folks I know who are hiring. And dinner's on me this Friday: biryani at that place near the old office?",
+    "No need to reply now."
+  ],
+  "offer": "warm introductions when he's ready; dinner Friday",
+  "closing": "Got your back,",
+  "signature": "Hardik",
+  "palette": {"bg": "#E4ECE6", "ink": "#2E3A33", "accent": "#3F7A5A", "paper": "#FFFEFA"},
+  "channel": "whatsapp",
+  "light_moment": {
+    "lead": "And because I know you'll appreciate it: Frank Costanza's \"Serenity now!\" never gets old.",
+    "title": "Seinfeld, \"The Serenity Now\" (season 9, episode 3), on your streaming service",
+    "source": "Episode reference only; no official clip link confirmed (Seinfeld S9 E3, aired October 9, 1997)"
+  }
+}

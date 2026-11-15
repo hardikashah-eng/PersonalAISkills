@@ -40,5 +40,9 @@
     "paper": "#FFFDF9"
   },
   "channel": "slack",
-  "channel_post": "Happy Thanksgiving, team. In the spring we set a goal that sounded a little unreasonable: every simulation run on the new farm by year's end, without stopping anyone's work. We got there in October, and test runs that took a week now finish the same afternoon. That came from late nights nobody asked for, careful reviews, and the habit you kept no matter what: no one debugs alone. Three other teams now build on what you made, and I'm taking that habit everywhere I go. Grateful for every one of you who touched this, on-site and remote. 🧡"
+  "channel_post": "Happy Thanksgiving, team. In the spring we set a goal that sounded a little unreasonable: every simulation run on the new farm by year's end, without stopping anyone's work. We got there in October, and test runs that took a week now finish the same afternoon. That came from late nights nobody asked for, careful reviews, and the habit you kept no matter what: no one debugs alone. Three other teams now build on what you made, and I'm taking that habit everywhere I go. Grateful for every one of you who touched this, on-site and remote. 🧡",
+  "fun_fact": {
+    "text": "Fun fact: ibises flying in a V take turns at the front, the hardest spot, and pairs share the lead almost exactly. Sounds like a team I know.",
+    "source": "Voelkl et al., PNAS 2015 (doi:10.1073/pnas.1413589112); University of Oxford news, 3 Feb 2015"
+  }
 }

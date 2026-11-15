@@ -80,13 +80,14 @@ HAND_CSS = """
   blockquote cite {{ font: 500 20px/1.2 "PAI Hand", cursive; margin-top:8px; }}
   .greeting {{ font-size:30px; margin:0 0 10px; }}
   .title {{ font-size:34px; line-height:1.15; margin:0 0 12px; transform:rotate(-0.8deg); }}
-  ol.items li {{ padding-left:38px; margin:0 0 18px; }}
-  ol.items li::before {{ font-size:30px; top:-4px; }}
-  ol.items li:nth-child(odd) {{ transform:rotate(-0.3deg); }}
-  ol.items li:nth-child(even) {{ transform:rotate(0.25deg); margin-left:4px; }}
-  ol.items .subject {{ font-size:28px; font-weight:700; }}
-  ol.items .why {{ font-size:24px; line-height:1.32; }}
-  ol.items .forward {{ font-size:23px; line-height:1.3; }}
+  ul.items li {{ padding-left:36px; margin:0 0 18px; font-size:28px; }}
+  ul.items li:nth-child(odd) {{ transform:rotate(-0.3deg); }}
+  ul.items li:nth-child(even) {{ transform:rotate(0.25deg); margin-left:4px; }}
+  ul.items .subject {{ font-size:28px; font-weight:700; }}
+  ul.items .why {{ font-size:24px; line-height:1.32; }}
+  ul.items .forward {{ font-size:23px; line-height:1.3; }}
+  .ps {{ font-size:22px; line-height:1.3; margin:22px 0 0 6px; transform:rotate(-0.4deg); opacity:.9; }}
+  .light {{ font-size:22px; line-height:1.3; margin:18px 0 0 6px; transform:rotate(0.3deg); }}
   .body p {{ font-size:25px; line-height:1.36; margin:0 0 14px; }}
   .body p:nth-child(4n+1) {{ transform:rotate(-0.35deg); margin-left:1px; }}
   .body p:nth-child(4n+2) {{ transform:rotate(0.25deg); margin-left:5px; }}
@@ -147,20 +148,23 @@ TEMPLATE = """<!DOCTYPE html>
                     color:var(--accent); }}
   .greeting {{ font-size:18px; margin:0 0 12px; }}
   .title {{ font-size:24px; margin:0 0 14px; color:var(--accent); }}
-  ol.items {{ list-style:none; counter-reset:item; margin:6px 0 10px; padding:0; }}
-  ol.items li {{ counter-increment:item; position:relative; padding-left:34px; margin:0 0 16px; }}
-  ol.items li::before {{ content:counter(item) "."; position:absolute; left:0; top:0; font-size:20px;
-                         color:var(--accent); }}
-  ol.items .subject {{ font-size:18px; font-weight:600; margin:0 0 2px; }}
-  ol.items .why {{ font-size:16px; line-height:1.55; margin:0; }}
-  ol.items .forward {{ font-size:15px; line-height:1.5; margin:4px 0 0; color:var(--accent); }}
-  ol.items .forward::before {{ content:"↪ "; }}
+  ul.items {{ list-style:none; margin:6px 0 10px; padding:0; }}
+  ul.items li {{ position:relative; padding-left:30px; margin:0 0 16px; font-size:18px; }}
+{mark_css}  ul.items .subject {{ font-size:18px; font-weight:600; margin:0 0 2px; }}
+  ul.items .why {{ font-size:16px; line-height:1.55; margin:0; }}
+  ul.items .forward {{ font-size:15px; line-height:1.5; margin:4px 0 0; color:var(--accent); }}
+  ul.items .forward::before {{ content:"↪ "; }}
+  .ps {{ margin:18px 0 0; font-size:14px; line-height:1.5; opacity:.85; }}
+  .light {{ margin:16px 0 0; font-size:14px; line-height:1.5; }}
+  .light a {{ color:var(--accent); text-decoration:underline; text-underline-offset:3px; }}
+  .ps b {{ color:var(--accent); font-weight:600; }}
   .body p {{ font-size:16px; line-height:1.65; margin:0 0 12px; }}
   .photo {{ margin:22px 0 10px; display:flex; justify-content:center; }}
   .photo .frame {{ background:#fff; padding:10px 10px 0; max-width:82%;
                   box-shadow:0 1px 2px rgba(0,0,0,.08), 0 8px 22px rgba(60,40,20,.16);
                   transform:rotate(-1.6deg); }}
   .photo img {{ display:block; width:100%; height:auto; }}
+  .photo.wide .frame {{ max-width:100%; transform:rotate(-1deg); }}
   .photo figcaption {{ font-style:italic; font-size:15px; text-align:center; padding:9px 6px 13px;
                       color:var(--ink); }}
   .photo .credit {{ font: 11px/1.3 system-ui, sans-serif; text-align:center; opacity:.6; margin:-8px 0 0; padding:0 6px 10px; }}
@@ -183,11 +187,32 @@ TEMPLATE = """<!DOCTYPE html>
     {photo_block}
     {closing_block}
     <p class="signature">{signature}</p>
+    {light_block}
+    {ps_block}
   </div>
 </article>
 </body>
 </html>
 """
+
+
+# Hand-drawn list marks (used as CSS masks so they take the card's accent colour).
+MARKS = {
+    "sparkle": "M12 1.5c.9 4.6 2.3 7.6 9.8 10.3-7.4 2.6-8.9 5.7-9.8 10.6-1-4.9-2.4-8-9.8-10.6C9.6 9.1 11.1 6.1 12 1.5z",
+    "leaf": "M4 20c0-9 6-15.5 17-17-1 10.5-7.5 16.5-16 17 3-4.5 6.5-8 10-11-4.5 2.5-8 6-11 11z",
+    "heart": "M12 21.2C6 16.6 2.5 13.2 2.5 8.9 2.5 5.9 4.8 3.6 7.6 3.6c1.9 0 3.4 1 4.4 2.6 1-1.6 2.6-2.6 4.4-2.6 2.9 0 5.1 2.3 5.1 5.3 0 4.3-3.5 7.7-9.5 12.3z",
+    "star": "M12 2.2l2.8 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.1 3.6 1.6-6.8L2.3 9.1l6.9-.6z",
+}
+
+
+def mark_css(name: str) -> str:
+    path = MARKS.get(name, MARKS["sparkle"])
+    svg = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>"
+           f"<path d='{path}' fill='black' stroke='black' stroke-width='.6' stroke-linejoin='round'/></svg>")
+    uri = "url(\"data:image/svg+xml," + svg.replace("<", "%3C").replace(">", "%3E").replace("#", "%23") + "\")"
+    return ("  ul.items li::before { content:''; position:absolute; left:2px; top:.32em; width:.9em; height:.9em;"
+            " background-color:var(--accent); -webkit-mask:" + uri + " center/contain no-repeat;"
+            " mask:" + uri + " center/contain no-repeat; transform:rotate(-8deg); }\n")
 
 
 # --- SVG ----------------------------------------------------------------------
@@ -361,6 +386,31 @@ def clean_photo(path: Path) -> tuple[bytes, str, list[str]]:
 
 # --- Rendering ----------------------------------------------------------------
 
+def fun_fact_text(note: dict) -> str:
+    ff = note.get("fun_fact")
+    if isinstance(ff, dict):
+        return (ff.get("text") or "").strip()
+    return (ff or "").strip()
+
+
+def light_html(note: dict, e) -> str:
+    lm = note.get("light_moment") or {}
+    if not lm.get("title"):
+        return ""
+    lead = e(lm.get("lead") or "For a smile, whenever you want one:")
+    title = e(lm["title"])
+    if lm.get("url", "").startswith(("https://", "http://")):
+        title = f'<a href="{e(lm["url"])}">{title}</a>'
+    return f'<p class="light">{lead} {title}</p>'
+
+
+def ps_html(note: dict, e) -> str:
+    text = fun_fact_text(note)
+    if not text:
+        return ""
+    return f'<p class="ps"><b>P.S.</b> {e(text)}</p>'
+
+
 def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = None,
            style: str = "handwritten") -> str:
     e = lambda s: html.escape(str(s or ""))
@@ -378,7 +428,15 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
         caption = f"<figcaption>{e(photo_meta['caption'])}</figcaption>" if photo_meta.get("caption") else ""
         if photo_meta.get("credit"):
             caption += f'<p class="credit">{e(photo_meta["credit"])}</p>'
-        photo_block = f'<figure class="photo"><div class="frame"><img src="{src}" alt="{alt}">{caption}</div></figure>'
+        wide = ""
+        try:
+            from PIL import Image as _Img  # optional: widen the frame for wide group shots
+            with _Img.open(io.BytesIO(data)) as _im:
+                if _im.width >= 1.5 * _im.height:
+                    wide = " wide"
+        except Exception:
+            pass
+        photo_block = f'<figure class="photo{wide}"><div class="frame"><img src="{src}" alt="{alt}">{caption}</div></figure>'
 
     closing = note.get("closing", "" if note.get("kind") == "gratitude" else "With gratitude,")
 
@@ -391,7 +449,7 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
                      f'<p class="why">{e(why)}</p>' if why else "",
                      f'<p class="forward">{e(it["forward"])}</p>' if it.get("forward") else ""]
             lis.append("<li>" + "".join(parts) + "</li>")
-        items_block = '<ol class="items">' + "".join(lis) + "</ol>"
+        items_block = '<ul class="items">' + "".join(lis) + "</ul>"
 
     style_css = ""
     if style == "handwritten":
@@ -419,6 +477,9 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
         title_block=f'<p class="title">{e(note["title"])}</p>' if note.get("title") else "",
         greeting_block=f'<p class="greeting">{e(note["greeting"])}</p>' if note.get("greeting") else "",
         items_block=items_block,
+        ps_block=ps_html(note, e),
+        light_block=light_html(note, e),
+        mark_css=mark_css(note.get("bullet", "sparkle")),
         body=body,
         photo_block=photo_block,
         closing_block=f'<p class="closing">{e(closing)}</p>' if closing else "",
@@ -444,15 +505,22 @@ def plain_text(note: dict) -> str:
         lines += [note["greeting"], ""]
     for p in note.get("body") or []:
         lines += [p, ""]
-    for i, it in enumerate(note.get("items") or [], 1):
+    for it in note.get("items") or []:
         why = " ".join(x for x in (it.get("why"), it.get("difference")) if x)
-        lines.append(f"{i}. {it.get('subject', '')}" + (f" — {why}" if why else ""))
+        lines.append(f"✦ {it.get('subject', '')}" + (f" — {why}" if why else ""))
         if it.get("forward"):
             lines.append(f"   ↪ {it['forward']}")
         lines.append("")
     if note.get("closing"):
         lines.append(note["closing"])
     lines.append(note.get("signature") or note.get("sender_first_name", ""))
+    lm = note.get("light_moment") or {}
+    if lm.get("title"):
+        lines += ["", f"{lm.get('lead') or 'For a smile, whenever you want one:'} {lm['title']}"]
+        if lm.get("url"):
+            lines.append(lm["url"])
+    if fun_fact_text(note):
+        lines += ["", f"P.S. {fun_fact_text(note)}"]
     return "\n".join(lines).strip() + "\n"
 
 

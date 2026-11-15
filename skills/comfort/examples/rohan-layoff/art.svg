@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <!-- Comfort header: a door left open onto a path at morning, with a warm light, for a new chapter -->
+  <rect width="320" height="200" fill="#DCE6DF"/>
+  <!-- sky and sun -->
+  <circle cx="248" cy="58" r="22" fill="#F3D9A0" opacity=".85"/>
+  <path d="M0 140 Q90 118 170 132 T320 124 V200 H0 Z" fill="#A9C2B2"/>
+  <!-- path winding away -->
+  <path d="M120 200 C150 170 200 160 222 132 L232 132 C214 164 176 176 170 200 Z" fill="#EFE7D6" stroke="#6E7C72" stroke-width="1.2"/>
+  <!-- wall with open door -->
+  <rect x="34" y="30" width="96" height="170" fill="#C6D3CA" stroke="#4E5A52" stroke-width="2"/>
+  <rect x="56" y="62" width="52" height="110" fill="#FBEFD3" stroke="#4E5A52" stroke-width="2"/>
+  <path d="M56 62 L36 70 L36 176 L56 172 Z" fill="#8FA597" stroke="#4E5A52" stroke-width="2"/>
+  <circle cx="42" cy="124" r="2.2" fill="#3F7A5A"/>
+  <!-- light spilling out -->
+  <path d="M56 172 L108 172 L150 200 L40 200 Z" fill="#FBEFD3" opacity=".75"/>
+  <!-- a small plant by the door -->
+  <path d="M116 172 h14 l-2 14 h-10 z" fill="#C98E5E" stroke="#4E5A52" stroke-width="1.4"/>
+  <path d="M123 172 C118 160 112 156 108 152 M123 172 C124 158 130 150 136 148 M123 172 C122 162 124 156 122 146" fill="none" stroke="#3F7A5A" stroke-width="2" stroke-linecap="round"/>
+  <!-- birds -->
+  <path d="M190 40 q6 -6 12 0 q6 -6 12 0 M222 82 q4 -4 8 0 q4 -4 8 0" fill="none" stroke="#4E5A52" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

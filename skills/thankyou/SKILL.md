@@ -191,6 +191,19 @@ Structure (keep it short — specific beats long):
    on to every engineer I've mentored since."
 7. **Occasion tie-in** — one line connecting to Thanksgiving/holiday/etc., if any.
 8. **Warm close + signature** — "With gratitude," / "Thank you, truly," + sender's first name.
+9. **P.S. fun fact** (when it fits) — one short, true, delightful fact tied to
+   the relationship or occasion, with a warm tie-back: "P.S. Fun fact: "mentor"
+   comes from Mentor, the friend Odysseus trusted to guide his son. You were
+   mine." Use the verified bank in `references/fun-facts.md`, or verify a new
+   fact in an original source and record it in `fun_fact.source`. Skip it for
+   hard-time notes or when nothing fits naturally.
+10. **A light moment** (optional, rare) — when the user says the recipient
+   loves a particular show, a link to that scene on an official channel, or a
+   public-domain short film, stored as `light_moment`
+   (`references/light-moments.md`).
+
+If the note lists several things, don't number them. The card draws a small
+hand-drawn mark for each one, and plain text uses ✦.
 
 **Team / org notes** follow the same shape with the group as the subject:
 greeting to the group → the goal and the moment it landed → what it took
@@ -390,6 +403,9 @@ Contact details are used only for the send and never saved.
 `source` is `own` (the user's photo), `sketch` (drawn), or `stock` (with
 `credit`, `license`, and `url`).
 `style` is `handwritten` (default) or `print`.
+`fun_fact` (optional) is `{"text": "Fun fact: …", "source": "where it was verified"}`;
+it's printed as a P.S. under the signature. `bullet` (optional) picks the
+hand-drawn list mark: `sparkle` (default), `leaf`, `heart`, or `star`.
 `channel` (optional) is the delivery channel; `subject` is the email subject;
 `short_body` is a shorter version for SMS or LinkedIn; `channel_post` is the
 team or org post for Slack, Teams, or Lark. All of these are safety-checked.
@@ -410,6 +426,7 @@ put the group's name in `recipient_name` (e.g. "the Platform team") and leave
 - `references/team-and-org.md` — `--team` / `--org`: shared achievements, naming everyone or no one, tone by sender's role, group photos
 - `references/family.md` — `--family`: forms of address, one picture of a lifetime, family rules, home language
 - `references/paying-it-forward.md` — when and how to show the gift travelling on
+- `references/fun-facts.md` — the optional P.S. fun fact: rules and a verified fact bank with sources
 - `references/sketch.md` — no photo: a drawn pencil sketch, or a freely licensed stock photo as a sketch; honesty rules
 - `scripts/sketch_photo.py` — turns a stock photo into a graphite pencil sketch (needs Pillow; strips metadata)
 - `references/delivery.md` — choosing the channel, the "Ready to send?" rule, formatting per channel, share links

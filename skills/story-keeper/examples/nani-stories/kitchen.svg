@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380">
+  <!-- Drawn stand-in (pencil style): a kitchen counter with a pot of dal steaming, a rolling pin and two cups -->
+  <defs><filter id="p" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+  <rect width="600" height="380" fill="#F7F4EE"/>
+  <g filter="url(#p)" fill="none" stroke="#4a4a4a" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 260 H570 M30 272 H570" stroke-width="2.2"/>
+    <rect x="70" y="40" width="150" height="120" stroke-width="2"/><path d="M145 40 V160 M70 100 H220" stroke-width="1.2"/>
+    <path d="M250 260 C246 200 250 190 260 186 H380 C390 190 394 200 390 260" stroke-width="2.4"/>
+    <path d="M250 196 H222 M390 196 H418" stroke-width="3"/>
+    <ellipse cx="320" cy="186" rx="62" ry="10" stroke-width="2"/>
+    <path d="M290 170 C280 150 300 140 290 120 M320 166 C310 140 334 130 322 104 M350 170 C340 150 360 140 350 120" stroke-width="1.5" opacity=".7"/>
+    <path d="M440 246 H540" stroke-width="7"/><path d="M430 246 h10 M540 246 h10" stroke-width="3"/>
+    <ellipse cx="490" cy="232" rx="30" ry="6" stroke-width="1.4"/>
+    <path d="M110 226 h34 v24 a10 10 0 0 1 -10 10 h-14 a10 10 0 0 1 -10 -10 z M150 232 a7 7 0 0 1 0 14" stroke-width="1.8"/>
+    <path d="M170 226 h34 v24 a10 10 0 0 1 -10 10 h-14 a10 10 0 0 1 -10 -10 z M210 232 a7 7 0 0 1 0 14" stroke-width="1.8"/>
+    <path d="M60 300 l12 -8 M80 316 l14 -10 M500 300 l12 -8 M520 316 l14 -10" stroke-width="1" opacity=".5"/>
+  </g>
+</svg>
