@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <!-- Welcome header: an open door with warm light, a welcome mat, a plant and a coffee cup on a desk -->
+  <rect width="320" height="200" fill="#DCE9E0"/>
+  <rect x="0" y="168" width="320" height="32" fill="#C5D8CB"/>
+  <rect x="40" y="24" width="96" height="144" fill="#FBF2DA" stroke="#2D3A33" stroke-width="2.2"/>
+  <path d="M40 24 L20 34 L20 176 L40 168 Z" fill="#8FB09B" stroke="#2D3A33" stroke-width="2.2" stroke-linejoin="round"/>
+  <circle cx="27" cy="104" r="2.4" fill="#3F7A5A"/>
+  <rect x="44" y="172" width="88" height="12" rx="3" fill="#C9935F" stroke="#2D3A33" stroke-width="1.4"/>
+  <path d="M56 178 h64" stroke="#FBF2DA" stroke-width="1.6" stroke-dasharray="5 4"/>
+  <rect x="176" y="120" width="124" height="8" fill="#9C7A5B" stroke="#2D3A33" stroke-width="1.4"/>
+  <path d="M186 128 v40 M290 128 v40" stroke="#2D3A33" stroke-width="2"/>
+  <path d="M196 120 h18 l-3 -16 h-12 z" fill="#C98E5E" stroke="#2D3A33" stroke-width="1.4"/>
+  <path d="M205 104 C198 92 192 88 186 86 M205 104 C206 90 212 82 220 80 M205 104 C204 94 206 86 204 76" fill="none" stroke="#3F7A5A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M244 104 h22 v10 a6 6 0 0 1 -6 6 h-10 a6 6 0 0 1 -6 -6 z M266 107 a5 5 0 0 1 0 9" fill="#FFFEFA" stroke="#2D3A33" stroke-width="1.5"/>
+  <path d="M251 98 q-3 -5 0 -10 M258 98 q-3 -5 0 -10" fill="none" stroke="#6E7C72" stroke-width="1.2" stroke-linecap="round"/>
+  <rect x="270" y="72" width="22" height="30" rx="2" fill="#FFFEFA" stroke="#2D3A33" stroke-width="1.4"/>
+  <path d="M275 80 h12 M275 86 h12 M275 92 h8" stroke="#3F7A5A" stroke-width="1.2"/>
+  <path d="M178 40 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z M226 28 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#3F7A5A"/>
+</svg>

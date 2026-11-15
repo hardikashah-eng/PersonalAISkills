@@ -15,6 +15,12 @@ up better for each other, not to stand in for them.
 | [Comfort](skills/comfort/SKILL.md) | A short, steady message for someone going through a hard time: a loss, an illness, a layoff, a breakup, a hard anniversary. It acknowledges without fixing or minimising, offers one specific kind of help, can add a gentle thought about something warm to eat (or a meal you'll bring), and follows their culture and faith. Only when you say they'd welcome it, and never for a fresh loss, it adds a link to a comedy scene for a smile. Nothing is sent without your yes. | "Help me write to Priya, her dad passed away" or "/comfort Rohan layoff via whatsapp" |
 | [Story Keeper](skills/story-keeper/SKILL.md) | Keeps a parent's or grandparent's life stories in a family booklet: gentle interview questions in their language, their stories in their own words, the family's photos (or pencil sketches of them), and short clips of their real voice cut from family videos. Consent first, private by default, and voices are never cloned or altered. | "Help me record Nani's stories for Diwali" |
 | [Tribute](skills/tribute/SKILL.md) | A group card for a farewell, retirement, milestone birthday or promotion. It writes the request to contributors, checks every message for kindness and privacy, and weaves them into one card with everyone credited, a group photo or sketch, a quote, and optionally a link to a favourite comedy scene or a public-domain short film. | "Make a farewell card for Meena from the team" |
+| [Kudos](skills/kudos/SKILL.md) | Specific recognition for real work (a merged PR, a resolved incident, a design doc, an on-call shift), written by reading the work itself. It names what the person did, the difference it made and the care behind it, as a DM, a #kudos post (Slack, Lark, Teams), a note to their manager, or, for public work with their OK, a LinkedIn post. It can log the strength for 1:1s and reviews. | "Thank Bea for the retry fix in #482 and post it in #kudos" |
+| [Feedback](skills/feedback/SKILL.md) | Constructive feedback shaped as what happened, what it affected and what to try next, starting from what's going well. It prepares 1:1 talking points and a written recap, blocks labels and absolutes, and once shared, adds the item to your private growth log of improvement opportunities with a follow-up date. | "Help me give Dami feedback on her design reviews" |
+| [Intro](skills/intro/SKILL.md) | Warm, double opt-in introductions: a private ask to each person first, then, once both say yes, a short intro with a clear reason and one easy next step. | "Introduce Chen to Ola, who built the tiling pass" |
+| [Welcome](skills/welcome/SKILL.md) | A first-week note for a new hire or team member (why the team is glad, the shape of the week, their buddy), a team introduction with only what they agreed to share, and an optional card. | "Welcome Kenji, who starts Monday" |
+| [Repair](skills/repair/SKILL.md) | A sincere apology or follow-up after a tense meeting, a sharp comment or a missed commitment. It owns what happened without excuses, says what will change, and blocks non-apologies. | "Help me follow up with Ravi after planning" |
+| [Nudge](skills/nudge/SKILL.md) | The daily and after-meeting list of people moments, each with a ready draft to approve: kudos for work and praise heard in meetings, private feedback prompts, commitments to follow up, first days, people not recognized lately. | "After standup" or "What should I follow up on today?" |
 
 ## Install
 
@@ -45,6 +51,10 @@ work without any connectors: Claude asks you a few short questions instead.
 - **Real voices, real photos.** Story Keeper uses the family's own photos and
   short clips of the elder's real voice; it never clones, synthesizes or
   splices a voice, or "restores" a face with AI.
+- **Automate the finding, not the sending.** Scheduled runs and after-meeting
+  scans prepare drafts and a review list ([AUTOMATION.md](AUTOMATION.md)); you
+  approve each message. Feedback stays private, and nothing is posted publicly
+  without the person's OK.
 - **You decide what's sent.** The skills draft; you review and edit. Nothing
   is sent or posted without your explicit yes to the exact message.
 
@@ -139,7 +149,33 @@ run code, Claude may run these Python 3 scripts (no network access):
   self-contained HTML file (and optionally a PDF with local Chrome), embedding
   the photos (metadata removed) and voice clips you chose.
 
+- `skills/kudos/scripts/work_context.py` reads one GitHub pull request or
+  issue you name through your signed-in GitHub CLI (`gh api`, GET requests
+  only) and prints a short summary, with email addresses removed. It never
+  comments or changes anything.
+- `skills/feedback/scripts/growth_log.py` keeps your private log of strengths
+  and improvement opportunities in a JSON Lines file you choose, and exports
+  it to CSV. Each entry passes the safety check first; it sends nothing anywhere.
+- `skills/nudge/scripts/scan_transcript.py` reads a meeting transcript file
+  and lists praise, wins, possible feedback moments and commitments, for you
+  only. It skips lines about personal matters and doesn't infer emotions.
+
 Where scripts can't run, the skills do the same checks by hand.
+
+**Meeting transcripts.** Nudge uses transcripts only from meetings you
+organized or attended where transcription was announced, never HR, medical or
+legal meetings. It quotes at most a sentence back to you, and stores nothing.
+
+**The growth log.** Feedback and Kudos can add entries to a log file you keep
+(or a Sheet, Lark Base or Notion database you connect). Entries are added
+only after you've shared the feedback with the person, hold strengths as well
+as growth areas, and are never saved to Claude's memory.
+
+**LinkedIn.** Kudos drafts a LinkedIn post only for public work, records the
+person's consent, and checks it with `safety_check.py --profile public` (no
+ticket numbers, internal links, confidential or unreleased work). You paste
+and post it yourself; if you ask, Claude fills in the post in your browser and
+stops before **Post**.
 
 **Links to comedy scenes.** Comfort and Tribute only ever link to an official
 source (the show's, studio's or network's own channel or streaming service) or
@@ -170,7 +206,7 @@ skills/<name>/
   examples/                  # finished samples
 ```
 
-Reconnect, Grateful, Comfort and Tribute reuse ThankYou's scripts (safety check with their own
+Every other skill reuses ThankYou's scripts (safety check with their own
 profiles, card renderer, share links, card image) and its guides (language,
 quotes, sketches, photos, safety, delivery, relationships and culture).
 

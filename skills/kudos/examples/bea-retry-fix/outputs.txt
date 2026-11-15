@@ -1,0 +1,33 @@
+== slack ==
+Bea,
+
+You traced last week's retry storm to retries firing in lockstep, fixed it with jittered backoff, and added a load test so it can't quietly come back. On-call hasn't been paged for it since, and I finally slept through a Tuesday night. That's the kind of care that makes everyone's nights better.
+
+Thank you,
+Hardik
+
+No share link for this channel: copy the text above into the app.
+
+== slack ==
+Kudos to Bea for the retry fix in #482. She traced last week's retry storm to retries firing in lockstep, fixed it with jittered backoff, and added a load test so it stays fixed. Two weeks without a retry page. Thank you, Bea, for the care that makes everyone's on-call quieter.
+
+— Hardik
+
+No share link for this channel: copy the text above into the app.
+
+== slack ==
+Hi Sam, I wanted you to know about Bea's work on #482. She found the root cause of last week's retry storm that three of us had missed, fixed it, and added a load test and a runbook note without being asked. On-call has been quiet since. It's exactly the ownership we talk about, and it's worth remembering at review time.
+
+Hardik
+
+No share link for this channel: copy the text above into the app.
+
+== linkedin ==
+Shout-out to Bea Ramos, who made our open-source client's retries smarter this month. Her change spreads out reconnect attempts, so apps using the library recover from network blips without overwhelming the servers behind them.
+
+What I admire most: she wrote the tests and the docs before anyone asked. Thank you, Bea. #opensource #reliability
+
+No share link for this channel: copy the text above into the app.
+note: public post: run safety_check.py --profile public first, and post only with the colleague's OK to be named and within your company's social media policy
+note: LinkedIn has no link that fills in post text: open https://www.linkedin.com/feed/, select 'Start a post', and paste
+

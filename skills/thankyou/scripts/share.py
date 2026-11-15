@@ -54,19 +54,34 @@ def quote_lines(note: dict, style: str) -> list[str]:
     return lines + [""]
 
 
-def body_for(note: dict, channel: str) -> list[str]:
+def as_list(value) -> list[str]:
+    if not value:
+        return []
+    return [value] if isinstance(value, str) else list(value)
+
+
+def body_for(note: dict, channel: str, post: bool = False) -> list[str]:
     """Paragraphs to use: a short or channel-post version when the note provides one."""
-    if channel in WORK_CHAT and note.get("audience") in ("team", "org") and note.get("channel_post"):
+    if channel in WORK_CHAT and (post or note.get("audience") in ("team", "org")) and note.get("channel_post"):
         return [note["channel_post"]]
     if channel in SHORT and note.get("short_body"):
-        return list(note["short_body"])
-    return list(note.get("body") or [])
+        return as_list(note["short_body"])
+    return as_list(note.get("body"))
 
 
-def format_text(note: dict, channel: str) -> str:
+def format_text(note: dict, channel: str, post: bool = False, manager: bool = False) -> str:
+    if manager:
+        if not note.get("manager_note"):
+            raise SystemExit("note.json has no manager_note")
+        sig = note.get("sender_first_name") or note.get("signature") or ""
+        return "\n\n".join(as_list(note["manager_note"]) + ([sig] if sig else [])).strip() + "\n"
+    if channel == "linkedin" and note.get("public_post"):
+        # A public post stands on its own: no greeting, sign-off or P.S.
+        return "\n\n".join(as_list(note["public_post"])).strip() + "\n"
     sig = note.get("signature") or note.get("sender_first_name", "")
     closing = note.get("closing") or ""
-    posting_to_group = channel in WORK_CHAT and note.get("audience") in ("team", "org") and note.get("channel_post")
+    posting_to_group = (channel in WORK_CHAT and note.get("channel_post")
+                        and (post or note.get("audience") in ("team", "org")))
 
     lines: list[str] = []
     if channel in ("email", "plain"):
@@ -83,7 +98,7 @@ def format_text(note: dict, channel: str) -> str:
         lines += [note["title"], ""]
     if not posting_to_group and note.get("greeting"):
         lines += [note["greeting"], ""]
-    for para in body_for(note, channel):
+    for para in body_for(note, channel, post):
         lines += [para, ""]
     if not posting_to_group:
         for it in note.get("items") or []:
@@ -151,6 +166,10 @@ def main() -> int:
     ap.add_argument("--channel", required=True, choices=CHANNELS)
     ap.add_argument("--to", help="phone number or email, used only in the printed link")
     ap.add_argument("--subject", help="email subject (default from note.json or the occasion)")
+    ap.add_argument("--post", action="store_true",
+                    help="posting to a channel (#kudos, a team thread): use channel_post from note.json")
+    ap.add_argument("--manager", action="store_true",
+                    help="the note to the person's manager (manager_note in note.json)")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     args = ap.parse_args()
 
@@ -160,7 +179,7 @@ def main() -> int:
         print(f"error: cannot read {args.note}: {exc}", file=sys.stderr)
         return 2
 
-    text = format_text(note, args.channel)
+    text = format_text(note, args.channel, args.post, args.manager)
     subject = (args.subject or default_subject(note)) if args.channel == "email" else None
     link = share_link(args.channel, text, args.to, subject)
 
@@ -171,7 +190,12 @@ def main() -> int:
         warnings.append(f"{words} words is long for {args.channel} (aim for under {limit}); "
                         "write a shorter version that keeps the specific moment"
                         + (" or add 'short_body' to note.json" if args.channel in SHORT else ""))
-    if args.channel in CHAT_APPS | SHORT | WORK_CHAT:
+    if args.channel == "linkedin" and note.get("public_post"):
+        warnings.append("public post: run safety_check.py --profile public first, and post only with the "
+                        "colleague's OK to be named and within your company's social media policy")
+        warnings.append("LinkedIn has no link that fills in post text: open https://www.linkedin.com/feed/, "
+                        "select 'Start a post', and paste")
+    elif args.channel in CHAT_APPS | SHORT | WORK_CHAT and not note.get("text_only"):
         warnings.append("send the card as an image (card_to_png.py) or the clean photo with the text")
     if link and len(link) > 2000:
         warnings.append("the link is very long; some apps may cut it off, so copy the text instead")

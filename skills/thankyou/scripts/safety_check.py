@@ -6,7 +6,7 @@ recipient-specific topics to avoid. It is a backstop for human judgement, not a
 replacement: a clean result does not prove a note is safe.
 
 Usage:
-    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect|team|family|grateful|comfort]
+    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect|team|family|grateful|comfort|public|feedback|repair]
                                       [--roster "Ana,Ben,Chen"] [--json]
 
 Exit code 0 = no blocking issues, 1 = blocking issues found, 2 = bad input.
@@ -176,6 +176,72 @@ COMFORT_REVIEW = {
     "check the tone": ["fun fact", "lol", "haha", "!!"],
 }
 
+# --- Profile: public (LinkedIn and other public posts) ------------------------
+
+PUBLIC_BLOCK = {
+    "confidential or unreleased": [
+        "confidential", "internal only", "nda", "under nda", "unreleased", "not yet announced",
+        "unannounced", "embargo", "embargoed", "stealth", "codename", "code name", "pre-release",
+    ],
+    "security details": [
+        "vulnerability", "vulnerabilities", "exploit", "cve", "security incident", "breach",
+        "data leak", "leaked", "credentials", "password", "api key",
+    ],
+    "people matters": [
+        "performance review", "pip", "headcount", "layoff", "layoffs", "reorg", "promotion packet",
+        "compensation", "salary", "rating",
+    ],
+}
+
+PUBLIC_REVIEW = {
+    "may be internal (check it's public)": [
+        "incident", "outage", "sev1", "sev2", "sev-1", "sev-2", "postmortem", "post-mortem",
+        "customer", "customers", "roadmap", "launch date", "beta", "internal", "on-call", "oncall",
+        "rollback", "downtime", "pager", "escalation", "deadline",
+    ],
+}
+
+PUBLIC_PATTERNS = {
+    "ticket or PR reference": r"(?<![\w/])#\d{2,}\b|\b[A-Z][A-Z0-9]{1,9}-\d{1,6}\b",
+    "internal link": r"https?://[^\s]*(?:internal|intranet|corp|\.local\b|jira|atlassian\.net|"
+                     r"feishu|larksuite|slack\.com|teams\.microsoft|sharepoint|confluence|grafana|"
+                     r"datadog|pagerduty|localhost|\b10\.\d|\b192\.168\.)[^\s]*",
+    "a metric or number (check it's public)": r"\b\d+(?:\.\d+)?\s?(?:%|percent|x\b|ms\b|k\b|m\b|users\b|qps\b)",
+}
+
+# --- Profile: feedback (constructive feedback) --------------------------------
+
+FEEDBACK_BLOCK = {
+    "labels the person instead of the behaviour": [
+        "lazy", "careless", "incompetent", "sloppy", "attitude problem", "bad attitude", "not a team player",
+        "unprofessional", "lack of commitment", "doesn't care", "don't care", "useless", "hopeless", "immature",
+    ],
+    "absolutes": ["you always", "you never", "every single time", "constantly"],
+    "comparing to others": ["unlike", "why can't you be like", "compared to"],
+}
+
+FEEDBACK_REVIEW = {
+    "coded or vague words (describe the behaviour instead)": [
+        "abrasive", "bossy", "emotional", "aggressive", "shrill", "too nice", "culture fit", "not a fit",
+        "attitude", "personality", "lack of polish", "executive presence", "too quiet", "too direct",
+    ],
+    "softeners that hide the point": ["just a thought", "no big deal", "maybe it's just me", "sort of", "kind of"],
+}
+
+# --- Profile: repair (apologies and follow-ups) -------------------------------
+
+REPAIR_BLOCK = {
+    "non-apology": [
+        "sorry if", "sorry you feel", "sorry that you feel", "if anyone was offended", "if i offended",
+        "mistakes were made", "i'm sorry but", "sorry, but", "no offense", "you misunderstood",
+        "you took it the wrong way", "to be fair", "you overreacted", "calm down",
+    ],
+}
+
+REPAIR_REVIEW = {
+    "excuses that dilute it": ["but", "however", "i was just", "i only", "anyway"],
+}
+
 PROFILES = {
     "default": ({}, {}),
     "reconnect": (RECONNECT_BLOCK, RECONNECT_REVIEW),
@@ -183,12 +249,23 @@ PROFILES = {
     "family": (FAMILY_BLOCK, FAMILY_REVIEW),
     "grateful": (GRATEFUL_BLOCK, GRATEFUL_REVIEW),
     "comfort": (COMFORT_BLOCK, COMFORT_REVIEW),
+    "public": (PUBLIC_BLOCK, PUBLIC_REVIEW),
+    "feedback": (FEEDBACK_BLOCK, FEEDBACK_REVIEW),
+    "repair": (REPAIR_BLOCK, REPAIR_REVIEW),
 }
 
 CLICHES = [
     "words cannot express", "words can't express", "from the bottom of my heart",
     "you're the best ever", "best ever", "means the world",
 ]
+
+
+def as_paras(value) -> list[str]:
+    if not value:
+        return []
+    if isinstance(value, str):
+        return [value]
+    return [str(v.get("text", "")) if isinstance(v, dict) else str(v) for v in value]
 
 
 def collect_text(note: dict) -> list[tuple[str, str]]:
@@ -224,6 +301,13 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
     sb = note.get("short_body") or []
     for i, para in enumerate([sb] if isinstance(sb, str) else sb):
         out.append((f"short_body[{i}]", str(para)))
+    for key in ("public_post", "manager_note", "talking_points", "commitment", "ask", "invite", "agenda"):
+        for i, para in enumerate(as_paras(note.get(key))):
+            out.append((f"{key}[{i}]", para))
+    fb = note.get("feedback") or {}
+    for key in ("observation", "impact", "next", "strength"):
+        if fb.get(key):
+            out.append((f"feedback.{key}", str(fb[key])))
     lm = note.get("light_moment") or {}
     for key in ("lead", "title"):
         if lm.get(key):
@@ -330,7 +414,11 @@ def scan(note: dict, avoid: list[str], profile: str = "default",
     def add(level, category, field, match):
         issues.append({"level": level, "category": category, "field": field, "match": match})
 
-    for field, text in collect_text(note):
+    texts = collect_text(note)
+    if profile == "public" and note.get("public_post"):
+        # Only the public post goes public; the private versions are checked without --profile public.
+        texts = [(f, t) for f, t in texts if f.startswith("public_post")]
+    for field, text in texts:
         for label, pattern in PII_PATTERNS.items():
             for m in re.finditer(pattern, text, flags=re.IGNORECASE):
                 add("block", f"PII: {label}", field, m.group(0))
@@ -354,6 +442,11 @@ def scan(note: dict, avoid: list[str], profile: str = "default",
         for category, terms in extra_review.items():
             for t in word_hits(text, terms):
                 add("review", f"{profile}: {category}", field, t)
+        if profile == "public":
+            for label, pattern in PUBLIC_PATTERNS.items():
+                for m in re.finditer(pattern, text):
+                    level = "review" if label.startswith("a metric") else "block"
+                    add(level, f"public: {label}", field, m.group(0))
         if text.count("!") > 1:
             add("review", "tone: too many exclamation marks", field, "!" * text.count("!"))
 
@@ -378,6 +471,37 @@ def scan(note: dict, avoid: list[str], profile: str = "default",
         if profile == "comfort":
             issues.append({"level": "review", "category": "comfort: humour only if the user confirmed it's welcome, never for a fresh loss",
                            "field": "light_moment", "match": lm.get("title", "")})
+    if profile == "feedback":
+        fb = note.get("feedback") or {}
+        for key, why in (("observation", "what you saw or heard, specifically"),
+                         ("impact", "what it affected"),
+                         ("next", "what to try next")):
+            if not fb.get(key):
+                issues.append({"level": "review", "category": f"feedback: add '{key}' ({why})",
+                               "field": f"feedback.{key}", "match": "missing"})
+    if profile == "repair":
+        all_text = " ".join(t for _, t in collect_text(note)).lower()
+        if not re.search(r"\bi(?:'m| am)? (?:sorry|apologi[sz]e)|\bmy (?:mistake|fault|bad)|\bi should have\b|\bi own\b", all_text):
+            issues.append({"level": "review", "category": "repair: say plainly what you're sorry for, in the first person",
+                           "field": "*", "match": "no first-person apology"})
+        if not note.get("commitment"):
+            issues.append({"level": "review", "category": "repair: add what you'll do differently ('commitment')",
+                           "field": "commitment", "match": "missing"})
+    if note.get("kind") == "intro" and note.get("body"):
+        people = [p.get("name") for p in note.get("people") or [] if p.get("name")]
+        opted = note.get("opted_in") or {}
+        missing = [p for p in people if not opted.get(p)]
+        if missing:
+            issues.append({"level": "block", "category": "intro: double opt-in, so ask each person first and introduce only after both say yes",
+                           "field": "opted_in", "match": ", ".join(missing)})
+    if profile == "public":
+        consent = note.get("consent") or {}
+        if not consent.get("named_person_ok"):
+            issues.append({"level": "block", "category": "public: confirm the colleague is happy to be named publicly (consent.named_person_ok)",
+                           "field": "consent", "match": "not confirmed"})
+        if not consent.get("company_policy_ok"):
+            issues.append({"level": "review", "category": "public: check your company's social media policy (consent.company_policy_ok)",
+                           "field": "consent", "match": "not confirmed"})
     if profile == "comfort" and note.get("fun_fact"):
         issues.append({"level": "block", "category": "comfort: no fun facts in a hard-time note",
                        "field": "fun_fact", "match": "fun_fact"})
@@ -398,7 +522,8 @@ def main() -> int:
     ap.add_argument("--avoid", default="", help="comma-separated topics to avoid for this recipient")
     ap.add_argument("--json", action="store_true", help="print machine-readable output")
     ap.add_argument("--profile", choices=sorted(PROFILES), default="default",
-                    help="extra checks: reconnect, team (team/org notes and tributes), family, grateful, comfort")
+                    help="extra checks: reconnect, team (team/org notes, tributes, kudos), family, grateful, comfort, "
+                         "public (LinkedIn and other public posts), feedback, repair")
     ap.add_argument("--roster", default=None,
                     help="comma-separated names in the group; if any are named, all must be "
                          "(defaults to the note's 'roster' list)")
