@@ -25,8 +25,10 @@ Record where the picture came from as `"source": "own"` in `note.json`.
    has doubts, skip the photo.
 4. **Never alter a person.** Do not edit, retouch, beautify, age, swap, or
    generate faces or bodies, and never create a fake or AI-made "photo" of
-   the people. Allowed edits: crop, straighten, resize, and gentle overall
-   brightness or contrast.
+   the people. Allowed edits: crop, straighten, resize, gentle overall
+   brightness or contrast, and, when the user asks, turning the whole photo
+   into a pencil sketch (`scripts/sketch_photo.py`, which restyles the entire
+   image evenly and changes no one's features).
 5. **Strip hidden data.** Remove EXIF and other metadata (GPS location, device
    serial, timestamps) before the photo goes into a card or draft.
    `scripts/render_card.py` does this automatically.

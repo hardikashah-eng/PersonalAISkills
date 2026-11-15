@@ -161,6 +161,7 @@ TEMPLATE = """<!DOCTYPE html>
                   box-shadow:0 1px 2px rgba(0,0,0,.08), 0 8px 22px rgba(60,40,20,.16);
                   transform:rotate(-1.6deg); }}
   .photo img {{ display:block; width:100%; height:auto; }}
+  .photo.wide .frame {{ max-width:100%; transform:rotate(-1deg); }}
   .photo figcaption {{ font-style:italic; font-size:15px; text-align:center; padding:9px 6px 13px;
                       color:var(--ink); }}
   .photo .credit {{ font: 11px/1.3 system-ui, sans-serif; text-align:center; opacity:.6; margin:-8px 0 0; padding:0 6px 10px; }}
@@ -378,7 +379,15 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
         caption = f"<figcaption>{e(photo_meta['caption'])}</figcaption>" if photo_meta.get("caption") else ""
         if photo_meta.get("credit"):
             caption += f'<p class="credit">{e(photo_meta["credit"])}</p>'
-        photo_block = f'<figure class="photo"><div class="frame"><img src="{src}" alt="{alt}">{caption}</div></figure>'
+        wide = ""
+        try:
+            from PIL import Image as _Img  # optional: widen the frame for wide group shots
+            with _Img.open(io.BytesIO(data)) as _im:
+                if _im.width >= 1.5 * _im.height:
+                    wide = " wide"
+        except Exception:
+            pass
+        photo_block = f'<figure class="photo{wide}"><div class="frame"><img src="{src}" alt="{alt}">{caption}</div></figure>'
 
     closing = note.get("closing", "" if note.get("kind") == "gratitude" else "With gratitude,")
 
