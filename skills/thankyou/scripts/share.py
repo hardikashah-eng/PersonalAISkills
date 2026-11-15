@@ -86,14 +86,14 @@ def format_text(note: dict, channel: str) -> str:
     for para in body_for(note, channel):
         lines += [para, ""]
     if not posting_to_group:
-        for i, it in enumerate(note.get("items") or [], 1):
+        for it in note.get("items") or []:
             why = " ".join(x for x in (it.get("why"), it.get("difference")) if x)
             subject = it.get("subject", "")
             if channel == "whatsapp":
                 subject = f"*{subject}*"
             elif channel in WORK_CHAT:
                 subject = f"*{subject}*"
-            lines.append(f"{i}. {subject}" + (f" — {why}" if why else ""))
+            lines.append(f"✦ {subject}" + (f" — {why}" if why else ""))
             if it.get("forward"):
                 lines.append(f"   ↪ {it['forward']}")
             lines.append("")
@@ -104,6 +104,10 @@ def format_text(note: dict, channel: str) -> str:
             lines.append(closing)
         if sig:
             lines.append(sig)
+    ff = note.get("fun_fact")
+    ff = (ff.get("text") if isinstance(ff, dict) else ff) or ""
+    if ff.strip() and channel not in ("sms", "imessage"):
+        lines += ["", f"P.S. {ff.strip()}"]
     return "\n".join(lines).strip() + "\n"
 
 

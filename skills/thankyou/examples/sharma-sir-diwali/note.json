@@ -24,5 +24,9 @@
     "ink": "#3A2A1A",
     "accent": "#B8461F",
     "paper": "#FFF8EC"
+  },
+  "fun_fact": {
+    "text": "Fun fact: \"Diwali\" comes from the Sanskrit dīpāvali, \"a row of lights\". You lit one of mine.",
+    "source": "Standard dictionaries: Diwali, from Sanskrit dīpāvali"
   }
 }

@@ -33,6 +33,8 @@ work without any connectors: Claude asks you a few short questions instead.
 - **Kind always.** Tone fits the relationship (spouse, parent, elder, sibling,
   friend, mentor, colleague…) and the recipient's culture, and the skills steer
   around topics that could hurt.
+- **A light P.S.** Cards can end with one short, true fun fact tied to the
+  relationship or occasion, drawn from a verified fact bank with sources.
 - **You decide what's sent.** The skills draft; you review and edit. Nothing
   is sent or posted without your explicit yes to the exact message.
 

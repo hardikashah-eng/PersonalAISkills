@@ -190,6 +190,10 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
         for key in ("subject", "why", "difference", "forward"):
             if it.get(key):
                 out.append((f"items[{i}].{key}", str(it[key])))
+    ff = note.get("fun_fact")
+    ff_text = ff.get("text") if isinstance(ff, dict) else ff
+    if ff_text:
+        out.append(("fun_fact", str(ff_text)))
     # Channel versions used by share.py
     for key in ("subject", "channel_post"):
         if note.get(key):
@@ -305,6 +309,14 @@ def scan(note: dict, avoid: list[str], profile: str = "default",
 
     issues += roster_issues(note, roster if roster is not None else note.get("roster") or [])
     issues += honesty_issues(note)
+    ff = note.get("fun_fact")
+    if ff and not (isinstance(ff, dict) and ff.get("source")):
+        issues.append({"level": "review", "category": "fun fact: record where it was verified (fun_fact.source)",
+                       "field": "fun_fact", "match": "no source"})
+    ff_text = ff.get("text") if isinstance(ff, dict) else ff
+    if ff_text and len(str(ff_text).split()) > 45:
+        issues.append({"level": "review", "category": "fun fact: keep it under about 35 words",
+                       "field": "fun_fact", "match": str(len(str(ff_text).split()))})
     return issues
 
 

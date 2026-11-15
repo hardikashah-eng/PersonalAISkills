@@ -31,5 +31,9 @@
     "alt": "A whiteboard with boxes and arrows sketching a job queue, with \"it works\" written in red"
   },
   "channel": "email",
-  "subject": "Thank you, Maya"
+  "subject": "Thank you, Maya",
+  "fun_fact": {
+    "text": "Fun fact: the word \"mentor\" comes from Mentor, the friend Odysseus trusted to guide his son in Homer's Odyssey. You were mine.",
+    "source": "Standard dictionaries (Merriam-Webster, Oxford): mentor, from Mentor in the Odyssey"
+  }
 }

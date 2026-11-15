@@ -30,5 +30,9 @@
     "ink": "#33302C",
     "accent": "#A8402F",
     "paper": "#FFFCF6"
+  },
+  "fun_fact": {
+    "text": "Fun fact: \"companion\" comes from the Latin for someone you share bread with. Thank you for all the bread, and all the company.",
+    "source": "Standard etymological dictionaries: companion, from Latin com- + panis"
   }
 }

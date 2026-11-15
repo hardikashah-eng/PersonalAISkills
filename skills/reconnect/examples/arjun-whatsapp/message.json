@@ -23,5 +23,9 @@
     "source": "own",
     "caption": "Friday chai, launch week 2019",
     "alt": "Two glasses of chai on a wooden table"
+  },
+  "fun_fact": {
+    "text": "Fun fact: \"chai\" and \"tea\" come from two Chinese words for the same drink, one that travelled by land and one by sea. Either way, it got us through launch week.",
+    "source": "World Atlas of Language Structures, chapter 138 \"Tea\" (Östen Dahl)"
   }
 }

@@ -41,5 +41,15 @@
     "caption": "दहलीज़ पर पाँच दीये",
     "alt": "पेंसिल स्केच: घर की दहलीज़ पर पाँच जलते दीये और रंगोली के बिंदु"
   },
-  "palette": {"bg": "#2F2A4F", "ink": "#3A2A1A", "accent": "#B8461F", "paper": "#FFF8EC"}
+  "palette": {
+    "bg": "#2F2A4F",
+    "ink": "#3A2A1A",
+    "accent": "#B8461F",
+    "paper": "#FFF8EC"
+  },
+  "fun_fact": {
+    "text": "मज़ेदार तथ्य: \"दीपावली\" संस्कृत के \"दीपावलि\" से बना है, जिसका अर्थ है \"दीपों की पंक्ति\"। इस साल हमारी पंक्ति थोड़ी और लंबी हो गई।",
+    "source": "Standard dictionaries: Diwali, from Sanskrit dīpāvali"
+  },
+  "bullet": "leaf"
 }

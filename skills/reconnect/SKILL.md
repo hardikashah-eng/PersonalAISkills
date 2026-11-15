@@ -151,6 +151,11 @@ Language: the language they used with each other; bilingual touch for mixed
 relationships (greeting or festival wish in the native language). Follow
 `../thankyou/references/language.md`.
 
+Optional **P.S. fun fact**, only if it's playful and tied to the shared memory
+(for example, where the word "chai" comes from, for the old chai-run crew).
+Use `../thankyou/references/fun-facts.md`, record the source, and leave it out
+of SMS and very short messages.
+
 Offer **two variants** when it helps: one lighter, one warmer. Keep the user's
 voice — if they share past messages to the person, match that register.
 
@@ -235,6 +240,6 @@ Same schema as ThankYou (quote optional):
 - `references/drift-detection.md` — finding drifted connections, exclusions, scoring
 - `references/hooks.md` — hook types, examples, what feels creepy or guilt-inducing
 - `examples/` — sample suggestion list and messages
-- Shared with ThankYou: `../thankyou/references/{safety,language,art,photos,sketch,relationships-and-culture}.md`,
+- Shared with ThankYou: `../thankyou/references/{safety,language,art,photos,sketch,fun-facts,relationships-and-culture}.md`,
   `../thankyou/scripts/{safety_check,render_card,sketch_photo,share,card_to_png}.py`,
   `../thankyou/references/delivery.md`
