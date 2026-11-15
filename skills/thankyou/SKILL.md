@@ -197,6 +197,10 @@ Structure (keep it short — specific beats long):
    mine." Use the verified bank in `references/fun-facts.md`, or verify a new
    fact in an original source and record it in `fun_fact.source`. Skip it for
    hard-time notes or when nothing fits naturally.
+10. **A light moment** (optional, rare) — when the user says the recipient
+   loves a particular show, a link to that scene on an official channel, or a
+   public-domain short film, stored as `light_moment`
+   (`references/light-moments.md`).
 
 If the note lists several things, don't number them. The card draws a small
 hand-drawn mark for each one, and plain text uses ✦.

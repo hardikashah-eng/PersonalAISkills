@@ -6,7 +6,7 @@ recipient-specific topics to avoid. It is a backstop for human judgement, not a
 replacement: a clean result does not prove a note is safe.
 
 Usage:
-    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect|team|family|grateful]
+    python3 safety_check.py note.json [--avoid "loss,divorce,baby"] [--profile reconnect|team|family|grateful|comfort]
                                       [--roster "Ana,Ben,Chen"] [--json]
 
 Exit code 0 = no blocking issues, 1 = blocking issues found, 2 = bad input.
@@ -154,12 +154,35 @@ GRATEFUL_REVIEW = {
     ],
 }
 
+# --- Profile: comfort (hard times) -------------------------------------------
+
+COMFORT_BLOCK = {
+    "minimising or silver-lining": [
+        "at least", "everything happens for a reason", "happens for a reason", "better place",
+        "god's plan", "part of god's plan", "silver lining", "look on the bright side",
+        "could have been worse", "could be worse", "it was meant to be", "time heals",
+        "move on", "moving on", "get over it", "you'll get over", "plenty of fish",
+    ],
+    "making it about the sender": [
+        "i know exactly how you feel", "i know how you feel", "when my", "same thing happened to me",
+    ],
+    "pressure or advice": [
+        "stay strong", "be strong", "you should", "you need to", "have you tried",
+        "you must", "don't cry", "cheer up", "let me know if you need anything",
+    ],
+}
+
+COMFORT_REVIEW = {
+    "check the tone": ["fun fact", "lol", "haha", "!!"],
+}
+
 PROFILES = {
     "default": ({}, {}),
     "reconnect": (RECONNECT_BLOCK, RECONNECT_REVIEW),
     "team": (TEAM_BLOCK, TEAM_REVIEW),
     "family": (FAMILY_BLOCK, FAMILY_REVIEW),
     "grateful": (GRATEFUL_BLOCK, GRATEFUL_REVIEW),
+    "comfort": (COMFORT_BLOCK, COMFORT_REVIEW),
 }
 
 CLICHES = [
@@ -176,7 +199,7 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
         if quote.get(key):
             out.append((f"quote.{key}", str(quote[key])))
     for key in ("greeting", "closing", "signature", "occasion"):
-        if note.get(key):
+        if note.get(key) and not isinstance(note[key], dict):
             out.append((key, str(note[key])))
     for i, para in enumerate(note.get("body") or []):
         out.append((f"body[{i}]", str(para)))
@@ -198,8 +221,43 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
     for key in ("subject", "channel_post"):
         if note.get(key):
             out.append((key, str(note[key])))
-    for i, para in enumerate(note.get("short_body") or []):
+    sb = note.get("short_body") or []
+    for i, para in enumerate([sb] if isinstance(sb, str) else sb):
         out.append((f"short_body[{i}]", str(para)))
+    lm = note.get("light_moment") or {}
+    for key in ("lead", "title"):
+        if lm.get(key):
+            out.append((f"light_moment.{key}", str(lm[key])))
+    # Story Keeper booklets (keepsake.json)
+    for key in ("subtitle", "dedication", "colophon", "intro"):
+        if note.get(key):
+            out.append((key, str(note[key])))
+
+    def photo_text(prefix: str, p: dict) -> None:
+        for key in ("caption", "alt", "credit"):
+            if (p or {}).get(key):
+                out.append((f"{prefix}.{key}", str(p[key])))
+
+    photo_text("cover_photo", note.get("cover_photo") or {})
+    for c, ch in enumerate(note.get("chapters") or []):
+        for key in ("title", "when", "pullquote"):
+            if ch.get(key):
+                out.append((f"chapters[{c}].{key}", str(ch[key])))
+        for i, para in enumerate(ch.get("story") or []):
+            out.append((f"chapters[{c}].story[{i}]", str(para)))
+        for i, p in enumerate(ch.get("photos") or []):
+            photo_text(f"chapters[{c}].photos[{i}]", p)
+        v = ch.get("voice") or {}
+        for key in ("label", "transcript", "translation"):
+            if v.get(key):
+                out.append((f"chapters[{c}].voice.{key}", str(v[key])))
+    cl = note.get("closing")
+    if isinstance(cl, dict):
+        for key in ("title", "signature"):
+            if cl.get(key):
+                out.append((f"closing.{key}", str(cl[key])))
+        for i, para in enumerate(cl.get("body") or []):
+            out.append((f"closing.body[{i}]", str(para)))
     return out
 
 
@@ -309,6 +367,20 @@ def scan(note: dict, avoid: list[str], profile: str = "default",
 
     issues += roster_issues(note, roster if roster is not None else note.get("roster") or [])
     issues += honesty_issues(note)
+    lm = note.get("light_moment") or {}
+    if lm.get("title"):
+        out_text = " ".join(str(lm.get(k, "")) for k in ("lead", "title"))
+        for t in word_hits(out_text, HARSH_TERMS):
+            issues.append({"level": "review", "category": "light moment: tone", "field": "light_moment", "match": t})
+        if not lm.get("source"):
+            issues.append({"level": "review", "category": "light moment: record the official or public-domain source",
+                           "field": "light_moment", "match": "no source"})
+        if profile == "comfort":
+            issues.append({"level": "review", "category": "comfort: humour only if the user confirmed it's welcome, never for a fresh loss",
+                           "field": "light_moment", "match": lm.get("title", "")})
+    if profile == "comfort" and note.get("fun_fact"):
+        issues.append({"level": "block", "category": "comfort: no fun facts in a hard-time note",
+                       "field": "fun_fact", "match": "fun_fact"})
     ff = note.get("fun_fact")
     if ff and not (isinstance(ff, dict) and ff.get("source")):
         issues.append({"level": "review", "category": "fun fact: record where it was verified (fun_fact.source)",
@@ -326,7 +398,7 @@ def main() -> int:
     ap.add_argument("--avoid", default="", help="comma-separated topics to avoid for this recipient")
     ap.add_argument("--json", action="store_true", help="print machine-readable output")
     ap.add_argument("--profile", choices=sorted(PROFILES), default="default",
-                    help="extra checks: reconnect, team (team/org notes), family, grateful (gratitude lists)")
+                    help="extra checks: reconnect, team (team/org notes and tributes), family, grateful, comfort")
     ap.add_argument("--roster", default=None,
                     help="comma-separated names in the group; if any are named, all must be "
                          "(defaults to the note's 'roster' list)")

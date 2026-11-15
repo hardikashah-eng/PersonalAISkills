@@ -87,6 +87,7 @@ HAND_CSS = """
   ul.items .why {{ font-size:24px; line-height:1.32; }}
   ul.items .forward {{ font-size:23px; line-height:1.3; }}
   .ps {{ font-size:22px; line-height:1.3; margin:22px 0 0 6px; transform:rotate(-0.4deg); opacity:.9; }}
+  .light {{ font-size:22px; line-height:1.3; margin:18px 0 0 6px; transform:rotate(0.3deg); }}
   .body p {{ font-size:25px; line-height:1.36; margin:0 0 14px; }}
   .body p:nth-child(4n+1) {{ transform:rotate(-0.35deg); margin-left:1px; }}
   .body p:nth-child(4n+2) {{ transform:rotate(0.25deg); margin-left:5px; }}
@@ -154,6 +155,8 @@ TEMPLATE = """<!DOCTYPE html>
   ul.items .forward {{ font-size:15px; line-height:1.5; margin:4px 0 0; color:var(--accent); }}
   ul.items .forward::before {{ content:"↪ "; }}
   .ps {{ margin:18px 0 0; font-size:14px; line-height:1.5; opacity:.85; }}
+  .light {{ margin:16px 0 0; font-size:14px; line-height:1.5; }}
+  .light a {{ color:var(--accent); text-decoration:underline; text-underline-offset:3px; }}
   .ps b {{ color:var(--accent); font-weight:600; }}
   .body p {{ font-size:16px; line-height:1.65; margin:0 0 12px; }}
   .photo {{ margin:22px 0 10px; display:flex; justify-content:center; }}
@@ -184,6 +187,7 @@ TEMPLATE = """<!DOCTYPE html>
     {photo_block}
     {closing_block}
     <p class="signature">{signature}</p>
+    {light_block}
     {ps_block}
   </div>
 </article>
@@ -389,6 +393,17 @@ def fun_fact_text(note: dict) -> str:
     return (ff or "").strip()
 
 
+def light_html(note: dict, e) -> str:
+    lm = note.get("light_moment") or {}
+    if not lm.get("title"):
+        return ""
+    lead = e(lm.get("lead") or "For a smile, whenever you want one:")
+    title = e(lm["title"])
+    if lm.get("url", "").startswith(("https://", "http://")):
+        title = f'<a href="{e(lm["url"])}">{title}</a>'
+    return f'<p class="light">{lead} {title}</p>'
+
+
 def ps_html(note: dict, e) -> str:
     text = fun_fact_text(note)
     if not text:
@@ -463,6 +478,7 @@ def render(note: dict, art_svg: str | None, photo: tuple[bytes, str] | None = No
         greeting_block=f'<p class="greeting">{e(note["greeting"])}</p>' if note.get("greeting") else "",
         items_block=items_block,
         ps_block=ps_html(note, e),
+        light_block=light_html(note, e),
         mark_css=mark_css(note.get("bullet", "sparkle")),
         body=body,
         photo_block=photo_block,
@@ -498,6 +514,11 @@ def plain_text(note: dict) -> str:
     if note.get("closing"):
         lines.append(note["closing"])
     lines.append(note.get("signature") or note.get("sender_first_name", ""))
+    lm = note.get("light_moment") or {}
+    if lm.get("title"):
+        lines += ["", f"{lm.get('lead') or 'For a smile, whenever you want one:'} {lm['title']}"]
+        if lm.get("url"):
+            lines.append(lm["url"])
     if fun_fact_text(note):
         lines += ["", f"P.S. {fun_fact_text(note)}"]
     return "\n".join(lines).strip() + "\n"

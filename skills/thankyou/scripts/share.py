@@ -104,6 +104,11 @@ def format_text(note: dict, channel: str) -> str:
             lines.append(closing)
         if sig:
             lines.append(sig)
+    lm = note.get("light_moment") or {}
+    if lm.get("title") and channel not in ("sms", "imessage"):
+        lines += ["", f"{lm.get('lead') or 'For a smile, whenever you want one:'} {lm['title']}"]
+        if lm.get("url"):
+            lines.append(lm["url"])
     ff = note.get("fun_fact")
     ff = (ff.get("text") if isinstance(ff, dict) else ff) or ""
     if ff.strip() and channel not in ("sms", "imessage"):

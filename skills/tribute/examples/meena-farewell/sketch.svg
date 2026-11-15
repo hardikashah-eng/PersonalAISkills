@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380">
+  <!-- Pencil sketch (drawn, not a photo): the team whiteboard, five mugs on the ledge, a heart drawn in the corner -->
+  <defs><filter id="p" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+  <rect width="600" height="380" fill="#F7F4EE"/>
+  <g filter="url(#p)" fill="none" stroke="#4a4a4a" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="50" y="30" width="500" height="270" rx="6" stroke-width="3"/>
+    <path d="M40 300 H560 V312 H40 Z" stroke-width="2"/>
+    <rect x="90" y="70" width="90" height="46" stroke-width="2"/><rect x="250" y="70" width="90" height="46" stroke-width="2"/>
+    <rect x="250" y="170" width="90" height="46" stroke-width="2"/><rect x="90" y="170" width="90" height="46" stroke-width="2"/>
+    <path d="M180 93 H250 M244 88 l6 5 -6 5 M295 116 V170 M290 164 l5 6 5 -6 M250 193 H180 M186 188 l-6 5 6 5 M135 170 V116 M130 122 l5 -6 5 6" stroke-width="1.8"/>
+    <path d="M105 88 h60 M105 98 h40 M265 88 h60 M265 98 h46 M265 188 h60 M265 198 h36 M105 188 h56 M105 198 h30" stroke-width="1.2" opacity=".7"/>
+    <path d="M380 70 C400 60 430 64 440 80 M380 90 h120 M380 104 h90 M380 118 h104" stroke-width="1.2" opacity=".6"/>
+    <path d="M395 214 C392 200 400 190 412 192 C420 182 436 184 438 196 C452 196 456 214 444 220 Z" stroke-width="1.4" opacity=".7"/>
+    <path d="M110 300 v-22 h22 v22 M132 284 a6 6 0 0 1 0 12 M190 300 v-22 h22 v22 M212 284 a6 6 0 0 1 0 12 M270 300 v-22 h22 v22 M292 284 a6 6 0 0 1 0 12 M350 300 v-22 h22 v22 M372 284 a6 6 0 0 1 0 12 M430 300 v-22 h22 v22 M452 284 a6 6 0 0 1 0 12" stroke-width="1.8"/>
+  </g>
+  <path d="M470 250 C458 236 440 244 450 260 L470 280 L490 260 C500 244 482 236 470 250 Z" fill="none" stroke="#5865A8" stroke-width="2.4" stroke-linejoin="round"/>
+</svg>

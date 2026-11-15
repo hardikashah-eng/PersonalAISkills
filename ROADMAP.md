@@ -51,9 +51,11 @@ people, so the user can thank or reconnect with many people at once.
 - Per-person opt-outs ("don't include Sam in holiday batches").
 
 ## Later
-- Comfort: messages for someone grieving, ill, or going through a hard time
-  (reuses the triggers and kindness rules).
-- Tribute: farewell cards, retirement tributes and toasts, with contributions
-  from many people.
 - Kudos: specific recognition at work, grounded in the actual work.
+- Comfort follow-ups: an optional reminder series (two weeks, one month, first
+  holidays, anniversary) that drafts check-ins for the user to review.
+- Story Keeper: optional local transcription of voice clips (when a speech
+  model is installed on the user's machine), and a printed-book layout.
+- Tribute: collecting contributions straight from a Slack, Teams or WhatsApp
+  thread the organizer points to, with each contributor's approval.
 - Move shared pieces into `skills/_core/`.
