@@ -71,11 +71,17 @@ def cron(tz: str, name: str, time: str, days: str) -> tuple[str, str]:
         try:
             dow = ",".join(str(DAYS[d.strip()[:3].lower()]) for d in days.split(","))
         except KeyError:
-            sys.exit(f"days must be weekdays, daily, or names like mon,fri (got {days!r})")
-    dom = "*"
-    if days.startswith("monthly"):
-        dom, dow = "1-7", "1"   # first Monday of the month
-    return f"CRON_TZ={tz} {m} {h} {dom} * {dow}", f"{h:02d}:{m:02d}"
+            if not days.startswith(("monthly", "quarterly")):
+                sys.exit(f"days must be weekdays, daily, monthly [day], quarterly [day], or names like mon,fri (got {days!r})")
+            dow = "*"
+    dom, month = "*", "*"
+    if days.startswith(("monthly", "quarterly")):
+        # Standard cron ORs day-of-month with day-of-week, so pin a day of the month instead.
+        day = re.search(r"(\d{1,2})", days)
+        dom, dow = (day.group(1) if day else "3"), "*"
+        if days.startswith("quarterly"):
+            month = "1,4,7,10"
+    return f"CRON_TZ={tz} {m} {h} {dom} {month} {dow}", f"{h:02d}:{m:02d}"
 
 
 def is_local_log(cfg: dict) -> bool:
@@ -156,6 +162,33 @@ def routine_prompts(cfg: dict) -> dict[str, dict]:
                      "mentors, friends) using my connected email and chat history, each with a real shared moment "
                      "as the hook, and draft a no-guilt check-in for each. Send me the review list."),
         },
+        "weekly-peer-pulse": {
+            "title": "Peer Pulse",
+            "what": "Friday prompt and Monday thank-you drafts from peers' answers",
+            "task": ("If today is Friday: draft this week's Peer Pulse prompt for my team with the peer-pulse "
+                     "skill (skills/peer-pulse/scripts/pulse.py prompt), for me to post. If today is Monday: "
+                     "collect the replies to last Friday's prompt from my direct messages or the form results I "
+                     "named, run pulse.py tally with --drafts and --evidence, and send me the private summary "
+                     "and the thank-you drafts. Never post or message anyone yourself."),
+        },
+        "monthly-team-story": {
+            "title": "Monthly Team Story",
+            "what": "A draft highlight reel of the month's teamwork",
+            "task": ("Run the team-story skill for last month: gather the merged work, incidents handled, "
+                     "launches and Peer Pulse moments from my sources, and draft story.json with chapters that "
+                     "name what each person did (including reviews, docs, on-call and help from other teams). "
+                     "Build the page, the #wins post and the slide outline, and send me the drafts with a list "
+                     "of anyone who may be missing. Nothing is posted until I approve it."),
+        },
+        "quarterly-spotlight": {
+            "title": "Quarterly Spotlight",
+            "what": "Who has consistently gone above and beyond this quarter, with workload checks",
+            "task": ("Run the spotlight skill for the quarter that just ended: add moments from my sources to my "
+                     "evidence file, run spotlight.py analyze, and run growth_log.py gaps for fairness. Send me, "
+                     "privately: people with a sustained pattern (alphabetical, with reasons), workload flags to "
+                     "ask about, people not recognized lately, and for each person with a pattern an impact-story "
+                     "draft and two or three ways to elevate them. No rankings or scores."),
+        },
     }
     for v in r.values():
         v["prompt"] = f"{ctx}\n\n{v['task']}\n\n{PRIVACY_RULE}\n\n{APPROVAL_RULE}"
@@ -177,7 +210,7 @@ def plan(cfg: dict, only: set[str] | None) -> list[dict]:
         expr, at = cron(cfg["timezone"], prompts[key]["title"], spec["time"], spec.get("days", "weekdays"))
         out.append({"key": key, "name": prompts[key]["title"], "what": prompts[key]["what"],
                     "cron": expr, "runs_at": at, "days": spec.get("days", "weekdays"),
-                    "needs_local_files": is_local_log(cfg) and key in ("daily-brief", "feedback-followups"),
+                    "needs_local_files": is_local_log(cfg) and key in ("daily-brief", "feedback-followups", "quarterly-spotlight"),
                     "prompt": prompts[key]["prompt"]})
     return out
 

@@ -67,7 +67,7 @@ A morning list of three to five items, from whatever the user has connected:
 | Yesterday's meeting transcripts | Recognition moments, commitments due |
 | Growth log (`../feedback/scripts/growth_log.py due`) | Feedback follow-ups and progress to notice |
 | Calendar or HR calendar the user shares | First days (Welcome), work anniversaries (ThankYou), returns from leave (a simple "welcome back", no questions) |
-| Kudos the user sent | People not recognized in 30+ days |
+| Growth log (`growth_log.py gaps --team … --days 30`) | People not recognized lately, and recognition spread across locations or roles |
 | Email, chat history | Drifted contacts (Reconnect), unanswered intros (Intro) |
 
 Each item has a one-line reason and a ready draft.

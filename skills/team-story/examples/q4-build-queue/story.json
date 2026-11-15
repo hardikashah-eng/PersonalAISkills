@@ -1,0 +1,49 @@
+{
+  "title": "The build queue, rebuilt",
+  "period": "Platform team · Q4 2026",
+  "since": "2026-10-01",
+  "until": "2026-11-14",
+  "team": ["Bea", "Chen", "Dami", "Ola", "Kenji", "Arjun"],
+  "headline": "Builds that used to queue for twenty minutes at peak now start in under two, and the nightly retry pages have stopped. Here's how six people (and a few friends on other teams) got us there.",
+  "chapters": [
+    {
+      "title": "Finding the real problem",
+      "when": "early October",
+      "what": "Two outages pointed at the queue; the team traced both to retries firing in lockstep and a cache that never let go.",
+      "contributors": [
+        {"name": "Bea", "did": "found the lockstep retries and shipped jittered backoff with a load test (#482)"},
+        {"name": "Chen", "did": "joined the Tuesday-night outage off-rota and found the runaway cache eviction"}
+      ]
+    },
+    {
+      "title": "Building it so it stays fixed",
+      "when": "mid October",
+      "what": "A load-test harness and a new cache layer, designed in the open.",
+      "contributors": [
+        {"name": "Chen", "did": "built the load-test harness and wrote the guide three teams now use"},
+        {"name": "Dami", "did": "wrote the cache layer design doc whose trade-offs table settled a month of debate"},
+        {"name": "Ola", "did": "reviewed every tiling-related change and kept the compiler team in the loop"}
+      ]
+    },
+    {
+      "title": "Rolling it out",
+      "when": "November",
+      "what": "A staged rollout across regions, with a new teammate shipping from week one.",
+      "contributors": [
+        {"name": "Dami", "did": "ran the staged rollout to 100% in the US and unblocked the eu region"},
+        {"name": "Kenji", "did": "fixed the flaky queue test in his first week, so rollouts stopped being retried by hand"},
+        {"name": "Arjun", "did": "turned around the eu config change once it was flagged"}
+      ]
+    }
+  ],
+  "quotes": [
+    {"text": "Chen's setup notes got me shipping in my first week.", "by": "Kenji"},
+    {"text": "The cache design doc answered every question the compiler team had.", "by": "Ola"},
+    {"text": "Two weeks without a single retry page.", "by": "on-call channel"}
+  ],
+  "also_thanks": [
+    {"name": "Ravi (Compiler team)", "for": "testing the NPU tiling pass against the harness and sending fixes back"},
+    {"name": "Priyanka", "for": "protecting two weeks of focus time for the redesign"}
+  ],
+  "closing": "Thank you, team. This is what it looks like when everyone makes everyone else better."
+}

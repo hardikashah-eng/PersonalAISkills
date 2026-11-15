@@ -1,8 +1,8 @@
 {
   "name": "personalaiskills",
   "displayName": "PersonalAISkills",
-  "description": "Skills for human connection at work and at home, used daily: specific kudos built from real work (PRs, incidents, design docs) for Slack, Lark, Teams or LinkedIn; constructive feedback with a private growth log; double opt-in intros; first-week welcomes; sincere repairs after a tense meeting; a daily and after-meeting nudge that finds these moments in transcripts and connected tools; and optional scheduled routines that bring you a review list each day or week. Plus thank-you notes, reconnecting, gratitude lists, comfort in hard times, family story keepsakes and group tributes. Fitted to the relationship, culture and language, and sent only when you say yes.",
-  "version": "0.10.0",
+  "description": "Skills for human connection at work and at home. Professional: specific kudos built from real work (Slack, Lark, Teams, LinkedIn), constructive feedback with a private growth log, intros, welcomes, repairs, a daily and after-meeting nudge, and opt-in scheduled routines. Teamwork: Spotlight finds and elevates people who consistently go above and beyond, Team Story showcases how the team worked together, Peer Pulse gathers weekly peer thanks, and Tribute makes group cards. Personal: thank-you notes, reconnecting, gratitude lists, comfort in hard times and family story keepsakes. Fitted to the relationship, culture and language, and sent only when you say yes.",
+  "version": "0.11.0",
   "author": {
     "name": "Hardik Shah",
     "url": "https://github.com/hardikashah-eng"
@@ -40,6 +40,10 @@
     "engineering-management",
     "leadership",
     "scheduled-tasks",
-    "routines"
+    "routines",
+    "teamwork",
+    "sponsorship",
+    "peer-recognition",
+    "team-culture"
   ]
 }

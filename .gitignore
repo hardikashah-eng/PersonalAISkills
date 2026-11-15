@@ -3,3 +3,4 @@ __pycache__/
 .DS_Store
 skills/*/examples/*/card.html
 skills/*/examples/*/keepsake.html
+skills/*/examples/*/team-story.html

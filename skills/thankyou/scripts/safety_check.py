@@ -335,6 +335,21 @@ def collect_text(note: dict) -> list[tuple[str, str]]:
         for key in ("label", "transcript", "translation"):
             if v.get(key):
                 out.append((f"chapters[{c}].voice.{key}", str(v[key])))
+    # Team Story (story.json)
+    if note.get("headline"):
+        out.append(("headline", str(note["headline"])))
+    for c, ch in enumerate(note.get("chapters") or []):
+        if ch.get("what"):
+            out.append((f"chapters[{c}].what", str(ch["what"])))
+        for i, con in enumerate(ch.get("contributors") or []):
+            if con.get("did"):
+                out.append((f"chapters[{c}].contributors[{i}]", str(con["did"])))
+    for i, q in enumerate(note.get("quotes") or []):
+        if isinstance(q, dict) and q.get("text"):
+            out.append((f"quotes[{i}]", str(q["text"])))
+    for i, t in enumerate(note.get("also_thanks") or []):
+        if isinstance(t, dict) and t.get("for"):
+            out.append((f"also_thanks[{i}]", str(t["for"])))
     cl = note.get("closing")
     if isinstance(cl, dict):
         for key in ("title", "signature"):

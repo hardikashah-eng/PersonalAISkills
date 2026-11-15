@@ -1,7 +1,7 @@
 ---
 name: routines
-description: Set up, change, pause or remove scheduled routines that keep the user's people habits going, such as a daily people brief, an after-standup scan for praise and commitments, a Friday kudos sweep, Monday growth-log follow-ups and 1:1 prep, or a monthly reconnect. Asks a few questions, shows the plan, and creates each routine with the app's scheduling tool only after the user says yes. Every run prepares drafts and one review list; nothing is sent without approval. Use when the user wants nudges, kudos or feedback follow-ups on a schedule, says "do this every week", or accepts the offer to make it regular.
-argument-hint: "[setup|list|change|pause|remove] [daily-brief|after-meeting|weekly-kudos|feedback-followups|monthly-reconnect]"
+description: Set up, change, pause or remove scheduled routines that keep the user's people habits going, such as a daily people brief, an after-standup scan for praise and commitments, a Friday kudos sweep, Monday growth-log follow-ups and 1:1 prep, a monthly reconnect, a weekly Peer Pulse, a monthly Team Story or a quarterly Spotlight. Asks a few questions, shows the plan, and creates each routine with the app's scheduling tool only after the user says yes. Every run prepares drafts and one review list; nothing is sent without approval. Use when the user wants nudges, kudos or feedback follow-ups on a schedule, says "do this every week", or accepts the offer to make it regular.
+argument-hint: "[setup|list|change|pause|remove] [daily-brief|after-meeting|weekly-kudos|feedback-followups|monthly-reconnect|weekly-peer-pulse|monthly-team-story|quarterly-spotlight]"
 ---
 
 # Routines
@@ -53,6 +53,9 @@ Don't offer during Comfort, Repair or anything sensitive.
    - Friday kudos sweep
    - Monday growth follow-ups and 1:1 prep
    - Monthly reconnect
+   - Weekly Peer Pulse (Friday prompt, Monday thank-you drafts)
+   - Monthly Team Story draft
+   - Quarterly Spotlight (who's consistently going above and beyond, with workload checks)
 2. **When?** Times and days, and the user's **time zone** (ask; don't guess).
 3. **Who's the team?** First names as they appear in tools and transcripts.
 4. **Which sources are connected?** (code host, incident tool, calendar,
