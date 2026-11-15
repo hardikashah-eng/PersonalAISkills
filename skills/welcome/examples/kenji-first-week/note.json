@@ -1,0 +1,40 @@
+{
+  "kind": "welcome",
+  "audience": "individual",
+  "recipient_first_name": "Kenji",
+  "sender_first_name": "Hardik",
+  "relationship": "new direct report, joining the Platform team",
+  "occasion": "First week",
+  "language": "en",
+  "direction": "ltr",
+  "quote": {
+    "text": "Alone we can do so little; together we can do so much.",
+    "attribution": "Helen Keller",
+    "translation": null
+  },
+  "title": "Welcome to the team, Kenji",
+  "greeting": "Dear Kenji,",
+  "body": [
+    "Welcome to the Platform team. When you talked about your work on the open-source job scheduler, the whole panel lit up, because it's exactly the problem we're about to take on with our build queue.",
+    "This week is for settling in: accounts and laptop on Monday, an architecture walkthrough on Tuesday, pairing with Bea on Wednesday, and a small starter task by Thursday. On Friday we'll sit down and talk about what's clear and what isn't.",
+    "Bea is your buddy, a few desks over and one message away. No question is too small, and nobody expects you to ship anything big this week."
+  ],
+  "closing": "We're so glad you're here,",
+  "signature": "Hardik and the Platform team",
+  "bullet": "leaf",
+  "palette": {
+    "bg": "#E5EEE8",
+    "ink": "#2D3A33",
+    "accent": "#3F7A5A",
+    "paper": "#FFFEFA"
+  },
+  "channel_post": "Please welcome Kenji, who joins the Platform team today. Kenji has worked on open-source job schedulers and will start on our build queue. Fun fact he asked us to share: he has climbed Mount Fuji three times. Say hi, and invite him to your favourite lunch spot.",
+  "consent": {
+    "shared_details_ok": true,
+    "note": "Kenji agreed to the scheduler mention and the Fuji fact."
+  },
+  "fun_fact": {
+    "text": "Fun fact: \"companion\" comes from the Latin for \"someone you share bread with\". Lunch on Wednesday is on us.",
+    "source": "Online Etymology Dictionary, \"companion\" (com- 'with' + panis 'bread')"
+  }
+}

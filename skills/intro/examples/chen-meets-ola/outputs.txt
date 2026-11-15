@@ -1,0 +1,19 @@
+== ask: Ola ==
+Hi Ola, would you be open to a short intro to Chen, who joined the kernels team three weeks ago? He's about to optimize the conv kernels your tiling pass handles, and I think 20 minutes with you would save him weeks. Totally fine to say no if your plate's full.
+
+== ask: Chen ==
+Hi Chen, Ola built the tiling pass in the NPU compiler, the part your conv kernel work will lean on most. Would a 20-minute intro be useful? If yes, I'll connect you two.
+
+== email ==
+Subject: Intro: Ola and Chen (tiling and conv kernels)
+
+Ola, meet Chen. Chen, meet Ola.
+
+Ola built the NPU compiler's tiling pass, and her test suite is the reason we trust it. Chen joined the kernels team three weeks ago and is about to optimize the conv kernels that pass handles, so you'll be working on two sides of the same seam.
+
+I think a 20-minute walkthrough of how tiling decisions are made would save Chen weeks, and Ola, you'll get a fresh pair of eyes on the kernels you feed. Chen, maybe you could suggest a time that works for Ola?
+
+I'll let you two take it from here.
+
+Hardik
+

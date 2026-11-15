@@ -1,8 +1,8 @@
 {
   "name": "personalaiskills",
   "displayName": "PersonalAISkills",
-  "description": "Skills for human connection: one-of-a-kind thank-you notes to a person, team, organization or family (ThankYou), no-guilt check-ins with people you've drifted from (Reconnect), seasonal gratitude lists (Grateful), steady, kind messages for someone going through a hard time with a warm food thought (Comfort), family keepsake booklets of a grandparent's stories with photos and clips of their real voice (Story Keeper), and group farewell or retirement cards woven from everyone's messages (Tribute). Grounded in real shared moments, fitted to the relationship, culture and language, with photos or pencil sketches, an optional link to an official comedy clip or public-domain film for a smile, and sent only when you say yes.",
-  "version": "0.8.0",
+  "description": "Skills for human connection at work and at home, used daily: specific kudos built from real work (PRs, incidents, design docs) for Slack, Lark, Teams or LinkedIn; constructive feedback with a private growth log; double opt-in intros; first-week welcomes; sincere repairs after a tense meeting; and a daily and after-meeting nudge that finds these moments in transcripts and connected tools. Plus thank-you notes, reconnecting, gratitude lists, comfort in hard times, family story keepsakes and group tributes. Fitted to the relationship, culture and language, and sent only when you say yes.",
+  "version": "0.9.0",
   "author": {
     "name": "Hardik Shah",
     "url": "https://github.com/hardikashah-eng"
@@ -28,6 +28,16 @@
     "memory-book",
     "farewell",
     "retirement",
-    "group-card"
+    "group-card",
+    "kudos",
+    "recognition",
+    "feedback",
+    "1on1",
+    "introductions",
+    "onboarding",
+    "apology",
+    "meeting-notes",
+    "engineering-management",
+    "leadership"
   ]
 }

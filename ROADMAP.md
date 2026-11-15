@@ -6,6 +6,10 @@ Wire the skills to occasions on the calendar (Thanksgiving, Christmas, Diwali,
 Lunar New Year, Eid, New Year, birthdays, work anniversaries) and to a list of
 people, so the user can thank or reconnect with many people at once.
 
+Started in 0.9.0: [AUTOMATION.md](AUTOMATION.md) and the Nudge skill's review
+list (daily, after-meeting and weekly runs that prepare drafts for approval).
+What's below extends that to occasions and long recipient lists.
+
 ### Occasions
 - A scheduled task per occasion, set up with the user. For example, a week
   before Thanksgiving: "prepare thank-you notes for my list".
@@ -51,7 +55,12 @@ people, so the user can thank or reconnect with many people at once.
 - Per-person opt-outs ("don't include Sam in holiday batches").
 
 ## Later
-- Kudos: specific recognition at work, grounded in the actual work.
+- Nudge: a recognition-fairness view for leaders (who hasn't been recognized,
+  across time zones and roles), from the kudos the user has sent.
+- Kudos: GitLab and Bitbucket readers alongside `work_context.py`, and a
+  milestone card for launches and work anniversaries.
+- Feedback: two-way 1:1 notes (what the person asked for), and an export
+  shaped for performance-review drafts.
 - Comfort follow-ups: an optional reminder series (two weeks, one month, first
   holidays, anniversary) that drafts check-ins for the user to review.
 - Story Keeper: optional local transcription of voice clips (when a speech

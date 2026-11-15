@@ -1,0 +1,19 @@
+{
+  "kind": "repair",
+  "text_only": true,
+  "audience": "individual",
+  "recipient_first_name": "Ravi",
+  "sender_first_name": "Hardik",
+  "relationship": "peer (staff engineer on a partner team)",
+  "situation": "cut him off twice in planning while he explained migration risks",
+  "greeting": "Ravi,",
+  "body": [
+    "In planning today I cut you off twice while you were walking through the migration risks. That wasn't fair to you, and the team missed points we needed to hear. I'm sorry.",
+    "I've put your risk list at the top of the planning doc, and in Thursday's review I'll make sure you have the floor first and hold my questions until you're done.",
+    "If you'd like to talk it through, I'm around. No need to reply."
+  ],
+  "commitment": "In Thursday's review, Ravi presents the risks first and I hold my questions until he's finished.",
+  "make_right": "Moved his risk list to the top of the planning doc.",
+  "closing": "",
+  "signature": "Hardik"
+}
