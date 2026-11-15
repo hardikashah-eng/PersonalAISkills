@@ -21,6 +21,7 @@ up better for each other, not to stand in for them.
 | [Welcome](skills/welcome/SKILL.md) | A first-week note for a new hire or team member (why the team is glad, the shape of the week, their buddy), a team introduction with only what they agreed to share, and an optional card. | "Welcome Kenji, who starts Monday" |
 | [Repair](skills/repair/SKILL.md) | A sincere apology or follow-up after a tense meeting, a sharp comment or a missed commitment. It owns what happened without excuses, says what will change, and blocks non-apologies. | "Help me follow up with Ravi after planning" |
 | [Nudge](skills/nudge/SKILL.md) | The daily and after-meeting list of people moments, each with a ready draft to approve: kudos for work and praise heard in meetings, private feedback prompts, commitments to follow up, first days, people not recognized lately. | "After standup" or "What should I follow up on today?" |
+| [Routines](skills/routines/SKILL.md) | Puts the habits on a schedule, if you want: a daily people brief, an after-standup scan, a Friday kudos sweep, Monday growth follow-ups and 1:1 prep, or a monthly reconnect. It asks a few questions, shows the plan, and creates each routine with your app's scheduler only after you say yes. Every run sends you one review list; nothing goes out without your approval. | "Set up my routines" or "Do this every Friday" |
 
 ## Install
 
@@ -159,6 +160,10 @@ run code, Claude may run these Python 3 scripts (no network access):
 - `skills/nudge/scripts/scan_transcript.py` reads a meeting transcript file
   and lists praise, wins, possible feedback moments and commitments, for you
   only. It skips lines about personal matters and doesn't infer emotions.
+
+- `skills/routines/scripts/make_routines.py` turns your setup answers into
+  routine names, schedules and prompts, and only prints them. Claude creates
+  the scheduled routines with your app's scheduler after you approve the plan.
 
 Where scripts can't run, the skills do the same checks by hand.
 

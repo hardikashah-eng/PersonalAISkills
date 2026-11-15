@@ -6,8 +6,9 @@ Wire the skills to occasions on the calendar (Thanksgiving, Christmas, Diwali,
 Lunar New Year, Eid, New Year, birthdays, work anniversaries) and to a list of
 people, so the user can thank or reconnect with many people at once.
 
-Started in 0.9.0: [AUTOMATION.md](AUTOMATION.md) and the Nudge skill's review
-list (daily, after-meeting and weekly runs that prepare drafts for approval).
+Started in 0.9.0 and 0.10.0: [AUTOMATION.md](AUTOMATION.md), the Nudge skill's
+review list, and the Routines skill, which schedules daily, after-meeting,
+weekly and monthly runs that prepare drafts for approval.
 What's below extends that to occasions and long recipient lists.
 
 ### Occasions
