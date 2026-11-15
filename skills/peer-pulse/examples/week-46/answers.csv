@@ -1,0 +1,7 @@
+date,from,helped,how,share
+2026-11-13,Kenji,Chen,Paired with me on the scheduler retry logic and explained the edge cases,yes
+2026-11-13,Dami,Chen,Unblocked the eu rollout by pairing on the config change,yes
+2026-11-13,Bea,Kenji,His fix for the flaky queue test means I stopped re-running CI by hand,yes
+2026-11-13,Ola,Dami,The cache design doc answered every question the compiler team had,anonymous
+2026-11-14,Chen,Ravi,Tested the NPU tiling pass against our harness and sent two fixes back,yes
+2026-11-14,Arjun,Bea,Covered for me while I was out sick,private

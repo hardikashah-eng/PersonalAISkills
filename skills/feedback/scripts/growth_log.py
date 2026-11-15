@@ -22,6 +22,10 @@ labelling language never get stored.
   python3 growth_log.py summary --log team-growth.jsonl --person Dami          # Markdown for a 1:1 or review
   python3 growth_log.py due --log team-growth.jsonl                            # follow-ups due this week
   python3 growth_log.py export --log team-growth.jsonl --csv growth.csv        # for Sheets, Lark Base, Excel
+  python3 growth_log.py gaps --log team-growth.jsonl --team "Bea,Chen,Dami" --days 30 \
+      --groups "Bea=Seattle,Chen=Shanghai,Dami=Seattle"                       # who hasn't been recognized lately
+  python3 growth_log.py add --log team-growth.jsonl --person Chen --type sponsorship --area leadership \
+      --observation "Nominated for the Q4 impact award" --source spotlight --shared
 """
 from __future__ import annotations
 
@@ -86,7 +90,7 @@ def cmd_add(a, rows: list[dict]) -> None:
         "next": (a.next or "").strip(),
         "source": a.source,
         "shared_with_person": bool(a.shared),
-        "status": "open" if a.type == "growth" else "noted",
+        "status": "open" if a.type in ("growth", "sponsorship") else "noted",
         "follow_up": a.follow_up or "",
         "history": [],
     }
@@ -95,6 +99,8 @@ def cmd_add(a, rows: list[dict]) -> None:
     check_safe(entry)
     rows.append(entry)
     print(f"added #{entry['id']}: {entry['type']} for {entry['person']} ({entry['area']})")
+    if a.type == "sponsorship":
+        print("note: update it with the outcome later (update --id N --status done --note \"…\")")
     if a.type == "growth" and not a.shared:
         print("note: share this with them directly; a growth log shouldn't hold anything they haven't heard from you")
 
@@ -161,6 +167,12 @@ def cmd_summary(a, rows) -> None:
         out.append(f"- **{r['area'].capitalize()}** ({r['date']}): {r['observation']}" + (f" {r['impact']}" if r.get("impact") else ""))
     if not strengths:
         out.append("- _No strengths logged yet. Add what's going well before the conversation._")
+    sponsor = [r for r in mine if r["type"] == "sponsorship"]
+    if sponsor:
+        out += ["", "## Sponsorship (opportunities and nominations)", ""]
+        for r in sponsor:
+            outcome = "; ".join(h["note"] for h in r.get("history", []) if h.get("note"))
+            out.append(f"- ({r['date']}, {r['status']}): {r['observation']}" + (f" Outcome: {outcome}" if outcome else ""))
     out += ["", "## Growth areas", ""]
     for r in growth:
         progress = "; ".join(h["note"] for h in r.get("history", []) if h.get("note"))
@@ -184,6 +196,43 @@ def cmd_summary(a, rows) -> None:
     print("\n".join(out))
 
 
+def cmd_gaps(a, rows) -> None:
+    """Fairness check: who hasn't been recognized lately, and how recognition is spread across groups."""
+    team = [t.strip() for t in a.team.split(",") if t.strip()]
+    since = (dt.date.today() - dt.timedelta(days=a.days)).isoformat()
+    recent = [r for r in rows if r["type"] in ("strength", "sponsorship") and r["date"] >= since]
+    seen = {r["person"].lower() for r in recent}
+    missing = [t for t in team if t.lower() not in seen]
+    print(f"Recognition in the last {a.days} days ({len(recent)} strengths and sponsorship entries)\n")
+    if missing:
+        print("Not recognized lately: " + ", ".join(missing))
+        print("  Look for their recent contributions (reviews, docs, on-call, helping others); "
+              "quiet or remote work is easy to miss.\n")
+    else:
+        print("Everyone on the team has been recognized in this period.\n")
+    if a.groups:
+        group_of = {}
+        for pair in a.groups.split(","):
+            name, _, group = pair.partition("=")
+            if name.strip():
+                group_of[name.strip().lower()] = group.strip() or "unspecified"
+        members, got = {}, {}
+        for t in team:
+            g = group_of.get(t.lower(), "unspecified")
+            members[g] = members.get(g, 0) + 1
+            got.setdefault(g, 0)
+        for r in recent:
+            g = group_of.get(r["person"].lower(), "unspecified")
+            got[g] = got.get(g, 0) + 1
+        total = max(len(recent), 1)
+        print("Spread across groups (share of team → share of recognition):")
+        for g in sorted(members):
+            team_share = members[g] / max(len(team), 1)
+            rec_share = got.get(g, 0) / total
+            flag = "  ← lower than its share of the team" if rec_share + 0.15 < team_share else ""
+            print(f"  {g}: {team_share:.0%} of the team → {rec_share:.0%} of recognition{flag}")
+
+
 def cmd_export(a, rows) -> None:
     cols = ["id", "date", "person", "type", "area", "observation", "impact", "next", "source",
             "shared_with_person", "status", "follow_up"]
@@ -204,12 +253,12 @@ def main() -> int:
 
     p = common(sub.add_parser("add"))
     p.add_argument("--person", required=True)
-    p.add_argument("--type", required=True, choices=["strength", "growth"])
+    p.add_argument("--type", required=True, choices=["strength", "growth", "sponsorship"])
     p.add_argument("--area", default="other", choices=AREAS)
     p.add_argument("--observation", required=True, help="what you saw or heard, specifically")
     p.add_argument("--impact", help="what it affected")
     p.add_argument("--next", help="what to try next (required for growth)")
-    p.add_argument("--source", default="manual", choices=["kudos", "feedback", "1:1", "review", "manual"])
+    p.add_argument("--source", default="manual", choices=["kudos", "feedback", "1:1", "review", "spotlight", "peer-pulse", "manual"])
     p.add_argument("--shared", action="store_true", help="already shared with the person")
     p.add_argument("--follow-up", help="YYYY-MM-DD to check in on progress")
     p.add_argument("--date")
@@ -220,11 +269,15 @@ def main() -> int:
     p.add_argument("--shared", action="store_true")
     p.add_argument("--note", help="progress you saw")
     p = common(sub.add_parser("list"))
-    p.add_argument("--person"); p.add_argument("--type", choices=["strength", "growth"]); p.add_argument("--open", action="store_true")
+    p.add_argument("--person"); p.add_argument("--type", choices=["strength", "growth", "sponsorship"]); p.add_argument("--open", action="store_true")
     p = common(sub.add_parser("due"))
     p.add_argument("--days", type=int, default=7)
     p = common(sub.add_parser("summary"))
     p.add_argument("--person", required=True); p.add_argument("--since", help="YYYY-MM-DD")
+    p = common(sub.add_parser("gaps"))
+    p.add_argument("--team", required=True, help="comma-separated names")
+    p.add_argument("--days", type=int, default=30)
+    p.add_argument("--groups", help="optional Name=group pairs (location, time zone, role), comma-separated")
     p = common(sub.add_parser("export"))
     p.add_argument("--csv", required=True); p.add_argument("--person")
     a = ap.parse_args()
@@ -234,7 +287,8 @@ def main() -> int:
         {"add": cmd_add, "update": cmd_update}[a.cmd](a, rows)
         save(a.log, rows)
     else:
-        {"list": cmd_list, "due": cmd_due, "summary": cmd_summary, "export": cmd_export}[a.cmd](a, rows)
+        {"list": cmd_list, "due": cmd_due, "summary": cmd_summary, "export": cmd_export,
+         "gaps": cmd_gaps}[a.cmd](a, rows)
     return 0
 
 

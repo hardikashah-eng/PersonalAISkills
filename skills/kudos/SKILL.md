@@ -23,8 +23,9 @@ three sentences, ready to post where they'll see it.
    that's easy to miss: tests, docs, reviews, calm incident updates, unblocking
    others, mentoring, the on-call shift where nothing went wrong.
 4. **Fair and inclusive.** Credit everyone who did the work. Notice people in
-   other time zones and quieter roles. The daily nudge (`../nudge/SKILL.md`)
-   can show who hasn't been recognized lately.
+   other time zones and quieter roles. `../feedback/scripts/growth_log.py gaps`
+   shows who hasn't been recognized lately, and Spotlight (`../spotlight/SKILL.md`)
+   finds people whose help keeps coming up week after week.
 5. **Private stays private.** No health, personal life, salary or performance
    ratings, and nothing about why someone was out (`../thankyou/references/safety.md`).
 6. **Public only when safe and agreed.** A LinkedIn post needs the work to be

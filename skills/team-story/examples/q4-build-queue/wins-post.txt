@@ -1,0 +1,11 @@
+🎉 The build queue, rebuilt (Platform team · Q4 2026)
+
+Builds that used to queue for twenty minutes at peak now start in under two, and the nightly retry pages have stopped. Here's how six people (and a few friends on other teams) got us there.
+
+• Finding the real problem: Two outages pointed at the queue; the team traced both to retries firing in lockstep and a cache that never let go. (Bea, Chen)
+• Building it so it stays fixed: A load-test harness and a new cache layer, designed in the open. (Chen, Dami, Ola)
+• Rolling it out: A staged rollout across regions, with a new teammate shipping from week one. (Dami, Kenji, Arjun)
+
+And thank you to Ravi (Compiler team), for testing the NPU tiling pass against the harness and sending fixes back; Priyanka, for protecting two weeks of focus time for the redesign.
+
+Thank you, team. This is what it looks like when everyone makes everyone else better.

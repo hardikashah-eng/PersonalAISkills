@@ -1,0 +1,18 @@
+{
+  "kind": "kudos",
+  "text_only": true,
+  "audience": "individual",
+  "recipient_first_name": "Chen",
+  "sender_first_name": "Hardik",
+  "manager_note": [
+    "Hi Priyanka, I wanted you to see the pattern in Chen's work this quarter. He has consistently made the people around him faster: a review that caught a stale-key bug before prod, mentoring that had Kenji shipping in his first week, and a load-test harness guide now used by three teams, including Compiler.",
+    "I've nominated him for the Q4 impact award, and I'd like him to lead the build-queue redesign next quarter. He's also covered on-call for others twice this month, so I'm checking in with him about load. Happy to share the full write-up."
+  ],
+  "greeting": "Chen,",
+  "body": [
+    "I've been noticing a pattern this quarter: the stale-key catch in #501, getting Kenji shipping in week one, and a harness guide three teams now use. You make everyone around you faster, and I want more people to see it.",
+    "I'd love to talk about leading the build-queue redesign next quarter. And since you've covered on-call twice this month, let's also make sure the load is sustainable. Coffee Tuesday?"
+  ],
+  "closing": "Thank you,",
+  "signature": "Hardik"
+}

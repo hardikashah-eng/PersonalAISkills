@@ -16,6 +16,9 @@ you one "ready to review" note. Nothing goes to anyone else until you say yes.
 | Welcome | a start date on the calendar | the personal note, the team post, a card | each message, timed for their first morning |
 | Repair | a commitment you missed (from your own meeting notes or task list) | a short owned follow-up | sending it |
 | Nudge | every morning; after a recurring meeting; Friday | the review list | each item on it |
+| Peer Pulse | Friday and Monday | the prompt for you to post; then a private tally and thank-you drafts | posting the prompt; each thank-you |
+| Team Story | monthly | a draft highlight reel, #wins post and slide outline | sharing or posting each version |
+| Spotlight | quarterly | a private summary: sustained patterns, workload checks, fairness gaps, impact-story drafts | every nomination, note or public mention |
 | ThankYou, Grateful | an occasion (Thanksgiving, Diwali, year-end), a work anniversary | notes and cards for the people on your list | each note (see the roadmap for reviewed batches) |
 | Reconnect | monthly | two or three check-ins with drifted contacts | each one |
 | Comfort | never automatically | — | Comfort only starts when you ask |

@@ -56,8 +56,9 @@ What's below extends that to occasions and long recipient lists.
 - Per-person opt-outs ("don't include Sam in holiday batches").
 
 ## Later
-- Nudge: a recognition-fairness view for leaders (who hasn't been recognized,
-  across time zones and roles), from the kudos the user has sent.
+- Spotlight: readers for GitLab, Bitbucket, Jira and PagerDuty alongside the
+  GitHub collector, and promotion-case templates for common career ladders.
+- Team Story: publish straight to a Slides deck or a Dashboard artifact.
 - Kudos: GitLab and Bitbucket readers alongside `work_context.py`, and a
   milestone card for launches and work anniversaries.
 - Feedback: two-way 1:1 notes (what the person asked for), and an export

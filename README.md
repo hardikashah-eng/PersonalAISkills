@@ -7,6 +7,12 @@ up better for each other, not to stand in for them.
 
 ## Skills
 
+All skills live in `skills/`, the standard plugin layout every Claude app reads. They're grouped here (and in [skills/README.md](skills/README.md)) by where you'll use them. ThankYou's `--team` and `--org` modes and Comfort work just as well with colleagues.
+
+### Personal
+
+For family, friends and the people who shaped you.
+
 | Skill | What it does | Try saying |
 |---|---|---|
 | [ThankYou](skills/thankyou/SKILL.md) | A one-of-one thank-you note for any occasion, to a person, a team (`--team`), an organization (`--org`), or family (`--family`). It opens with a fitting, correctly attributed quote, recalls the specific moment or shared achievement that made a real difference, uses your native language where it fits, can show how you are paying it forward, and adds a small artwork drawn only for them plus a photo from a good time together, or a pencil sketch of the moment when there is no photo. The card is written in handwriting, and Claude helps deliver it by email, WhatsApp, text, Slack and more. | "Write a Thanksgiving thank-you note to my mentor Maya" or "/thankyou --team Platform Thanksgiving" |
@@ -14,7 +20,13 @@ up better for each other, not to stand in for them.
 | [Grateful](skills/grateful/SKILL.md) | A seasonal gratitude list (Thanksgiving, Diwali, year-end) of the people, moments and facts you're grateful for. Each entry gives a safe reason, the real difference it made, and how you're paying it forward. It opens with a quote and a pencil sketch of the occasion or feeling, in handwriting, in your language, private by default or ready to share. | "What am I grateful for this Thanksgiving?" or "/grateful Diwali --family" |
 | [Comfort](skills/comfort/SKILL.md) | A short, steady message for someone going through a hard time: a loss, an illness, a layoff, a breakup, a hard anniversary. It acknowledges without fixing or minimising, offers one specific kind of help, can add a gentle thought about something warm to eat (or a meal you'll bring), and follows their culture and faith. Only when you say they'd welcome it, and never for a fresh loss, it adds a link to a comedy scene for a smile. Nothing is sent without your yes. | "Help me write to Priya, her dad passed away" or "/comfort Rohan layoff via whatsapp" |
 | [Story Keeper](skills/story-keeper/SKILL.md) | Keeps a parent's or grandparent's life stories in a family booklet: gentle interview questions in their language, their stories in their own words, the family's photos (or pencil sketches of them), and short clips of their real voice cut from family videos. Consent first, private by default, and voices are never cloned or altered. | "Help me record Nani's stories for Diwali" |
-| [Tribute](skills/tribute/SKILL.md) | A group card for a farewell, retirement, milestone birthday or promotion. It writes the request to contributors, checks every message for kindness and privacy, and weaves them into one card with everyone credited, a group photo or sketch, a quote, and optionally a link to a favourite comedy scene or a public-domain short film. | "Make a farewell card for Meena from the team" |
+
+### Professional
+
+Everyday habits for engineers and leaders.
+
+| Skill | What it does | Try saying |
+|---|---|---|
 | [Kudos](skills/kudos/SKILL.md) | Specific recognition for real work (a merged PR, a resolved incident, a design doc, an on-call shift), written by reading the work itself. It names what the person did, the difference it made and the care behind it, as a DM, a #kudos post (Slack, Lark, Teams), a note to their manager, or, for public work with their OK, a LinkedIn post. It can log the strength for 1:1s and reviews. | "Thank Bea for the retry fix in #482 and post it in #kudos" |
 | [Feedback](skills/feedback/SKILL.md) | Constructive feedback shaped as what happened, what it affected and what to try next, starting from what's going well. It prepares 1:1 talking points and a written recap, blocks labels and absolutes, and once shared, adds the item to your private growth log of improvement opportunities with a follow-up date. | "Help me give Dami feedback on her design reviews" |
 | [Intro](skills/intro/SKILL.md) | Warm, double opt-in introductions: a private ask to each person first, then, once both say yes, a short intro with a clear reason and one easy next step. | "Introduce Chen to Ola, who built the tiling pass" |
@@ -22,6 +34,17 @@ up better for each other, not to stand in for them.
 | [Repair](skills/repair/SKILL.md) | A sincere apology or follow-up after a tense meeting, a sharp comment or a missed commitment. It owns what happened without excuses, says what will change, and blocks non-apologies. | "Help me follow up with Ravi after planning" |
 | [Nudge](skills/nudge/SKILL.md) | The daily and after-meeting list of people moments, each with a ready draft to approve: kudos for work and praise heard in meetings, private feedback prompts, commitments to follow up, first days, people not recognized lately. | "After standup" or "What should I follow up on today?" |
 | [Routines](skills/routines/SKILL.md) | Puts the habits on a schedule, if you want: a daily people brief, an after-standup scan, a Friday kudos sweep, Monday growth follow-ups and 1:1 prep, or a monthly reconnect. It asks a few questions, shows the plan, and creates each routine with your app's scheduler only after you say yes. Every run sends you one review list; nothing goes out without your approval. | "Set up my routines" or "Do this every Friday" |
+
+### Professional: teamwork
+
+Showcasing great teamwork, and finding and elevating the people who make it happen.
+
+| Skill | What it does | Try saying |
+|---|---|---|
+| [Spotlight](skills/spotlight/SKILL.md) | Finds people who consistently go above and beyond, from a pattern over weeks across several sources and colleagues (help on reviews, incidents outside their rota, mentoring, docs other teams use, peer thanks), never one big launch. It turns that into an impact story with links to the work, then into sponsorship: a nomination, a note to their manager and skip-level, a stretch opportunity, an introduction. It also flags when the extra effort may not be sustainable. No scores or rankings. | "Who has been quietly carrying the team this quarter?" or "Help me nominate Chen" |
+| [Team Story](skills/team-story/SKILL.md) | Tells a project or quarter through everyone's contributions, including reviews, docs, on-call and help from other teams, as a one-page highlight reel with a "who helped whom" map (connections, not rankings), quotes and thanks, plus a #wins post, an all-hands slide outline and a note for leadership. | "Make a Team Story for the build-queue project" |
+| [Peer Pulse](skills/peer-pulse/SKILL.md) | A one-minute weekly prompt ("Who helped you this week, and how?") answered privately, then turned into thank-you drafts quoting peers as they allowed, and into evidence for Spotlight and Team Story. Personal answers are held for you and never stored. | "Start a Peer Pulse for the Platform team" |
+| [Tribute](skills/tribute/SKILL.md) | A group card for a farewell, retirement, milestone birthday or promotion. It writes the request to contributors, checks every message for kindness and privacy, and weaves them into one card with everyone credited, a group photo or sketch, a quote, and optionally a link to a favourite comedy scene or a public-domain short film. | "Make a farewell card for Meena from the team" |
 
 ## Install
 
@@ -165,11 +188,26 @@ run code, Claude may run these Python 3 scripts (no network access):
   routine names, schedules and prompts, and only prints them. Claude creates
   the scheduled routines with your app's scheduler after you approve the plan.
 
+- `skills/spotlight/scripts/spotlight.py` keeps an evidence file you choose,
+  reads reviews and thanks from a GitHub repo you name (read-only, through
+  `gh`), and prints a private analysis (sustained patterns, workload to check)
+  and the evidence for an impact story. No scores or rankings.
+- `skills/team-story/scripts/team_story.py` builds a one-page team highlight
+  reel (with a who-helped-whom map), a channel post and a slide outline.
+- `skills/peer-pulse/scripts/pulse.py` prints the weekly prompt and tallies
+  answers into thank-you drafts and evidence, holding personal answers back.
+
 Where scripts can't run, the skills do the same checks by hand.
 
 **Meeting transcripts.** Nudge uses transcripts only from meetings you
 organized or attended where transcription was announced, never HR, medical or
 legal meetings. It quotes at most a sentence back to you, and stores nothing.
+
+**Spotlight, Team Story and Peer Pulse.** Evidence about colleagues stays in a
+file you keep, for spotting who to elevate, never for criticizing anyone or
+ranking people. Peer Pulse answers are quoted only as each writer allows;
+personal answers aren't stored. Workload flags are prompts to ask, never
+guesses about anyone's health or life.
 
 **The growth log.** Feedback and Kudos can add entries to a log file you keep
 (or a Sheet, Lark Base or Notion database you connect). Entries are added
@@ -204,10 +242,11 @@ voice clip is a plain tone standing in for a real recording.
 
 ```
 .claude-plugin/plugin.json   # plugin manifest
+skills/README.md             # the skills, grouped: personal, professional, teamwork
 skills/<name>/
   SKILL.md                   # instructions Claude follows
   references/                # detailed guidance loaded on demand
-  scripts/                   # helper scripts (ThankYou; shared with Reconnect)
+  scripts/                   # helper scripts (ThankYou's are shared by all skills)
   examples/                  # finished samples
 ```
 
