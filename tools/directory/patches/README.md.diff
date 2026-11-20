@@ -1,0 +1,188 @@
+--- a/README.md
++++ b/README.md
+@@ -49,34 +49,11 @@
+ ## Install
+ 
+-In Claude, add **PersonalAISkills** from the plugin directory (Customize → Plugins),
+-once it is listed there. In Claude Code you can install it straight from GitHub:
+-
+-```
+-/plugin install personalaiskills --marketplace hardikashah-eng/personalaiskills
+-```
+-
+-### Two editions
+-
+-| Edition | Where | What's in it |
+-|---|---|---|
+-| Full | this repository's root (`.claude-plugin/`, `skills/`), installed from GitHub in Claude Code | the skills plus their helper scripts and bundled handwriting fonts |
+-| Directory | [`directory/personalaiskills/`](directory/personalaiskills/), the folder submitted to Claude's plugin directory | the same skills as Markdown and images only: each script step is written as instructions Claude follows |
+-
+-The plugin directory accepts scripts, fonts and other programs only from
+-Verified organizations, so the directory edition is generated from the full
+-one by `tools/build_directory.py`. **Don't edit `directory/` by hand**; change
+-`skills/`, then run:
+-
+-```
+-python3 tools/build_directory.py build   # regenerate the directory edition
+-python3 tools/build_directory.py check   # what CI runs: up to date, and within the directory's rules
+-```
+-
+-If a change to `skills/` touches a step the directory edition rewrites,
+-`build` stops and names the file. Reset that file with
+-`build --no-patches <file>`, edit it under `directory/personalaiskills/` so
+-it doesn't depend on a script, and run `record` to save the edit as a patch in
+-`tools/directory/patches/`. New directory-only guides go in
+-`tools/directory/add/`.
++In Claude, add **PersonalAISkills** from the plugin directory (Customize → Plugins).
++
++This is the directory edition: the same skills as the
++[full edition on GitHub](https://github.com/hardikashah-eng/personalaiskills),
++with every helper script rewritten as instructions, so it is Markdown and
++images only. The full edition, with its scripts, installs in Claude Code from
++the repository's own marketplace.
+ 
+ The skills work best with your email or chat connected to Claude. They also
+@@ -101,5 +78,5 @@
+   splices a voice, or "restores" a face with AI.
+ - **Automate the finding, not the sending.** Scheduled runs and after-meeting
+-  scans prepare drafts and a review list ([AUTOMATION.md](AUTOMATION.md)); you
++  scans prepare drafts and a review list ([AUTOMATION.md](https://github.com/hardikashah-eng/personalaiskills/blob/main/AUTOMATION.md)); you
+   approve each message. Feedback stays private, and nothing is posted publicly
+   without the person's OK.
+@@ -109,7 +86,7 @@
+ ## Privacy and data handling
+ 
+-This plugin contains only skills (instructions and five small helper scripts).
+-It has no hooks, no MCP servers, no package installs, and makes no network
+-requests of its own.
++This plugin contains only skills: Markdown instructions and example images.
++It has no scripts, hooks, MCP servers or package installs, and makes no
++network requests of its own.
+ 
+ **What it reads.** To find a real moment to mention, Claude may search the
+@@ -164,63 +141,13 @@
+ estranged family, or anyone who may have passed away.
+ 
+-**What runs on your machine.** When a skill is used in an environment that can
+-run code, Claude may run these Python 3 scripts (no network access):
+-
+-- `skills/thankyou/scripts/safety_check.py` reads a draft note (JSON) and
+-  flags contact details, money amounts, financial and health terms, topics to
+-  avoid, and harsh or guilt-inducing wording, including in a photo's caption
+-  and alt text. It prints a report and writes nothing.
+-- `skills/thankyou/scripts/render_card.py` turns a note, an optional SVG
+-  drawing and an optional photo into a self-contained HTML card file at the
+-  path you choose. It strips scripts and external links from the SVG and all
+-  metadata from the photo, and can save the cleaned photo for you to attach.
+-  It uses the standard library only; if Pillow is already installed it also
+-  turns photos upright and shrinks them to at most 1200 px. It can also embed a drawn
+-  pencil-sketch SVG, with scripts and external links removed.
+-- `skills/thankyou/scripts/sketch_photo.py` turns a freely licensed stock
+-  photo into a graphite pencil sketch and removes its metadata. It needs
+-  Pillow; without Pillow, Claude draws the sketch as an SVG instead.
+-- `skills/thankyou/scripts/share.py` formats the note for a channel (email
+-  subject, short SMS version, team post) and prints a share link for
+-  WhatsApp, SMS, email, Telegram or LINE. It never sends anything; a phone
+-  number or address given to it appears only in the printed link.
+-- `skills/thankyou/scripts/card_to_png.py` saves the card as an image using a
+-  local headless browser (Playwright or Chrome, if installed). The card is
+-  self-contained, so nothing is fetched.
+-
+-- `skills/story-keeper/scripts/extract_voice.py` cuts a short clip (3–90 s) of
+-  audio from a video or audio file you choose, at the times you choose, using
+-  ffmpeg on your machine. It keeps the audio only, adds a short fade, evens out
+-  loudness and removes all metadata (date, device, location). Nothing is
+-  uploaded. With `--scan` it only lists where the talking is.
+-- `skills/story-keeper/scripts/keepsake.py` builds the family booklet as one
+-  self-contained HTML file (and optionally a PDF with local Chrome), embedding
+-  the photos (metadata removed) and voice clips you chose.
+-
+-- `skills/kudos/scripts/work_context.py` reads one GitHub pull request or
+-  issue you name through your signed-in GitHub CLI (`gh api`, GET requests
+-  only) and prints a short summary, with email addresses removed. It never
+-  comments or changes anything.
+-- `skills/feedback/scripts/growth_log.py` keeps your private log of strengths
+-  and improvement opportunities in a JSON Lines file you choose, and exports
+-  it to CSV. Each entry passes the safety check first; it sends nothing anywhere.
+-- `skills/nudge/scripts/scan_transcript.py` reads a meeting transcript file
+-  and lists praise, wins, possible feedback moments and commitments, for you
+-  only. It skips lines about personal matters and doesn't infer emotions.
+-
+-- `skills/routines/scripts/make_routines.py` turns your setup answers into
+-  routine names, schedules and prompts, and only prints them. Claude creates
+-  the scheduled routines with your app's scheduler after you approve the plan.
+-
+-- `skills/spotlight/scripts/spotlight.py` keeps an evidence file you choose,
+-  reads reviews and thanks from a GitHub repo you name (read-only, through
+-  `gh`), and prints a private analysis (sustained patterns, workload to check)
+-  and the evidence for an impact story. No scores or rankings.
+-- `skills/team-story/scripts/team_story.py` builds a one-page team highlight
+-  reel (with a who-helped-whom map), a channel post and a slide outline.
+-- `skills/peer-pulse/scripts/pulse.py` prints the weekly prompt and tallies
+-  answers into thank-you drafts and evidence, holding personal answers back.
+-
+-Where scripts can't run, the skills do the same checks by hand.
++**What runs on your machine.** Nothing. This edition is Markdown instructions
++and example images only: no scripts, programs, fonts or downloads. Every step
++(the safety check, building a card or booklet, the channel text and share
++links, the growth log, the transcript scan, the Spotlight pattern check, the
++Peer Pulse tally, the routine prompts) is written as instructions Claude
++follows itself. Claude uses only the tools already available in your session:
++it writes the card as an HTML file, and removes a photo's metadata or saves the
++card as an image only if your environment can; otherwise it leaves the photo
++out, or asks you to take a screenshot.
+ 
+ **Meeting transcripts.** Nudge uses transcripts only from meetings you
+@@ -240,6 +167,6 @@
+ 
+ **LinkedIn.** Kudos drafts a LinkedIn post only for public work, records the
+-person's consent, and checks it with `safety_check.py --profile public` (no
+-ticket numbers, internal links, confidential or unreleased work). You paste
++person's consent, and checks it with the public-post checks (no ticket
++numbers, internal links, confidential or unreleased work). You paste
+ and post it yourself; if you ask, Claude fills in the post in your browser and
+ stops before **Post**.
+@@ -254,12 +181,10 @@
+ with the elder's or the family's agreement, and are never saved to memory.
+ 
+-**Fonts.** Cards are written in a handwriting font by default. Caveat and Kalam
+-are bundled in `skills/thankyou/assets/fonts/` under the SIL Open Font License
+-1.1 (licence files included) and embedded in each card, so nothing is fetched
+-when a card opens.
++**Fonts.** Cards are written in a handwriting typeface already on the
++reader's computer, so nothing is fetched when a card opens.
+ 
+ All people in `examples/` are fictional, the example photos are illustrated
+-stand-ins, and the sketches were drawn by the skill. The Story Keeper example's
+-voice clip is a plain tone standing in for a real recording.
++stand-ins, and the sketches were drawn by the skill (as SVG, saved here as PNG
++images). The Story Keeper example leaves its voice clip out.
+ 
+ ## Layout
+@@ -271,22 +196,11 @@
+   SKILL.md                   # instructions Claude follows
+   references/                # detailed guidance loaded on demand
+-  scripts/                   # helper scripts (ThankYou's are shared by all skills)
+   examples/                  # finished samples
+ ```
+ 
+-Every other skill reuses ThankYou's scripts (safety check with their own
+-profiles, card renderer, share links, card image) and its guides (language,
+-quotes, sketches, photos, safety, delivery, relationships and culture).
+-
+-## Try the scripts locally
+-
+-```bash
+-cd skills/thankyou
+-python3 scripts/safety_check.py examples/maya-thanksgiving/note.json
+-python3 scripts/render_card.py examples/maya-thanksgiving/note.json \
+-  --art examples/maya-thanksgiving/art.svg --out /tmp/maya.html
+-```
+-
+-Requires Python 3.9 or later; no dependencies.
++Every other skill reuses ThankYou's guides: the safety checklist (with extra
++checks for each kind of note), card layout, channel formats and share links,
++photos and card images, language, quotes, sketches, safety, delivery, and
++relationships and culture.
+ 
+ ## License

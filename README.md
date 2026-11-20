@@ -55,6 +55,30 @@ once it is listed there. In Claude Code you can install it straight from GitHub:
 /plugin install personalaiskills --marketplace hardikashah-eng/personalaiskills
 ```
 
+### Two editions
+
+| Edition | Where | What's in it |
+|---|---|---|
+| Full | this repository's root (`.claude-plugin/`, `skills/`), installed from GitHub in Claude Code | the skills plus their helper scripts and bundled handwriting fonts |
+| Directory | [`directory/personalaiskills/`](directory/personalaiskills/), the folder submitted to Claude's plugin directory | the same skills as Markdown and images only: each script step is written as instructions Claude follows |
+
+The plugin directory accepts scripts, fonts and other programs only from
+Verified organizations, so the directory edition is generated from the full
+one by `tools/build_directory.py`. **Don't edit `directory/` by hand**; change
+`skills/`, then run:
+
+```
+python3 tools/build_directory.py build   # regenerate the directory edition
+python3 tools/build_directory.py check   # what CI runs: up to date, and within the directory's rules
+```
+
+If a change to `skills/` touches a step the directory edition rewrites,
+`build` stops and names the file. Reset that file with
+`build --no-patches <file>`, edit it under `directory/personalaiskills/` so
+it doesn't depend on a script, and run `record` to save the edit as a patch in
+`tools/directory/patches/`. New directory-only guides go in
+`tools/directory/add/`.
+
 The skills work best with your email or chat connected to Claude. They also
 work without any connectors: Claude asks you a few short questions instead.
 

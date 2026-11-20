@@ -1,0 +1,34 @@
+--- a/skills/story-keeper/examples/nani-stories/keepsake.json
++++ b/skills/story-keeper/examples/nani-stories/keepsake.json
+@@ -10,5 +10,5 @@
+   },
+   "cover_photo": {
+-    "path": "courtyard.svg",
++    "path": "courtyard.png",
+     "caption": "The house with the mango tree",
+     "alt": "Pencil drawing of a small courtyard house beside a mango tree with a wooden swing",
+@@ -27,8 +27,8 @@
+       "pullquote": "Sometimes the best gift is the one nobody knows you gave.",
+       "voice": {
+-        "path": "standin-voice.m4a",
++        "path": "nani-voice.m4a",
+         "label": "Hear Nani tell it",
+         "transcript": "And he cheered so loudly, the whole street came out!",
+-        "recorded": "Stand-in clip for this example. Yours is cut from a family video with extract_voice.py."
++        "recorded": "Example only: the clip itself isn't included. Yours is a short cut from a family video."
+       }
+     },
+@@ -38,5 +38,5 @@
+       "photos": [
+         {
+-          "path": "train.svg",
++          "path": "train.png",
+           "caption": "One trunk, one tiffin, and a lot of courage",
+           "alt": "Pencil drawing of a steam train at a platform with a trunk and a tiffin carrier",
+@@ -56,5 +56,5 @@
+       "photos": [
+         {
+-          "path": "kitchen.svg",
++          "path": "kitchen.png",
+           "caption": "The pot that fed three generations",
+           "alt": "Pencil drawing of a pot of dal steaming on a kitchen counter, with a rolling pin and two cups",

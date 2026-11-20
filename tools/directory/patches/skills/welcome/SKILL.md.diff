@@ -1,0 +1,23 @@
+--- a/skills/welcome/SKILL.md
++++ b/skills/welcome/SKILL.md
+@@ -47,5 +47,5 @@
+ - **Optional card** (`--card`): a quote, a small sketch (a door with a
+   welcome mat, a desk with a plant and a coffee, the city skyline) and the
+-  team's signatures, rendered with `../thankyou/scripts/render_card.py`.
++  team's signatures, built as in `../thankyou/references/card-layout.md`.
+   It can be printed for their desk on day one or sent as an image.
+ - **A fun fact P.S.** is welcome here (`../thankyou/references/fun-facts.md`).
+@@ -53,9 +53,8 @@
+ ### 3. Check and deliver
+ 
+-```bash
+-python3 ../thankyou/scripts/safety_check.py note.json --profile team
+-python3 ../thankyou/scripts/share.py note.json --channel slack           # the personal note
+-python3 ../thankyou/scripts/share.py note.json --channel slack --post    # the team introduction
+-```
++Check both with `../thankyou/references/safety-checklist.md` (every-note and
++team checks). Prepare the personal note as a Slack DM and the team
++introduction as a channel post (`channel_post`) with
++`../thankyou/references/channel-formats.md`.
+ 
+ Time it for their first morning, or the Friday before they start (personal

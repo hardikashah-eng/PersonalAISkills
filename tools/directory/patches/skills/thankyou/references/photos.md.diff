@@ -1,0 +1,34 @@
+--- a/skills/thankyou/references/photos.md
++++ b/skills/thankyou/references/photos.md
+@@ -28,9 +28,9 @@
+    the people. Allowed edits: crop, straighten, resize, gentle overall
+    brightness or contrast, and, when the user asks, turning the whole photo
+-   into a pencil sketch (`scripts/sketch_photo.py`, which restyles the entire
+-   image evenly and changes no one's features).
++   into a pencil sketch (only with an image tool that restyles the entire
++   image evenly and changes no one's features; see `references/images.md`).
+ 5. **Strip hidden data.** Remove EXIF and other metadata (GPS location, device
+-   serial, timestamps) before the photo goes into a card or draft.
+-   `scripts/render_card.py` does this automatically.
++   serial, timestamps) before the photo goes into a card or draft
++   (`references/images.md`). If you can't, leave the photo out.
+ 6. **Keep it private.** A card with a personal photo is for the recipient
+    only. Deliver it as a file or a draft, and don't publish it as a public or
+@@ -88,5 +88,5 @@
+ "The night the demo finally worked, 2019" or "Friday chai, launch week". A
+ city or event name is fine, but never a home, school, or workplace address.
+-The caption goes through `safety_check.py` like the rest of the note.
++The caption goes through the safety checklist like the rest of the note.
+ 
+ Alt text: a plain description for screen readers ("Two cups of chai on an
+@@ -95,7 +95,7 @@
+ ## Delivery
+ 
+-- **Card:** `render_card.py note.json --art art.svg --photo photo.jpg` puts
+-  the photo in a small instant-photo frame with the caption. It strips
+-  metadata and, if Pillow is installed, shrinks the photo to at most 1200 px.
++- **Card:** the photo goes in a small instant-photo frame with the caption
++  (`references/card-layout.md`), after its metadata is removed and it's
++  shrunk to at most 1200 px (`references/images.md`).
+ - **Email draft:** attach or embed the stripped photo, never the original file.
+ - **WhatsApp or SMS:** suggest sending the photo first, then the message. A

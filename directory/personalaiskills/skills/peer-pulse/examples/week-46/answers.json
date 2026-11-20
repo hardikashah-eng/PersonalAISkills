@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2026-11-13",
+    "from": "Kenji",
+    "helped": "Chen",
+    "how": "Paired with me on the scheduler retry logic and explained the edge cases",
+    "share": "yes"
+  },
+  {
+    "date": "2026-11-13",
+    "from": "Dami",
+    "helped": "Chen",
+    "how": "Unblocked the eu rollout by pairing on the config change",
+    "share": "yes"
+  },
+  {
+    "date": "2026-11-13",
+    "from": "Bea",
+    "helped": "Kenji",
+    "how": "His fix for the flaky queue test means I stopped re-running CI by hand",
+    "share": "yes"
+  },
+  {
+    "date": "2026-11-13",
+    "from": "Ola",
+    "helped": "Dami",
+    "how": "The cache design doc answered every question the compiler team had",
+    "share": "anonymous"
+  },
+  {
+    "date": "2026-11-14",
+    "from": "Chen",
+    "helped": "Ravi",
+    "how": "Tested the NPU tiling pass against our harness and sent two fixes back",
+    "share": "yes"
+  },
+  {
+    "date": "2026-11-14",
+    "from": "Arjun",
+    "helped": "Bea",
+    "how": "Covered for me while I was out sick",
+    "share": "private"
+  }
+]

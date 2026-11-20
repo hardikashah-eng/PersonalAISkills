@@ -1,0 +1,27 @@
+{
+  "recipient_first_name": "Priya",
+  "sender_first_name": "Hardik",
+  "relationship": "colleague",
+  "situation": "loss",
+  "language": "en",
+  "direction": "ltr",
+  "quote": {
+    "text": "What we have once enjoyed we can never lose. … All that we love deeply becomes a part of us.",
+    "attribution": "Helen Keller, We Bereaved (1929)",
+    "translation": null
+  },
+  "greeting": "Dear Priya,",
+  "body": [
+    "I just heard about your dad, and I'm so sorry.",
+    "I'll always remember him at the team picnic, proudly telling everyone you'd been fixing the family computer since you were nine. You have his warmth and his laugh.",
+    "I've got your release reviews covered for the next two weeks, so please don't give work a second thought.",
+    "I'm making a pot of dal and rice on Saturday and I'll leave some at your door. No need to come out, and no need to reply."
+  ],
+  "offer": "covering release reviews for two weeks; dal and rice at the door on Saturday",
+  "closing": "Holding you and your family close,",
+  "signature": "Hardik",
+  "palette": {"bg": "#E9ECEF", "ink": "#33363B", "accent": "#B07A3A", "paper": "#FFFEFB"},
+  "channel": "card",
+  "subject": "Thinking of you, Priya",
+  "short_body": "Priya, I just heard about your dad, and I'm so sorry. I've got your reviews covered, and I'll leave some dal at your door Saturday. No need to reply. Holding you close. Hardik"
+}

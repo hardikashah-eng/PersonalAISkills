@@ -1,0 +1,9 @@
+--- a/skills/thankyou/references/safety.md
++++ b/skills/thankyou/references/safety.md
+@@ -51,5 +51,5 @@
+ ## Final read checklist
+ 
+-- [ ] `scripts/safety_check.py` passes clean
++- [ ] `references/safety-checklist.md` passes clean
+ - [ ] No PII, financial, or health details — even indirectly
+ - [ ] The moment is specific but safe for a stranger to read

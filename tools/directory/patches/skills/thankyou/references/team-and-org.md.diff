@@ -1,0 +1,9 @@
+--- a/skills/thankyou/references/team-and-org.md
++++ b/skills/thankyou/references/team-and-org.md
+@@ -49,5 +49,5 @@
+    person on the roster, each with something specific. One forgotten name
+    hurts more than the note helps. When in doubt, name no one. With a roster,
+-   `safety_check.py --roster "Ana,Ben,Chen"` flags anyone missing.
++   Check the note against the roster: if anyone is named, everyone must be.
+ 3. **Include everyone who made it happen**, including remote teammates,
+    contractors, interns, people on leave, and those who moved on mid-project.

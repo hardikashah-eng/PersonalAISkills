@@ -1,0 +1,9 @@
+--- a/skills/thankyou/references/family.md
++++ b/skills/thankyou/references/family.md
+@@ -53,5 +53,5 @@
+ 2. **Whole-family notes include everyone** in the household or the group the
+    user names, especially in-laws, step-family, and the youngest and oldest.
+-   If naming people, name everyone (`safety_check.py --roster`).
++   If naming people, name everyone (check against the family list).
+ 3. **No guilt or debt language**: avoid "after all you sacrificed", "I can
+    never repay you", "I know I don't call enough". Gratitude, not obligation.

@@ -1,0 +1,48 @@
+--- a/skills/tribute/SKILL.md
++++ b/skills/tribute/SKILL.md
+@@ -24,5 +24,5 @@
+    Every message goes through the safety check; flagged ones go back to the
+    organizer, not straight into the card.
+-4. **Name everyone or no one** in group greetings (`--roster`), as in ThankYou
++4. **Name everyone or no one** in group greetings (the roster check), as in ThankYou
+    team mode.
+ 5. **A memorial tribute is different.** For someone who has died, follow
+@@ -59,9 +59,7 @@
+ 
+ Gather each message as `{"subject": "Contributor name", "why": "their message"}`
+-in `items`. Run the safety check with the full roster of contributors:
+-
+-```bash
+-python3 ../thankyou/scripts/safety_check.py note.json --profile team --roster "Arjun,Bea,Chen,Dami"
+-```
++in `items`. Check every message with `../thankyou/references/safety-checklist.md`
++(the every-note checks plus the team section), and check the card against the
++full roster of contributors (Arjun, Bea, Chen, Dami…): if anyone is named, everyone is.
+ 
+ Flagged messages go back to the organizer with a suggested gentler version for
+@@ -78,5 +76,5 @@
+    for flow: a strong one first, a funny one in the middle, the most moving one
+    last.
+-5. **A group photo** (the group's own, `--photo`) or a **pencil sketch** of a
++5. **A group photo** (the group's own, metadata removed) or a **pencil sketch** of a
+    meaningful scene (`../thankyou/references/sketch.md`).
+ 6. **A light moment** (optional): a link to the honoree's favourite comedy
+@@ -89,9 +87,8 @@
+ ### 5. Render and deliver
+ 
+-```bash
+-python3 ../thankyou/scripts/render_card.py note.json --art art.svg --photo group.jpg --out card.html
+-python3 ../thankyou/scripts/card_to_png.py card.html --out card.png
+-python3 ../thankyou/scripts/share.py note.json --channel slack
+-```
++Build `card.html` from `note.json`, `art.svg` and the group photo
++(`../thankyou/references/card-layout.md`), make `card.png` for chat
++(`../thankyou/references/images.md`), and prepare the Slack or other channel
++text (`../thankyou/references/channel-formats.md`).
+ 
+ Show the organizer the finished card ("Ready to send?") and send only on an
+@@ -110,3 +107,3 @@
+ - `references/collecting.md`: the request to contributors, reminders, handling late or tricky messages
+ - `examples/meena-farewell/`: a team farewell card with five contributions and a public-domain film link
+-- Shared with ThankYou: `../thankyou/scripts/` and its references
++- Shared with ThankYou: its references, including `card-layout.md`, `channel-formats.md`, `images.md` and `safety-checklist.md`

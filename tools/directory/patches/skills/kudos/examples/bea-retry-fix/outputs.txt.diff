@@ -1,0 +1,9 @@
+--- a/skills/kudos/examples/bea-retry-fix/outputs.txt
++++ b/skills/kudos/examples/bea-retry-fix/outputs.txt
+@@ -29,5 +29,5 @@
+ 
+ No share link for this channel: copy the text above into the app.
+-note: public post: run safety_check.py --profile public first, and post only with the colleague's OK to be named and within your company's social media policy
++note: public post: check it against the public-post section of the safety checklist first, and post only with the colleague's OK to be named and within your company's social media policy
+ note: LinkedIn has no link that fills in post text: open https://www.linkedin.com/feed/, select 'Start a post', and paste
+ 

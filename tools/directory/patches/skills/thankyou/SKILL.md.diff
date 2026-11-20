@@ -1,0 +1,128 @@
+--- a/skills/thankyou/SKILL.md
++++ b/skills/thankyou/SKILL.md
+@@ -289,9 +289,10 @@
+   needs to look real. Use only public domain, CC0, or free-to-use licences,
+   checked on the photo's page. Scenes and objects only; never people, public
+-  figures, or anything from social media. Convert it with
+-  `scripts/sketch_photo.py`, and credit the author if the licence asks.
++  figures, or anything from social media. Turn it into a sketch only if
++  your environment has an image tool (`references/images.md`), and credit the
++  author if the licence asks.
+ - **Be honest.** A sketch or stock image isn't a photo of their moment. Never
+   write "found this photo" or "remember this?", and never caption it as "us".
+-  Set `"source": "sketch"` or `"stock"` so the safety check can enforce this.
++  Set `"source": "sketch"` or `"stock"` so the safety check catches this.
+ 
+ The user can also say no picture at all; the header drawing carries the card.
+@@ -299,19 +300,16 @@
+ ### 8. Safety pass — mandatory before showing the note
+ 
+-Run the automated check, then review by hand:
+-
+-```bash
+-python3 scripts/safety_check.py note.json
+-# team / org: also checks for confidential details, review language, and
+-# non-inclusive words; --roster flags anyone left out when some are named
+-python3 scripts/safety_check.py note.json --profile team --roster "Ana,Ben,Chen,Dev"
+-# family: also checks for comparison, pressure, and guilt phrases
+-python3 scripts/safety_check.py note.json --profile family
+-```
+-
+-The script flags emails, phone numbers, URLs, long numbers, currency amounts,
+-health and financial terms, and harsh words, in the note and in the photo
+-caption and alt text. Fix every flag (abstract or remove) and re-run until
+-clean. Then re-read against the non-negotiables above — the script is a
++Go through `references/safety-checklist.md` for every field of the note,
++including the photo caption and alt text:
++
++- **Every note:** emails, phone numbers, URLs, long numbers, street addresses,
++  handles, currency amounts, health and financial terms, sensitive topics,
++  anything the user asked to steer clear of, harsh words and clichés.
++- **Team / org:** also confidential details, review language and non-inclusive
++  words, and, if anyone is named, that everyone on the roster is named.
++- **Family:** also comparison, pressure and guilt phrases.
++
++Fix every block (abstract or remove) and go through the list again until it's
++clean. Then re-read against the non-negotiables above — the checklist is a
+ backstop, not a substitute for judgement. Ask: *Would the recipient feel seen
+ and happy? Would anything make them uncomfortable if someone read it over their
+@@ -321,23 +319,12 @@
+ ### 9. Deliver
+ 
+-Render a card the user can view, print, or screenshot. Cards are **handwritten
+-by default**: the note is set in a handwriting font (Caveat, with Kalam for
+-Devanagari, both bundled and embedded so the card works offline) in ink on card
+-stock, with slightly uneven lines and a signature. Chinese, Japanese and Korean
+-use a handwriting-like system font where one is installed; other scripts use the
+-system font. Use `--style print` for the clean serif look.
+-
+-```bash
+-python3 scripts/render_card.py note.json --art art.svg --out thankyou-<firstname>.html
+-python3 scripts/render_card.py note.json --art art.svg --style print --out thankyou-<firstname>.html
+-# with a photo (metadata is stripped; --photo-out saves the clean copy to attach)
+-python3 scripts/render_card.py note.json --art art.svg --photo moment.jpg \
+-  --photo-out moment-clean.jpg --out thankyou-<firstname>.html
+-# with a drawn pencil sketch instead of a photo
+-python3 scripts/render_card.py note.json --art art.svg --photo sketch.svg --out thankyou-<firstname>.html
+-# with a freely licensed stock photo turned into a pencil sketch
+-python3 scripts/sketch_photo.py stock.jpg --out sketch.jpg
+-python3 scripts/render_card.py note.json --art art.svg --photo sketch.jpg --out thankyou-<firstname>.html
+-```
++Make a card the user can view, print, or screenshot: one self-contained HTML
++file, `thankyou-<firstname>.html`, built from `note.json`, `art.svg` and the
++optional photo or sketch, following `references/card-layout.md`. Cards are
++**handwritten by default**: the note is set in a handwriting typeface the
++computer already has, in ink on card stock, with slightly uneven lines and a
++signature. Set `"style": "print"` for the clean serif look. Remove a photo's
++metadata before it goes in the card, and keep the clean copy to attach
++(`references/images.md`).
+ 
+ Then **deliver** it the way the user wants (`references/delivery.md`):
+@@ -350,11 +337,9 @@
+ 2. **Format it for that channel**: email gets a subject and the full note;
+    chat apps get the photo or card image first, then the text; SMS gets a
+-   short version; a team gets the channel-ready post.
+-   ```bash
+-   python3 scripts/share.py note.json --channel whatsapp     # text + share link
+-   python3 scripts/card_to_png.py card.html --out card.png   # card as an image
+-   ```
++   short version; a team gets the channel-ready post. Prepare the text and the
++   share link with `references/channel-formats.md`, and the card as an image
++   with `references/images.md`.
+    If the text is long for the channel, write a shorter version that keeps the
+-   specific moment (put it in `short_body`), and re-run the safety check.
++   specific moment (put it in `short_body`), and check it again.
+ 3. **Deliver**:
+    - **A connected app can send** (Gmail, Outlook, Slack, Teams, Lark, …):
+@@ -400,5 +385,5 @@
+ `translation` is used when the quote is in another language (shown under it).
+ `direction` is `rtl` for Arabic, Hebrew, Urdu, Persian.
+-`photo` is optional; the image file itself is passed with `--photo`. Its
++`photo` is optional; it describes the image that goes in the card. Its
+ `source` is `own` (the user's photo), `sketch` (drawn), or `stock` (with
+ `credit`, `license`, and `url`).
+@@ -412,6 +397,6 @@
+ `audience` is `individual` (default), `team`, `org`, or `family`. For a group,
+ put the group's name in `recipient_name` (e.g. "the Platform team") and leave
+-`recipient_first_name` out; the optional `roster` list is what
+-`safety_check.py --roster` checks against.
++`recipient_first_name` out; the optional `roster` list is who the group
++check compares against.
+ 
+ ## Files
+@@ -429,10 +414,8 @@
+ - `references/fun-facts.md` — the optional P.S. fun fact: rules and a verified fact bank with sources
+ - `references/sketch.md` — no photo: a drawn pencil sketch, or a freely licensed stock photo as a sketch; honesty rules
+-- `scripts/sketch_photo.py` — turns a stock photo into a graphite pencil sketch (needs Pillow; strips metadata)
+ - `references/delivery.md` — choosing the channel, the "Ready to send?" rule, formatting per channel, share links
+-- `scripts/share.py` — channel-ready text, email subject, and share links (WhatsApp, SMS, email, Telegram, LINE); never sends
+-- `scripts/card_to_png.py` — saves the card as an image for messaging apps (local headless browser)
+-- `assets/fonts/` — handwriting fonts embedded in cards: Caveat (Latin, Cyrillic) and Kalam (Devanagari), SIL Open Font License 1.1
+-- `scripts/safety_check.py` — automated PII / financial / health / harshness scan
+-- `scripts/render_card.py` — renders note.json + art.svg (+ optional photo, metadata stripped) into a printable HTML card
+-- `examples/` — a finished sample (note.json, art.svg, rendered card)
++- `references/channel-formats.md` — channel-ready text, email subject, and share links (WhatsApp, SMS, email, Telegram, LINE); never sends
++- `references/images.md` — removing photo metadata, the card as an image, sketches from photos
++- `references/safety-checklist.md` — the PII / financial / health / harshness checklist, with extra checks by kind of note
++- `references/card-layout.md` — how to build the printable HTML card from note.json, the artwork and the photo
++- `examples/` — finished samples (note.json, the artwork, the rendered card)

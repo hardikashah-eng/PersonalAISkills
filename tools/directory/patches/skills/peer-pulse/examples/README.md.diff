@@ -1,0 +1,11 @@
+--- a/skills/peer-pulse/examples/README.md
++++ b/skills/peer-pulse/examples/README.md
+@@ -3,6 +3,6 @@
+ ## week-46: one Friday's answers from a fictional Platform team
+ 
+-- `prompt.txt`: the Slack prompt `pulse.py prompt` printed
+-- `answers.csv`: six answers, with each writer's choice of how they're
++- `prompt.txt`: the Slack prompt
++- `answers.json`: six answers (as exported from a form), with each writer's choice of how they're
+   quoted. One answer mentions being out sick, so it's held for the organizer.
+ - `tally.md`: the organizer's private summary, including "not mentioned this

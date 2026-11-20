@@ -1,0 +1,74 @@
+{
+  "audience": "individual",
+  "recipient_first_name": "Meena",
+  "sender_first_name": "Hardik",
+  "relationship": "teammate and tech lead, leaving for a new role; card from the Platform team",
+  "occasion": "farewell",
+  "language": "en",
+  "direction": "ltr",
+  "quote": {
+    "text": "No act of kindness, no matter how small, is ever wasted.",
+    "attribution": "Aesop, The Lion and the Mouse",
+    "translation": null
+  },
+  "title": "Thank you, Meena",
+  "greeting": "Dear Meena,",
+  "body": [
+    "Six years, three re-architectures, and more whiteboard markers than anyone can count. We asked everyone for one moment with you and the difference you made. Here's what they said."
+  ],
+  "items": [
+    {
+      "subject": "Arjun",
+      "why": "My first week, I broke the build and wanted to disappear. You sat with me, fixed it together, and then said, \"Now you know how it works.\" I've said that to every new hire since."
+    },
+    {
+      "subject": "Bea",
+      "why": "With you, every question felt welcome. That's why I kept asking, and why I'm a better engineer today."
+    },
+    {
+      "subject": "Chen",
+      "why": "The Friday you stayed late so the rest of us could make it to the school play. We noticed. We always noticed."
+    },
+    {
+      "subject": "Dami",
+      "why": "Your review comments always started with what was good. I still have your note on my first design doc pinned above my desk."
+    },
+    {
+      "subject": "Hardik",
+      "why": "You taught this team that no one debugs alone. That's staying here long after you've gone. Your new team is lucky."
+    }
+  ],
+  "roster": [
+    "Arjun",
+    "Bea",
+    "Chen",
+    "Dami",
+    "Hardik"
+  ],
+  "closing": "With love and gratitude,",
+  "signature": "The Platform team",
+  "photo": {
+    "source": "sketch",
+    "caption": "The whiteboard, one last time",
+    "alt": "Pencil sketch of a whiteboard covered in boxes and arrows, with five coffee mugs on the ledge and a heart drawn in the corner"
+  },
+  "bullet": "star",
+  "palette": {
+    "bg": "#E6E9F4",
+    "ink": "#2F3142",
+    "accent": "#5865A8",
+    "paper": "#FFFEFB"
+  },
+  "light_moment": {
+    "lead": "For a smile on your first week: Buster Keaton building a new house that refuses to cooperate.",
+    "title": "One Week (1920), public domain",
+    "url": "https://commons.wikimedia.org/wiki/Category:One_Week_(1920_film)",
+    "source": "Public domain (US, 1920); Wikimedia Commons"
+  },
+  "channel": "slack",
+  "channel_post": "Today is Meena's last day. 💙 We asked the team for one moment with her and the difference she made, and turned them into a card. Thank you, Meena, for six years of patience, great reviews and \"no one debugs alone\". Your new team is lucky.",
+  "fun_fact": {
+    "text": "Fun fact: ibises flying in a V take turns at the front, the hardest spot. You led from the front for six years. Now it's our turn.",
+    "source": "Voelkl et al., PNAS 2015 (doi:10.1073/pnas.1413589112)"
+  }
+}

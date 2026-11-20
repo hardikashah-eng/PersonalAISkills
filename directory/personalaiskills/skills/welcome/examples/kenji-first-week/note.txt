@@ -1,0 +1,17 @@
+“Alone we can do so little; together we can do so much.”
+— Helen Keller
+
+Welcome to the team, Kenji
+
+Dear Kenji,
+
+Welcome to the Platform team. When you talked about your work on the open-source job scheduler, the whole panel lit up, because it's exactly the problem we're about to take on with our build queue.
+
+This week is for settling in: accounts and laptop on Monday, an architecture walkthrough on Tuesday, pairing with Bea on Wednesday, and a small starter task by Thursday. On Friday we'll sit down and talk about what's clear and what isn't.
+
+Bea is your buddy, a few desks over and one message away. No question is too small, and nobody expects you to ship anything big this week.
+
+We're so glad you're here,
+Hardik and the Platform team
+
+P.S. Fun fact: "companion" comes from the Latin for "someone you share bread with". Lunch on Wednesday is on us.

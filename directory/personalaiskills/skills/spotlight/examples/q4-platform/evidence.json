@@ -1,0 +1,189 @@
+[
+  {
+    "date": "2026-10-02",
+    "person": "Chen",
+    "kind": "review-for-others",
+    "from": "Dami",
+    "source": "github",
+    "summary": "Reviewed the cache rollout PR; caught a stale-key bug before merge",
+    "link": "https://github.com/acme/platform/pull/501",
+    "beyond_role": false,
+    "cross_team": false
+  },
+  {
+    "date": "2026-10-06",
+    "person": "Chen",
+    "kind": "mentoring",
+    "from": "Kenji",
+    "source": "peer-pulse",
+    "summary": "Paired with Kenji for two afternoons on the build queue; his first PR merged with no changes",
+    "link": "",
+    "beyond_role": true,
+    "cross_team": false
+  },
+  {
+    "date": "2026-10-08",
+    "person": "Chen",
+    "kind": "incident-help",
+    "from": "Ola",
+    "source": "pagerduty",
+    "summary": "Joined the Tuesday-night build outage off-rota and found the runaway cache eviction",
+    "link": "",
+    "beyond_role": true,
+    "cross_team": false
+  },
+  {
+    "date": "2026-10-14",
+    "person": "Chen",
+    "kind": "peer-thanks",
+    "from": "Bea",
+    "source": "standup",
+    "summary": "Bea: big thanks to Chen for the load test harness, it caught two edge cases before merge",
+    "link": "",
+    "beyond_role": false,
+    "cross_team": false
+  },
+  {
+    "date": "2026-10-16",
+    "person": "Chen",
+    "kind": "docs",
+    "from": "Chen",
+    "source": "github",
+    "summary": "Wrote the load-test harness guide, now used by three teams",
+    "link": "https://github.com/acme/platform/pull/517",
+    "beyond_role": true,
+    "cross_team": true
+  },
+  {
+    "date": "2026-10-21",
+    "person": "Chen",
+    "kind": "cross-team-help",
+    "from": "Ravi",
+    "source": "peer-pulse",
+    "summary": "Ravi (Compiler team): Chen walked us through the harness so we could test the NPU tiling pass",
+    "link": "",
+    "beyond_role": true,
+    "cross_team": true
+  },
+  {
+    "date": "2026-10-23",
+    "person": "Chen",
+    "kind": "on-call-cover",
+    "from": "Dami",
+    "source": "pagerduty",
+    "summary": "Covered Dami's on-call shift on short notice",
+    "link": "",
+    "beyond_role": true,
+    "cross_team": false
+  },
+  {
+    "date": "2026-10-29",
+    "person": "Chen",
+    "kind": "review-for-others",
+    "from": "Kenji",
+    "source": "github",
+    "summary": "Reviewed Kenji's scheduler change with a clear explanation of the retry semantics",
+    "link": "https://github.com/acme/platform/pull/530",
+    "beyond_role": false,
+    "cross_team": false
+  },
+  {
+    "date": "2026-11-04",
+    "person": "Chen",
+    "kind": "onboarding-help",
+    "from": "Kenji",
+    "source": "peer-pulse",
+    "summary": "Kenji: Chen's setup notes got me shipping in my first week",
+    "link": "",
+    "beyond_role": true,
+    "cross_team": false
+  },
+  {
+    "date": "2026-11-06",
+    "person": "Chen",
+    "kind": "on-call-cover",
+    "from": "Ola",
+    "source": "pagerduty",
+    "summary": "Covered Ola's Thursday on-call",
+    "link": "",
+    "beyond_role": true,
+    "cross_team": false
+  },
+  {
+    "date": "2026-11-11",
+    "person": "Chen",
+    "kind": "peer-thanks",
+    "from": "Dami",
+    "source": "standup",
+    "summary": "Dami: Chen unblocked the eu rollout by pairing on the config change",
+    "link": "",
+    "beyond_role": false,
+    "cross_team": false
+  },
+  {
+    "date": "2026-10-09",
+    "person": "Bea",
+    "kind": "kudos",
+    "from": "Hardik",
+    "source": "kudos",
+    "summary": "Retry storm fix with jittered backoff and a load test",
+    "link": "https://github.com/acme/platform/pull/482",
+    "beyond_role": false,
+    "cross_team": false
+  },
+  {
+    "date": "2026-10-12",
+    "person": "Bea",
+    "kind": "peer-thanks",
+    "from": "Ola",
+    "source": "standup",
+    "summary": "Ola: thanks Bea for covering the tiling reviews",
+    "link": "",
+    "beyond_role": false,
+    "cross_team": false
+  },
+  {
+    "date": "2026-11-02",
+    "person": "Bea",
+    "kind": "review-for-others",
+    "from": "Chen",
+    "source": "github",
+    "summary": "Reviewed the harness guide",
+    "link": "https://github.com/acme/platform/pull/517",
+    "beyond_role": false,
+    "cross_team": false
+  },
+  {
+    "date": "2026-10-20",
+    "person": "Dami",
+    "kind": "peer-thanks",
+    "from": "Ola",
+    "source": "standup",
+    "summary": "Ola: Dami's cache design doc answered every question the compiler team had",
+    "link": "",
+    "beyond_role": false,
+    "cross_team": true
+  },
+  {
+    "date": "2026-10-27",
+    "person": "Dami",
+    "kind": "docs",
+    "from": "Dami",
+    "source": "github",
+    "summary": "Cache layer design doc, trade-offs table reused by two teams",
+    "link": "",
+    "beyond_role": false,
+    "cross_team": true
+  },
+  {
+    "date": "2026-11-09",
+    "person": "Kenji",
+    "kind": "peer-thanks",
+    "from": "Bea",
+    "source": "peer-pulse",
+    "summary": "Bea: Kenji's scheduler fix removed our flaky queue test",
+    "link": "",
+    "beyond_role": false,
+    "cross_team": false
+  }
+]

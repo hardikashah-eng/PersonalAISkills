@@ -1,0 +1,35 @@
+== email ==
+Subject: Recap: design reviews
+
+Hi Dami,
+
+Thanks for the conversation today. To recap: your cache design doc set a new bar, and two teams have already reused the trade-offs table.
+
+For the next design reviews, we agreed you'll open with the decision you need and the top three risks, then demo, so reviewers can weigh in while there's time.
+
+Happy to look at the agenda before the 3 December review. Let's compare notes after it.
+
+Thanks,
+Hardik
+
+Share link (opens the app with the message filled in; you choose to send):
+mailto:?subject=Recap%3A%20design%20reviews&body=Hi%20Dami%2C%0A%0AThanks%20for%20the%20conversation%20today.%20To%20recap%3A%20your%20cache%20design%20doc%20set%20a%20new%20bar%2C%20and%20two%20teams%20have%20already%20reused%20the%20trade-offs%20table.%0A%0AFor%20the%20next%20design%20reviews%2C%20we%20agreed%20you%27ll%20open%20with%20the%20decision%20you%20need%20and%20the%20top%20three%20risks%2C%20then%20demo%2C%20so%20reviewers%20can%20weigh%20in%20while%20there%27s%20time.%0A%0AHappy%20to%20look%20at%20the%20agenda%20before%20the%203%20December%20review.%20Let%27s%20compare%20notes%20after%20it.%0A%0AThanks%2C%0AHardik%0A
+
+== growth log entry ==
+added #1: growth for Dami (communication)
+added #2: strength for Dami (craft)
+
+== growth log summary for Dami ==
+# Dami: strengths and growth
+
+## What's going well
+
+- **Craft** (2026-11-14): The cache layer design doc was the clearest the team has seen this year; two other teams reused its trade-offs table.
+
+## Growth areas
+
+- **Communication** (2026-11-14, open): In the last two design reviews, the risks section came after a 20-minute demo.
+  - Effect: Reviewers raised the risks in the last five minutes, and the decision slipped a week.
+  - Next: Open with the decision you need and the top three risks, then demo.
+
+_1 strength, 1 growth area (0 done)._

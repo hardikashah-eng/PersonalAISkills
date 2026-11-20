@@ -1,0 +1,15 @@
+{
+  "kind": "kudos",
+  "text_only": true,
+  "audience": "individual",
+  "recipient_first_name": "Chen",
+  "sender_first_name": "Hardik",
+  "source": "standup 2026-11-16, 00:00:12 (Bea credited Chen's load test harness)",
+  "greeting": "Chen,",
+  "body": [
+    "Bea mentioned in standup that your load test harness caught two edge cases in the retry fix before it merged. That's a big part of why on-call has been quiet all week. Thank you for building something the whole team can lean on."
+  ],
+  "closing": "",
+  "signature": "Hardik",
+  "channel_post": "Kudos to Chen, whose load test harness caught two edge cases in the retry fix before merge. It's a big part of a week with no retry pages, and his docs (out Wednesday) will let every team reuse it. Thank you, Chen."
+}

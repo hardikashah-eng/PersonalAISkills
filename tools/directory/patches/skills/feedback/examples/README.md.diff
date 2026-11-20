@@ -1,0 +1,10 @@
+--- a/skills/feedback/examples/README.md
++++ b/skills/feedback/examples/README.md
+@@ -8,4 +8,5 @@
+ 
+ `outputs.txt` shows the email recap, the two growth-log entries (the
+-improvement opportunity, and the strength alongside it), and the
+-`growth_log.py summary` printed for the next 1:1. `growth-log.jsonl` is the log itself.
++improvement opportunity, and the strength alongside it), and the summary
++prepared for the next 1:1 (`../references/growth-log.md`). `growth-log.json`
++holds the same two entries (in the user's file, each is one line of JSON Lines).

@@ -1,0 +1,13 @@
+--- a/skills/comfort/examples/README.md
++++ b/skills/comfort/examples/README.md
+@@ -18,6 +18,6 @@
+   his streaming service, since no official clip link was confirmed.
+ 
+-```bash
+-python3 ../../thankyou/scripts/safety_check.py priya-sympathy/note.json --profile comfort
+-python3 ../../thankyou/scripts/render_card.py priya-sympathy/note.json --art priya-sympathy/art.svg --out /tmp/priya.html
+-```
++Both were checked with `../../thankyou/references/safety-checklist.md`
++(every-note checks plus Comfort messages) and built with
++`../../thankyou/references/card-layout.md`. The skill draws each header as
++SVG; here it's saved as `art.png`, next to the finished `card.png`.

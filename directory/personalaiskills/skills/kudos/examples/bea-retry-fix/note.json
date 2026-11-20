@@ -1,0 +1,24 @@
+{
+  "kind": "kudos",
+  "text_only": true,
+  "audience": "individual",
+  "recipient_first_name": "Bea",
+  "sender_first_name": "Hardik",
+  "relationship": "teammate (same team, different time zone)",
+  "work": {"type": "pull request", "ref": "#482", "title": "Add jittered backoff to client retries, with load test"},
+  "greeting": "Bea,",
+  "body": [
+    "You traced last week's retry storm to retries firing in lockstep, fixed it with jittered backoff, and added a load test so it can't quietly come back. On-call hasn't been paged for it since, and I finally slept through a Tuesday night. That's the kind of care that makes everyone's nights better."
+  ],
+  "closing": "Thank you,",
+  "signature": "Hardik",
+  "channel_post": "Kudos to Bea for the retry fix in #482. She traced last week's retry storm to retries firing in lockstep, fixed it with jittered backoff, and added a load test so it stays fixed. Two weeks without a retry page. Thank you, Bea, for the care that makes everyone's on-call quieter.",
+  "manager_note": [
+    "Hi Sam, I wanted you to know about Bea's work on #482. She found the root cause of last week's retry storm that three of us had missed, fixed it, and added a load test and a runbook note without being asked. On-call has been quiet since. It's exactly the ownership we talk about, and it's worth remembering at review time."
+  ],
+  "public_post": [
+    "Shout-out to Bea Ramos, who made our open-source client's retries smarter this month. Her change spreads out reconnect attempts, so apps using the library recover from network blips without overwhelming the servers behind them.",
+    "What I admire most: she wrote the tests and the docs before anyone asked. Thank you, Bea. #opensource #reliability"
+  ],
+  "consent": {"named_person_ok": true, "company_policy_ok": true, "note": "Bea said yes to being named and tagged; the client library is open source and the fix is in the public release notes."}
+}

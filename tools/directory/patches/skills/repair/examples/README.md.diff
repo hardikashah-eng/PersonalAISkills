@@ -1,0 +1,7 @@
+--- a/skills/repair/examples/README.md
++++ b/skills/repair/examples/README.md
+@@ -6,3 +6,3 @@
+ effect, apologises plainly, says what will change (`commitment`) and what was
+ already done to make it right (`make_right`), with no pressure to reply.
+-`outputs.txt` shows the message as `share.py` prints it.
++`outputs.txt` shows the message formatted for Slack.

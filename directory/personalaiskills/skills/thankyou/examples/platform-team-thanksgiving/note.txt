@@ -1,0 +1,17 @@
+“Alone we can do so little; together we can do so much.”
+— Helen Keller
+
+To the Platform team,
+
+In the spring we set ourselves a goal that sounded a little unreasonable: move every simulation run onto the new farm before the end of the year, without stopping anyone's work along the way.
+
+We got there in October. Test runs that used to take a week now finish the same afternoon. That happened because of late nights nobody asked for, careful reviews, and one habit you kept no matter what: no one debugs alone.
+
+Three other teams now run their tests on what you built, and I'm carrying that same habit into every group I work with.
+
+This Thanksgiving I'm grateful for every one of you who touched this, on-site and remote.
+
+With gratitude and pride,
+Hardik
+
+P.S. Fun fact: ibises flying in a V take turns at the front, the hardest spot, and pairs share the lead almost exactly. Sounds like a team I know.

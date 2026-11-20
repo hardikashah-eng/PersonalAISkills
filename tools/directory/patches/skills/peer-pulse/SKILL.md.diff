@@ -1,0 +1,37 @@
+--- a/skills/peer-pulse/SKILL.md
++++ b/skills/peer-pulse/SKILL.md
+@@ -32,9 +32,6 @@
+ ### 1. Post the prompt (Friday)
+ 
+-```bash
+-python3 scripts/pulse.py prompt --team "Platform" --due "Friday 4 pm" --channel slack
+-```
+-
+-The organizer posts it in the team channel (asking for replies by DM), or
++Write the prompt for the team, the due time and the channel (for example
++Platform, Friday 4 pm, Slack) from `references/prompt-and-tally.md`. The organizer posts it in the team channel (asking for replies by DM), or
+ sends it as a short form (Google Forms, Microsoft Forms, a Lark form). With a
+ connector, Claude can draft the post or schedule it, for the user to approve.
+@@ -43,12 +40,10 @@
+ 
+ From DMs (with a connector, only the replies to the prompt), a form export
+-(CSV), or pasted in. Columns: `date, from, helped, how, share`.
++(CSV), or pasted in. Fields: `date, from, helped, how, share`.
+ 
+ ### 3. Tally
+ 
+-```bash
+-python3 scripts/pulse.py tally answers.csv --team "Bea,Chen,Dami,Ola,Kenji,Arjun" \
+-  --organizer "Hardik" --drafts drafts/ --evidence evidence.jsonl
+-```
++Tally the answers with the team list (for example Bea, Chen, Dami, Ola,
++Kenji, Arjun) and the organizer's name, following `references/prompt-and-tally.md`:
+ 
+ - A private summary for the organizer: who was thanked, for what, and by whom (as allowed)
+@@ -73,5 +68,5 @@
+ ## Files
+ 
+-- `scripts/pulse.py`: the prompt (by channel) and the tally (drafts, evidence, held answers)
++- `references/prompt-and-tally.md`: the prompt (by channel) and the tally (drafts, evidence, held answers)
+ - `references/running-it.md`: getting started, keeping it light, what to do with what you learn
+ - `examples/week-46/`: six answers, the tally and four thank-you drafts

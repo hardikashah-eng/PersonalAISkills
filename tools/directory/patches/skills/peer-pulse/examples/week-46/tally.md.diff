@@ -1,0 +1,7 @@
+--- a/skills/peer-pulse/examples/week-46/tally.md
++++ b/skills/peer-pulse/examples/week-46/tally.md
+@@ -20,3 +20,3 @@
+ 
+ 4 Kudos draft(s) → drafts/ (review each before sending)
+-5 moment(s) added to /tmp/ev-test.jsonl for Spotlight
++5 moment(s) added to evidence.jsonl for Spotlight

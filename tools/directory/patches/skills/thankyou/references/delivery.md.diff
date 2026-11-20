@@ -1,0 +1,44 @@
+--- a/skills/thankyou/references/delivery.md
++++ b/skills/thankyou/references/delivery.md
+@@ -74,14 +74,14 @@
+ - **The text formatted for the channel** (see below).
+ - **The card as an image** (`card.png`), since messaging apps show images, not
+-  HTML: `python3 scripts/card_to_png.py card.html --out card.png`.
+-- **The clean photo**, if there is one (`--photo-out` from `render_card.py`).
+-- **A share link** that opens the app with the message filled in:
+-  `python3 scripts/share.py note.json --channel whatsapp`.
++  HTML (`references/images.md`).
++- **The clean photo**, if there is one, with its metadata removed.
++- **A share link** that opens the app with the message filled in
++  (`references/channel-formats.md`).
+ 
+ | Channel | Share link | Notes |
+ |---|---|---|
+-| WhatsApp | `https://wa.me/?text=…` | Opens WhatsApp and lets the user pick the chat. With `--to <number>`, opens that chat directly. |
+-| SMS / iMessage | `sms:?&body=…` | Opens Messages. With `--to`, addressed to that number. |
+-| Email (any app) | `mailto:?subject=…&body=…` | With `--to`, addressed. Attach the card and photo by hand. |
++| WhatsApp | `https://wa.me/?text=…` | Opens WhatsApp and lets the user pick the chat. With a number the user gives, opens that chat directly. |
++| SMS / iMessage | `sms:?&body=…` | Opens Messages. With a number the user gives, addressed to it. |
++| Email (any app) | `mailto:?subject=…&body=…` | With an address the user gives, addressed. Attach the card and photo by hand. |
+ | Telegram | `https://t.me/share/url?url=&text=…` | Pick the chat in Telegram. |
+ | LINE | `https://line.me/R/share?text=…` | Pick the chat in LINE. |
+@@ -89,5 +89,5 @@
+ 
+ Links carry only the message text. A phone number or address is added only if
+-the user gives it for this send (`--to`), and it is never written to a file.
++the user gives it for this send, and it is never written to a file.
+ 
+ ## Formatting by channel
+@@ -102,8 +102,8 @@
+ | LinkedIn | 50–100 words | warm-professional, text only |
+ 
+-`scripts/share.py` produces the channel version: it drops the card-only
+-parts for short channels (the quote attribution layout, extra blank lines),
+-adds a subject for email, and warns when the text is long for the channel.
+-For SMS and chat, Claude may also write a shorter version by hand. Keep the
++Make the channel version with `references/channel-formats.md`: drop the
++card-only parts for short channels (the quote attribution layout, extra blank
++lines), add a subject for email, and shorten the text when it's long for the
++channel. For SMS and chat, write a shorter version by hand. Keep the
+ specific moment, as it's the heart of the note.
+ 

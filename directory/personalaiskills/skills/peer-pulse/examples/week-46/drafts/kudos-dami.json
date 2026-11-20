@@ -1,0 +1,15 @@
+{
+  "kind": "kudos",
+  "text_only": true,
+  "audience": "individual",
+  "recipient_first_name": "Dami",
+  "sender_first_name": "Hardik",
+  "source": "Peer Pulse",
+  "greeting": "Dami,",
+  "body": [
+    "Someone mentioned you in this week's Peer Pulse. a teammate: \"The cache design doc answered every question the compiler team had.\"",
+    "Thank you for making the team better. It was noticed."
+  ],
+  "closing": "",
+  "signature": "Hardik"
+}
