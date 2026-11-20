@@ -1,0 +1,60 @@
+--- a/skills/feedback/SKILL.md
++++ b/skills/feedback/SKILL.md
+@@ -79,9 +79,6 @@
+ ### 3. Check it
+ 
+-```bash
+-python3 ../thankyou/scripts/safety_check.py note.json --profile feedback
+-```
+-
+-The `feedback` profile blocks labels, absolutes and comparisons, flags coded
++Go through `../thankyou/references/safety-checklist.md`: the every-note
++checks plus the Feedback section, which blocks labels, absolutes and comparisons, flags coded
+ or vague words ("abrasive", "emotional", "executive presence", "culture fit")
+ and missing parts (observation, impact, next).
+@@ -90,27 +87,23 @@
+ 
+ The conversation happens in person or on a call. For the written follow-up,
+-use `../thankyou/scripts/share.py note.json --channel email` (or Slack, Lark,
+-Teams as a direct message), and send only on the user's explicit yes.
++prepare the email (or Slack, Lark, Teams direct message) with
++`../thankyou/references/channel-formats.md`, and send only on the user's explicit yes.
+ 
+ ### 5. Add it to improvement opportunities (automatic once shared)
+ 
+ When the user confirms the conversation happened (or approves sending the
+-written follow-up), add it to their growth log, with no extra step:
++written follow-up), add it to their growth log, with no extra step: a growth
++entry for Dami with area, observation, impact, next, source feedback, shared,
++and a follow-up date such as 2026-12-05 (`references/growth-log.md` says how).
+ 
+-```bash
+-python3 scripts/growth_log.py add --log <their log file> --person Dami --type growth --area communication \
+-  --observation "…" --impact "…" --next "…" --source feedback --shared --follow-up 2026-12-05
+-```
+-
+-- The log is a file the user keeps (a private folder, or exported to a
+-  private Google Sheet, Lark Base table, Notion database or Excel with
+-  `growth_log.py export --csv`). If the user prefers a connected tool, Claude
+-  adds the same fields as a row there instead (`references/growth-log.md`).
++- The log is a file the user keeps (a private folder), or a private Google
++  Sheet, Lark Base table, Notion database or Excel file. If the user prefers a
++  connected tool, Claude adds the same fields as a row there instead.
+ - Kudos adds **strengths** to the same log, so the picture stays balanced.
+-- `growth_log.py due` lists follow-ups coming up; the daily nudge surfaces them.
+-- When progress is seen, update it (`update --status done --note "…"`) and say
+-  so to the person. That closing of the loop is the point of the log.
+-- `growth_log.py summary --person Dami` prints both strengths and growth areas
+-  for a 1:1 or review.
++- The **due** list shows follow-ups coming up; the daily nudge surfaces them.
++- When progress is seen, update the entry (status done, with a note of what
++  you saw) and say so to the person. That closing of the loop is the point of the log.
++- A **summary** for one person shows both strengths and growth areas for a
++  1:1 or review.
+ 
+ ## Make it regular (optional)
+@@ -126,4 +119,3 @@
+ - `references/growth-log.md`: what's logged, where it can live, privacy and fairness rules
+ - `references/when-not-to.md`: when to involve HR or other support instead
+-- `scripts/growth_log.py`: the private log of strengths and improvement opportunities
+ - `examples/dami-design-reviews/`: talking points, a written follow-up and the log entry

@@ -1,0 +1,55 @@
+--- a/skills/nudge/SKILL.md
++++ b/skills/nudge/SKILL.md
+@@ -29,5 +29,5 @@
+    the company allows this use. Never HR, medical or legal meetings, or 1:1s
+    the other person didn't know were transcribed.
+-6. **Few and fair.** At most five nudges a day (`--max`). Rotate who gets
++6. **Few and fair.** At most five nudges a day. Rotate who gets
+    recognized, and flag people who haven't been for a while.
+ 
+@@ -39,9 +39,7 @@
+    Lark/Feishu Minutes, Otter or similar through the user's connectors, or a
+    file the user shares (VTT, SRT or "Name: text").
+-2. Scan it:
+-   ```bash
+-   python3 scripts/scan_transcript.py standup.vtt --me "Hardik" --people "Bea,Chen,Dami,Ola,Arjun"
+-   ```
+-   It lists **recognition moments** (someone thanked or credited a colleague),
++2. Read it for people moments, following `references/transcript-scan.md`,
++   with the user as the meeting owner and their team list (for example Bea,
++   Chen, Dami, Ola, Arjun). List **recognition moments** (someone thanked or credited a colleague),
+    **wins** people reported, **possible feedback moments** (for the user only)
+    and **commitments** (who said they'd do what, and when).
+@@ -51,5 +49,5 @@
+    (`../feedback/SKILL.md`), a reminder for the user's own commitments, and
+    Repair if the user wants to follow up on a tense moment.
+-5. Run each draft through the safety check, and present a review list
++5. Check each draft with `../thankyou/references/safety-checklist.md`, and present a review list
+    (`examples/standup-2026-11-16/review.md`).
+ 6. On approval: send each item through its channel (connector or copy),
+@@ -66,7 +64,7 @@
+ | PagerDuty, Jira, incident channels: resolved incidents, finished on-call | Kudos for calm, careful handling |
+ | Yesterday's meeting transcripts | Recognition moments, commitments due |
+-| Growth log (`../feedback/scripts/growth_log.py due`) | Feedback follow-ups and progress to notice |
++| Growth log, due list (`../feedback/references/growth-log.md`) | Feedback follow-ups and progress to notice |
+ | Calendar or HR calendar the user shares | First days (Welcome), work anniversaries (ThankYou), returns from leave (a simple "welcome back", no questions) |
+-| Growth log (`growth_log.py gaps --team … --days 30`) | People not recognized lately, and recognition spread across locations or roles |
++| Growth log, gaps check over 30 days | People not recognized lately, and recognition spread across locations or roles |
+ | Email, chat history | Drifted contacts (Reconnect), unanswered intros (Intro) |
+ 
+@@ -81,6 +79,6 @@
+ 
+ The Routines skill (`../routines/SKILL.md`) sets these up: it asks a few
+-questions, shows the plan, generates standalone prompts with
+-`make_routines.py`, and creates the scheduled tasks only after the user says
++questions, shows the plan, writes standalone prompts for each routine,
++and creates the scheduled tasks only after the user says
+ yes. Offer it once, after a nudge list that helped.
+ 
+@@ -90,5 +88,5 @@
+ ## Files
+ 
+-- `scripts/scan_transcript.py`: find recognition, wins, possible feedback and commitments in a transcript (local, read-only)
++- `references/transcript-scan.md`: find recognition, wins, possible feedback and commitments in a transcript (read-only)
+ - `references/sources.md`: what each source gives, and the privacy rules for each
+ - `examples/standup-2026-11-16/`: a transcript, the scan, two Kudos drafts and the review list

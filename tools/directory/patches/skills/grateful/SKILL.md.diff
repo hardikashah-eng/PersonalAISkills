@@ -1,0 +1,44 @@
+--- a/skills/grateful/SKILL.md
++++ b/skills/grateful/SKILL.md
+@@ -162,11 +162,7 @@
+ ### 7. Safety pass
+ 
+-```bash
+-python3 ../thankyou/scripts/safety_check.py grateful.json --profile grateful
+-```
+-
+-The `grateful` profile adds checks for comparison with others' misfortune,
+-bragging, and guilt, on top of the PII, financial, health and tone checks.
+-Fix every blocking flag. Then re-read: *Would everyone mentioned be glad to
++Go through `../thankyou/references/safety-checklist.md`: the Gratitude lists
++section adds checks for comparison with others' misfortune, bragging, and
++guilt, on top of the PII, financial, health and tone checks. Fix every block. Then re-read: *Would everyone mentioned be glad to
+ read this? Would someone not on the list feel hurt? Is anything revealed that
+ isn't the user's to share? For `--public`: are there roles instead of names?*
+@@ -174,12 +170,11 @@
+ ### 8. Render and deliver
+ 
+-```bash
+-python3 ../thankyou/scripts/render_card.py grateful.json --art sketch.svg --out grateful.html
+-# with a real photo of the user's own instead: add --photo photo.jpg
+-python3 ../thankyou/scripts/card_to_png.py grateful.html --out grateful.png
+-python3 ../thankyou/scripts/share.py grateful.json --channel whatsapp
+-```
+-
+-The card is handwritten by default (`--style print` for a typeset version):
++Build `grateful.html` from `grateful.json` with `sketch.svg` as the artwork
++(or a real photo of the user's own, with its metadata removed), following
++`../thankyou/references/card-layout.md`. For messaging, make the card image
++(`../thankyou/references/images.md`) and the channel text and share link
++(`../thankyou/references/channel-formats.md`).
++
++The card is handwritten by default (`"style": "print"` for a typeset version):
+ the sketch across the top, then the quote, the title, and the entries, each
+ marked with a small hand-drawn sparkle (not numbered) and showing its reason,
+@@ -225,4 +220,4 @@
+   a drawn pencil sketch
+ - Shared with ThankYou (`../thankyou/`):
+-  - `references/`: safety, language, quotes, sketch, photos, paying-it-forward, fun-facts, delivery, connector-mining, relationships-and-culture
+-  - `scripts/`: safety_check (`--profile grateful`), render_card (renders `items`), share (formats `items`), card_to_png, sketch_photo
++  - `references/`: safety, safety-checklist (Gratitude lists section), language, quotes, sketch, photos, paying-it-forward, fun-facts, delivery, connector-mining, relationships-and-culture
++  - `references/`: card-layout (renders `items`), channel-formats (formats `items`), images

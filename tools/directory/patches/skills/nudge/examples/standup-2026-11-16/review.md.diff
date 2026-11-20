@@ -1,0 +1,9 @@
+--- a/skills/nudge/examples/standup-2026-11-16/review.md
++++ b/skills/nudge/examples/standup-2026-11-16/review.md
+@@ -1,5 +1,5 @@
+ # After standup, 16 Nov: ready for your review
+ 
+-Built from `transcript.vtt` by `scan_transcript.py` (see `candidates.md`).
++Built from `transcript.txt` (see `candidates.md`).
+ Nothing has been sent. Reply with what to send, edit or skip.
+ 

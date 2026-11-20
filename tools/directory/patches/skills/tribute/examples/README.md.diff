@@ -1,0 +1,14 @@
+--- a/skills/tribute/examples/README.md
++++ b/skills/tribute/examples/README.md
+@@ -9,6 +9,7 @@
+ - A P.S. fun fact about ibises sharing the lead.
+ 
+-```bash
+-python3 ../../thankyou/scripts/safety_check.py meena-farewell/note.json --profile team --roster "Arjun,Bea,Chen,Dami,Hardik"
+-python3 ../../thankyou/scripts/render_card.py meena-farewell/note.json --art meena-farewell/art.svg --photo meena-farewell/sketch.svg --out /tmp/meena.html
+-```
++Checked with `../../thankyou/references/safety-checklist.md` (every-note and
++team checks, roster Arjun, Bea, Chen, Dami and Hardik), and built with
++`../../thankyou/references/card-layout.md` from `note.json`, the artwork and
++the sketch. The skill draws both as SVG; here they are saved as `art.png` and
++`sketch.png`, next to the finished `card.png`.

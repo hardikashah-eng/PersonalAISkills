@@ -1,0 +1,38 @@
+--- a/skills/routines/SKILL.md
++++ b/skills/routines/SKILL.md
+@@ -24,5 +24,5 @@
+    sentence, which approval setting each routine got.
+ 4. **Standalone prompts.** A scheduled run starts fresh, with no memory of this
+-   conversation. Generate the prompt with `scripts/make_routines.py`, so it
++   conversation. Write the prompt as in `references/routine-prompts.md`, so it
+    carries the user's name, time zone, team, sources, channels, growth log and
+    the approval and privacy rules.
+@@ -71,10 +71,6 @@
+ ### 2. Show the plan
+ 
+-```bash
+-python3 scripts/make_routines.py routines.json          # the plan, for the user
+-python3 scripts/make_routines.py routines.json --json   # names, schedules and prompts, for creating them
+-```
+-
+-Show each routine's name, what it does, when it runs, and that it sends only
++Turn `routines.json` into each routine's name, schedule and standalone prompt,
++following `references/routine-prompts.md`. Show each routine's name, what it does, when it runs, and that it sends only
+ a review list. Ask: "Create these?"
+ 
+@@ -101,6 +97,6 @@
+ - **List:** the user's existing routines from this plugin (names start with
+   the routine titles above), with their schedules.
+-- **Change:** a new time, days, team members or sources: regenerate the prompt
+-  with `make_routines.py --only <key>` and update the routine.
++- **Change:** a new time, days, team members or sources: write that routine's
++  prompt and schedule again (`references/routine-prompts.md`) and update the routine.
+ - **Pause or remove:** on request, with the user confirming each removal.
+ - **Too noisy?** Suggest fewer routines, a lower `max_items`, or weekly instead of daily.
+@@ -108,5 +104,5 @@
+ ## Files
+ 
+-- `scripts/make_routines.py`: turns `routines.json` into names, schedules and standalone prompts
++- `references/routine-prompts.md`: turns `routines.json` into names, schedules and standalone prompts
+ - `references/catalog.md`: each routine, what it reads, what it prepares, and good default times
+ - `references/platforms.md`: how to create routines in the Claude app, Claude Code, or by hand

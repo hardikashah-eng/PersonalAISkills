@@ -1,0 +1,21 @@
+--- a/skills/story-keeper/examples/README.md
++++ b/skills/story-keeper/examples/README.md
+@@ -7,12 +7,9 @@
+ 
+ Everything here is a stand-in: Nani and the stories are fictional, the
+-pictures are drawn pencil sketches (labelled as such), and
+-`standin-voice.m4a` is a plain tone, not a voice, made by cutting a generated
+-test video with `extract_voice.py`. In real use the photos are the family's own
+-and the clip is the elder's real voice.
++pictures are drawn pencil sketches (labelled as such, drawn as SVG and saved
++here as PNG), and the voice clip is left out of this example. In real use the
++photos are the family's own and the clip is the elder's real voice.
+ 
+-```bash
+-cd nani-stories
+-python3 ../../scripts/keepsake.py keepsake.json --out /tmp/nani.html --pdf /tmp/nani.pdf
+-python3 ../../../thankyou/scripts/safety_check.py keepsake.json --profile family
+-```
++The booklet is built from `nani-stories/keepsake.json` as in
++`../references/booklet-layout.md`, and checked with
++`../../thankyou/references/safety-checklist.md` (every-note and family checks).

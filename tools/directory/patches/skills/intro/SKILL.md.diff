@@ -1,0 +1,14 @@
+--- a/skills/intro/SKILL.md
++++ b/skills/intro/SKILL.md
+@@ -63,8 +63,7 @@
+ ### 4. Check, deliver, follow up
+ 
+-```bash
+-python3 ../thankyou/scripts/safety_check.py note.json
+-python3 ../thankyou/scripts/share.py note.json --channel email
+-```
++Check it with `../thankyou/references/safety-checklist.md` (including the
++introductions check: both people said yes), and prepare the email with
++`../thankyou/references/channel-formats.md`.
+ 
+ Send only on the user's yes. Offer one gentle reminder to the user (not to

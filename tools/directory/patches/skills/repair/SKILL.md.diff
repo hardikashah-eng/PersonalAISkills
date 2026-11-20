@@ -1,0 +1,14 @@
+--- a/skills/repair/SKILL.md
++++ b/skills/repair/SKILL.md
+@@ -61,8 +61,7 @@
+ ### 3. Check and deliver
+ 
+-```bash
+-python3 ../thankyou/scripts/safety_check.py note.json --profile repair
+-python3 ../thankyou/scripts/share.py note.json --channel slack
+-```
++Check it with `../thankyou/references/safety-checklist.md` (the every-note
++checks plus Apologies and follow-ups), and prepare the Slack (or other
++channel) text with `../thankyou/references/channel-formats.md`.
+ 
+ Send only on the user's yes; for in-person repairs, give the talking points.

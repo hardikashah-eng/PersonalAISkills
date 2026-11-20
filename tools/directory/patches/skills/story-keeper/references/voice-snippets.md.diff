@@ -1,0 +1,47 @@
+--- a/skills/story-keeper/references/voice-snippets.md
++++ b/skills/story-keeper/references/voice-snippets.md
+@@ -19,10 +19,6 @@
+ ## Finding the moment
+ 
+-```bash
+-python3 scripts/extract_voice.py video.mp4 --scan
+-```
+-
+-`--scan` lists the stretches with sound, which are likely to be talking. The
+-user (not Claude) listens and chooses. Good clips:
++The user (not Claude) watches or listens and chooses the moment, and notes
++where it starts and ends (for example 1:23 to 1:48). Good clips:
+ 
+ - 10–30 seconds: one complete thought, a laugh, a blessing, a phrase they
+@@ -33,12 +29,16 @@
+ ## Cutting it
+ 
+-```bash
+-python3 scripts/extract_voice.py video.mp4 --start 1:23 --end 1:48 --out nani-mango.m4a
+-```
++A clean clip keeps the audio only, trimmed at the chosen start and end, with
++a short fade in and out, as small AAC audio (.m4a), and with every metadata
++tag (date, device, location) removed.
+ 
+-The script keeps the audio only, adds a short fade, evens out loudness,
+-saves small AAC audio (.m4a, about 8 KB per second), and removes every
+-metadata tag (date, device, location). It runs locally with ffmpeg; nothing is
+-uploaded. Clips over 30 seconds get a warning and over 90 seconds are refused.
++- **If your environment can process audio and video**, cut it there to that
++  shape, on the user's own file. Nothing is uploaded anywhere else.
++- **Otherwise, the user trims it** with the built-in editor on their phone or
++  computer (the trim tool in the Photos app, QuickTime, or Clipchamp, for
++  example), saves just that part, and attaches it. Ask them to share it
++  without location where the app offers that.
++
++Keep clips to 10–30 seconds; ask for a shorter cut if one runs past about 90.
+ 
+ ## Captioning it
+@@ -58,7 +58,2 @@
+   agreement.
+ 
+-## Without ffmpeg
+-
+-Install it from https://ffmpeg.org/download.html (or `brew install ffmpeg`,
+-`winget install ffmpeg`, `sudo apt install ffmpeg`). Or the user can trim the
+-clip with the phone's built-in editor and attach the result.

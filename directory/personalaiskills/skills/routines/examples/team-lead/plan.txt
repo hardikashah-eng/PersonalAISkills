@@ -1,0 +1,18 @@
+7 routine(s) for Alex (America/Los_Angeles):
+
+• Daily people brief: Morning list of recognition, follow-ups, first days and anniversaries
+  weekdays at 08:40  [CRON_TZ=America/Los_Angeles 40 8 * * 1-5]
+• After Platform standup: Recognition and commitments from Platform standup
+  weekdays at 10:10  [CRON_TZ=America/Los_Angeles 10 10 * * 1-5]
+• Friday recognition sweep: The week's work worth recognizing, spread across the team
+  fri at 14:35  [CRON_TZ=America/Los_Angeles 35 14 * * 5]
+• Monday growth follow-ups: Growth-log follow-ups due this week, and 1:1 prep
+  mon at 08:15  [CRON_TZ=America/Los_Angeles 15 8 * * 1]
+• Peer Pulse: Friday prompt and Monday thank-you drafts from peers' answers
+  fri,mon at 13:10  [CRON_TZ=America/Los_Angeles 10 13 * * 5,1]
+• Monthly Team Story: A draft highlight reel of the month's teamwork
+  monthly 3 at 14:20  [CRON_TZ=America/Los_Angeles 20 14 3 * *]
+• Quarterly Spotlight: Who has consistently gone above and beyond this quarter, with workload checks
+  quarterly 5 at 09:40  [CRON_TZ=America/Los_Angeles 40 9 5 1,4,7,10 *]
+
+Each run prepares drafts and sends you one review list. Nothing is sent without your yes.

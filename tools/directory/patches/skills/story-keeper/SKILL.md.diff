@@ -1,0 +1,58 @@
+--- a/skills/story-keeper/SKILL.md
++++ b/skills/story-keeper/SKILL.md
+@@ -79,5 +79,5 @@
+ grandparents, siblings, the house, the shop, the wedding):
+ 
+-- Use them as they are, after cleaning (metadata is removed automatically).
++- Use them as they are, after cleaning (remove the metadata, `../thankyou/references/images.md`).
+ - Old prints: help photograph or scan them flat, then crop and straighten.
+ - A **pencil sketch** of a photo is available on request (`"sketch": true`),
+@@ -91,10 +91,7 @@
+ If the family has videos of the elder talking (a birthday toast, a festival,
+ a phone video of them telling a story), cut 1–3 short clips (10–30 s each) of
+-their real voice:
+-
+-```bash
+-python3 scripts/extract_voice.py diwali-2009.mp4 --scan                      # where's the talking?
+-python3 scripts/extract_voice.py diwali-2009.mp4 --start 1:23 --end 1:48 --out nani-mango.m4a
+-```
++their real voice, such as `nani-mango.m4a` from 1:23 to 1:48 of
++`diwali-2009.mp4`. The user trims the clip, or you do if your environment can
++(`references/voice-snippets.md`).
+ 
+ Listen with the user and let them choose the moment. Add the words heard in
+@@ -104,10 +101,7 @@
+ ### 6. Build the keepsake
+ 
+-Fill `keepsake.json` (see `examples/nani-stories/keepsake.json`) and build:
+-
+-```bash
+-python3 scripts/keepsake.py keepsake.json --out nani-stories.html
+-python3 scripts/keepsake.py keepsake.json --out nani-stories.html --pdf nani-stories.pdf   # for printing
+-```
++Fill `keepsake.json` (see `examples/nani-stories/keepsake.json`) and build
++`nani-stories.html` from it, following `references/booklet-layout.md`. For
++printing, the user prints it to PDF from their browser.
+ 
+ The booklet has a cover (title, the elder's photo, a dedication), one page per
+@@ -118,9 +112,6 @@
+ ### 7. Review and share
+ 
+-Run the safety check on the text before sharing:
+-
+-```bash
+-python3 ../thankyou/scripts/safety_check.py keepsake.json --profile family
+-```
++Check the text before sharing with `../thankyou/references/safety-checklist.md`
++(the every-note and family checks).
+ 
+ Then the elder (or the family) approves it. Share privately: as a file in the
+@@ -151,6 +142,5 @@
+ - `references/voice-snippets.md`: finding, cutting and captioning voice clips; what never to do
+ - `references/consent-and-care.md`: consent, memory loss, painful memories, remembrance books
+-- `scripts/extract_voice.py`: cut a clean voice clip from a video with ffmpeg (local, metadata removed)
+-- `scripts/keepsake.py`: build the booklet (HTML, optional PDF)
++- `references/booklet-layout.md`: build the booklet (one HTML file that also prints)
+ - `examples/nani-stories/`: a three-chapter example with drawn stand-in pictures
+-- Shared with ThankYou: `../thankyou/scripts/{safety_check,sketch_photo,card_to_png}.py` and its references
++- Shared with ThankYou: `../thankyou/references/{safety-checklist,images,sketch}.md` and its other references

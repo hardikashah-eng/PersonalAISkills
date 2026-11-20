@@ -1,0 +1,18 @@
+--- a/skills/kudos/examples/README.md
++++ b/skills/kudos/examples/README.md
+@@ -6,9 +6,10 @@
+ 
+ - `body`: a direct message naming what she did, the difference, and the care behind it
+-- `channel_post`: the #kudos version (`share.py --channel slack --post`)
+-- `manager_note`: a note to her manager, so it counts at review time (`--manager`)
++- `channel_post`: the #kudos version for Slack
++- `manager_note`: a note to her manager, so it counts at review time
+ - `public_post`: a LinkedIn post in public terms, with no PR number, no
+-  internal detail, and Bea's consent recorded (`--channel linkedin`; checked
+-  with `safety_check.py --profile public`)
++  internal detail, and Bea's consent recorded (checked with the public-post
++  section of `../../thankyou/references/safety-checklist.md`)
+ 
+-`outputs.txt` shows all four as printed by `share.py`.
++`outputs.txt` shows all four, formatted for their channels as in
++`../../thankyou/references/channel-formats.md`.

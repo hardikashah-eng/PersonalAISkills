@@ -1,0 +1,31 @@
+--- a/skills/team-story/SKILL.md
++++ b/skills/team-story/SKILL.md
+@@ -49,9 +49,7 @@
+ ### 3. Build the versions
+ 
+-```bash
+-python3 scripts/team_story.py story.json --evidence evidence.jsonl --out team-story.html   # the page
+-python3 scripts/team_story.py story.json --post      # a #wins or all-hands channel post
+-python3 scripts/team_story.py story.json --slides    # slide outline for an all-hands deck
+-```
++From `story.json` (and Spotlight's evidence file for the map, if the user
++keeps one), make the page, a #wins or all-hands channel post, and a slide
++outline for an all-hands deck, following `references/page-and-map.md`.
+ 
+ - **The page** is one self-contained HTML file (publish it as an artifact
+@@ -65,6 +63,6 @@
+ ### 4. Check and share
+ 
+-Run the safety check on `story.json` (`--profile team`, and `--profile public`
+-for anything public). Show the user each version, and post or send only on
++Check `story.json` with `../thankyou/references/safety-checklist.md` (the
++every-note and team checks, and the public-post checks for anything public). Show the user each version, and post or send only on
+ an explicit yes. Offer to send each contributor a Kudos note with their line.
+ 
+@@ -76,5 +74,5 @@
+ ## Files
+ 
+-- `scripts/team_story.py`: build the page with the who-helped-whom map, the post and the slide outline
++- `references/page-and-map.md`: build the page with the who-helped-whom map, the post and the slide outline
+ - `references/story-shape.md`: the arc, chapters, what to include, examples of good lines
+ - `examples/q4-build-queue/`: a quarter's story with the map, post and slide outline

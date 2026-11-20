@@ -1,0 +1,9 @@
+--- a/skills/routines/examples/README.md
++++ b/skills/routines/examples/README.md
+@@ -5,5 +5,5 @@
+ - `routines.json`: the answers to setup: who, time zone, team, sources,
+   channels, growth log (a Google Sheet), the standup, and which routines.
+-- `plan.txt`: what `make_routines.py` shows the user before anything is created.
++- `plan.txt`: what the user sees before anything is created.
+ - `routines-plan.json`: the four routines to create, each with a name, a cron
+   schedule in the user's time zone, and a standalone prompt with the approval

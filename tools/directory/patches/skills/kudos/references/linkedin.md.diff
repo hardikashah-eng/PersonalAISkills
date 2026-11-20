@@ -1,0 +1,9 @@
+--- a/skills/kudos/references/linkedin.md
++++ b/skills/kudos/references/linkedin.md
+@@ -13,5 +13,5 @@
+ 3. **Your company's social media policy allows it** (`consent.company_policy_ok`).
+    Many require that only announced work is discussed.
+-4. **It passes** `safety_check.py --profile public`: no ticket or PR numbers,
++4. **It passes** the public-post checks in `../../thankyou/references/safety-checklist.md`: no ticket or PR numbers,
+    internal links, confidential or unreleased work, security details, people
+    matters, and any metric already published.

@@ -1,0 +1,9 @@
+--- a/skills/feedback/examples/dami-design-reviews/outputs.txt
++++ b/skills/feedback/examples/dami-design-reviews/outputs.txt
+@@ -20,5 +20,5 @@
+ added #2: strength for Dami (craft)
+ 
+-== growth_log.py summary --person Dami ==
++== growth log summary for Dami ==
+ # Dami: strengths and growth
+ 

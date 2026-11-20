@@ -1,0 +1,80 @@
+--- a/skills/spotlight/SKILL.md
++++ b/skills/spotlight/SKILL.md
+@@ -32,6 +32,6 @@
+    surprise awards, and then still keep anything personal out.
+ 6. **Fair.** Watch for who's easy to miss: remote, other time zones, quieter,
+-   newer, or doing "glue work". The fairness check in the growth log
+-   (`../feedback/scripts/growth_log.py gaps`) helps.
++   newer, or doing "glue work". The gaps check in the growth log
++   (`../feedback/references/growth-log.md`) helps.
+ 7. **Send only on an explicit yes** (`../thankyou/references/delivery.md`).
+ 
+@@ -44,21 +44,18 @@
+ | Source | How |
+ |---|---|
+-| GitHub reviews on others' PRs, thanks in PR threads | `python3 scripts/spotlight.py collect-github --evidence ev.jsonl --repo org/repo --since 2026-10-01 --team "login=Name,…"` |
+-| Meeting transcripts | Nudge's `scan_transcript.py` recognition moments, added as `peer-thanks` |
+-| Peer Pulse answers | `../peer-pulse/scripts/pulse.py … --evidence ev.jsonl` |
++| GitHub reviews on others' PRs, thanks in PR threads | the GitHub connector, read-only, for the repos, period and team logins the user names (`references/evidence-and-analysis.md`) |
++| Meeting transcripts | Nudge's recognition moments from a transcript, added as `peer-thanks` |
++| Peer Pulse answers | Peer Pulse's tally adds them (`../peer-pulse/SKILL.md`) |
+ | Kudos the user sent | growth-log strengths, added as `kudos` |
+ | Incidents, on-call, cross-team help, mentoring, docs | the user's incident tool, chat and docs through connectors, or the user's own notes |
+ 
+ Each line: date, person, kind, from, source, summary, link, `beyond_role`,
+-`cross_team` (format at the top of `scripts/spotlight.py`). Use first names
++`cross_team` (format in `references/evidence-and-analysis.md`). Use first names
+ consistently, and keep personal details out.
+ 
+ ### 2. Look for the pattern
+ 
+-```bash
+-python3 scripts/spotlight.py analyze --evidence ev.jsonl --since 2026-10-01
+-```
+-
+-It lists people with a sustained pattern (alphabetical, with reasons), people
++Run the pattern check in `references/evidence-and-analysis.md` over the
++period (for example, since 2026-10-01). It lists people with a sustained pattern (alphabetical, with reasons), people
+ where a pattern may be forming, and workload to check. Discuss it with the user;
+ they know context the evidence doesn't.
+@@ -66,9 +63,6 @@
+ ### 3. Tell their story
+ 
+-```bash
+-python3 scripts/spotlight.py story --evidence ev.jsonl --person Chen --since 2026-10-01 > chen-evidence.md
+-```
+-
+-From the evidence, write the impact story (`references/impact-story.md`):
++Gather Chen's moments for the period, grouped by theme with links
++(`references/evidence-and-analysis.md`), into `chen-evidence.md`. From the evidence, write the impact story (`references/impact-story.md`):
+ a two-sentence summary of the pattern, then three or four themes with the
+ strongest examples and links, what colleagues said, and the difference it made.
+@@ -84,5 +78,5 @@
+   launch, presenting at a staff meeting or a conference
+ - **An introduction** to someone senior who should know their work (Intro)
+-- **A public shout-out**, only for public work and with their OK (Kudos, `--profile public`)
++- **A public shout-out**, only for public work and with their OK (Kudos, with the public-post checks)
+ - **A mention in the next Team Story** or all-hands
+ 
+@@ -92,10 +86,8 @@
+ ### 5. Log it and follow through
+ 
+-Log each sponsorship step and its outcome in the growth log:
+-
+-```bash
+-python3 ../feedback/scripts/growth_log.py add --log <file> --person Chen --type sponsorship --area leadership \
+-  --observation "Nominated for the Q4 engineering award; offered the build-queue redesign lead" --source review --shared
+-```
++Log each sponsorship step and its outcome in the growth log
++(`../feedback/references/growth-log.md`): for example, a sponsorship entry for
++Chen, area leadership, observation "Nominated for the Q4 engineering award;
++offered the build-queue redesign lead", source review, shared.
+ 
+ Update it when there's an outcome ("won", "took the lead", "promoted").
+@@ -108,5 +100,5 @@
+ ## Files
+ 
+-- `scripts/spotlight.py`: collect GitHub evidence, analyze patterns, assemble the evidence for a story (local, read-only)
++- `references/evidence-and-analysis.md`: the evidence file, collecting from GitHub, the pattern check, assembling the evidence for a story
+ - `references/impact-story.md`: how to write the story, with an example
+ - `references/sponsorship.md`: ways to elevate someone, nomination shape, the workload conversation

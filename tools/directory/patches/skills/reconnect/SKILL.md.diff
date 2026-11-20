@@ -1,0 +1,68 @@
+--- a/skills/reconnect/SKILL.md
++++ b/skills/reconnect/SKILL.md
+@@ -128,5 +128,5 @@
+ (`../thankyou/references/sketch.md`): an original drawn SVG (default), or a
+ freely licensed stock photo of a place, never of people, turned into a sketch
+-with `../thankyou/scripts/sketch_photo.py`. Then the opener changes. A sketch
++when an image tool is available (`../thankyou/references/images.md`). Then the opener changes. A sketch
+ isn't a found photo, so never write "found this from launch week" or
+ "remember this?". Write something like "Made a little sketch of our Friday chai
+@@ -170,10 +170,7 @@
+ ### 5. Safety pass
+ 
+-```bash
+-python3 ../thankyou/scripts/safety_check.py message.json --profile reconnect
+-```
+-
+-The `reconnect` profile adds checks for guilt and time-counting phrases,
+-surveillance-sounding phrases, and hidden asks. Fix all blocking flags; review
++Go through `../thankyou/references/safety-checklist.md`: the every-note checks
++plus the Reconnect check-ins section, which adds checks for guilt and time-counting phrases,
++surveillance-sounding phrases, and hidden asks. Fix every block; review
+ the rest. Then re-read: *Would this be a pleasant surprise to receive? Easy to
+ answer? Nothing that feels like pressure, guilt, or being watched?*
+@@ -182,11 +179,8 @@
+ 
+ For each person: the message (ready to paste), one line on why this hook, and
+-the variant if any. With a photo, render the cleaned copy so no hidden
+-location or camera data goes out:
+-
+-```bash
+-python3 ../thankyou/scripts/render_card.py message.json --art art.svg \
+-  --photo memory.jpg --photo-out memory-clean.jpg --out reconnect-<firstname>.html
+-```
++the variant if any. With a photo, remove its metadata first so no hidden
++location or camera data goes out (`../thankyou/references/images.md`), then
++build the card, `reconnect-<firstname>.html`, from `message.json`, `art.svg`
++and the clean photo (`../thankyou/references/card-layout.md`).
+ 
+ Then deliver it on the channel they share, following
+@@ -195,8 +189,7 @@
+ WeChat, LINE, or KakaoTalk.
+ 
+-```bash
+-python3 ../thankyou/scripts/share.py message.json --channel whatsapp   # text + share link
+-python3 ../thankyou/scripts/card_to_png.py reconnect-<firstname>.html --out card.png
+-```
++Prepare the channel text and share link with
++`../thankyou/references/channel-formats.md`, and the card as an image with
++`../thankyou/references/images.md`.
+ 
+ - **On chat apps**, the photo (or card image) goes first, then the short text.
+@@ -233,6 +226,6 @@
+ ```
+ 
+-`photo` is optional; the image itself is passed to `render_card.py` with
+-`--photo`. `source` is `own`, `sketch`, or `stock` (with `credit` and `license`).
++`photo` is optional; it describes the image that goes in the card. `source`
++is `own`, `sketch`, or `stock` (with `credit` and `license`).
+ 
+ ## Files
+@@ -241,5 +234,4 @@
+ - `references/hooks.md` — hook types, examples, what feels creepy or guilt-inducing
+ - `examples/` — sample suggestion list and messages
+-- Shared with ThankYou: `../thankyou/references/{safety,language,art,photos,sketch,fun-facts,relationships-and-culture}.md`,
+-  `../thankyou/scripts/{safety_check,render_card,sketch_photo,share,card_to_png}.py`,
+-  `../thankyou/references/delivery.md`
++- Shared with ThankYou: `../thankyou/references/{safety,safety-checklist,language,art,photos,sketch,fun-facts,relationships-and-culture}.md`,
++  `../thankyou/references/{card-layout,images,channel-formats,delivery}.md`

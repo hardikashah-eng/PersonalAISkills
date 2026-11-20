@@ -1,0 +1,31 @@
+{
+  "recipient_first_name": "Arjun",
+  "sender_first_name": "Hardik",
+  "relationship": "former teammate and friend",
+  "channel": "whatsapp",
+  "language": "en",
+  "direction": "ltr",
+  "occasion": "Thought of you",
+  "greeting": "Hey Arjun,",
+  "body": [
+    "Found this from launch week and it made me smile. I still think those Friday chai runs got us through that crunch.",
+    "What are you building these days? Would love to hear, no need for a long reply."
+  ],
+  "closing": "",
+  "signature": "Hardik",
+  "palette": {
+    "bg": "#E9F0EA",
+    "ink": "#2E3A33",
+    "accent": "#3F7D5C",
+    "paper": "#FFFEFB"
+  },
+  "photo": {
+    "source": "own",
+    "caption": "Friday chai, launch week 2019",
+    "alt": "Two glasses of chai on a wooden table"
+  },
+  "fun_fact": {
+    "text": "Fun fact: \"chai\" and \"tea\" come from two Chinese words for the same drink, one that travelled by land and one by sea. Either way, it got us through launch week.",
+    "source": "World Atlas of Language Structures, chapter 138 \"Tea\" (Östen Dahl)"
+  }
+}

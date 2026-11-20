@@ -1,0 +1,16 @@
+--- a/skills/README.md
++++ b/skills/README.md
+@@ -37,6 +37,9 @@
+ ## Shared
+ 
+-ThankYou's `scripts/` (safety check, card renderer, share links, card image,
+-pencil sketch) and its `references/` (quotes, language, safety, delivery,
+-sketches, photos, relationships and culture, fun facts, light moments) are
+-used by every skill.
++ThankYou's `references/` are used by every skill: the safety checklist, card
++layout, channel formats and share links, photos and card images, and quotes,
++language, safety, delivery, sketches, relationships and culture, fun facts and
++light moments.
++
++In this edition every step is written as instructions Claude follows, so the
++plugin is Markdown and images only.

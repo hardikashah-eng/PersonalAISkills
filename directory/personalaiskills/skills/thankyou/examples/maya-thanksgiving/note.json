@@ -1,0 +1,39 @@
+{
+  "recipient_first_name": "Maya",
+  "sender_first_name": "Hardik",
+  "relationship": "former manager and mentor",
+  "language": "en",
+  "direction": "ltr",
+  "occasion": "Happy Thanksgiving",
+  "quote": {
+    "text": "If I have seen further it is by standing on the shoulders of Giants.",
+    "attribution": "Isaac Newton, letter to Robert Hooke (1675)",
+    "translation": null
+  },
+  "greeting": "Dear Maya,",
+  "body": [
+    "Five years ago, when I was ready to scrap the simulation pipeline redesign, you gave up two evenings to stand at a whiteboard with me and untangle it, one box and arrow at a time.",
+    "That design shipped, and it's still the foundation my team builds on today. More than the system, you taught me that being stuck is just the part before the sketch gets clear. I've passed that on to every engineer I've mentored since.",
+    "Not once did you make me feel small for not knowing. That patience is something I try to carry with me every day.",
+    "This Thanksgiving, you're near the top of my list. I hope the trails are kind to you this season."
+  ],
+  "closing": "With gratitude,",
+  "signature": "Hardik",
+  "palette": {
+    "bg": "#FBEBD9",
+    "ink": "#3B2F2A",
+    "accent": "#B5562F",
+    "paper": "#FFFDF9"
+  },
+  "photo": {
+    "source": "own",
+    "caption": "The whiteboard from that second evening, 2021",
+    "alt": "A whiteboard with boxes and arrows sketching a job queue, with \"it works\" written in red"
+  },
+  "channel": "email",
+  "subject": "Thank you, Maya",
+  "fun_fact": {
+    "text": "Fun fact: the word \"mentor\" comes from Mentor, the friend Odysseus trusted to guide his son in Homer's Odyssey. You were mine.",
+    "source": "Standard dictionaries (Merriam-Webster, Oxford): mentor, from Mentor in the Odyssey"
+  }
+}
